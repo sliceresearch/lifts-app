@@ -1,0 +1,89 @@
+<ion-header no-border>
+  <ion-toolbar mode="ios" color="primary">
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-menu-toggle>
+          <ion-icon name="menu" id="menubutton" size="large"></ion-icon>
+        </ion-menu-toggle>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title> <h3 ion-text>Choice-ToastAR</h3></ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button [disabled]="true">
+        <ion-icon name="search" size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen color="primary">
+  <div ion-fixed class="fixed-content">
+    <div *ngIf="screenInfo" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);">
+      <ion-grid>
+        <ion-row justify-content-center>
+          <ion-col col-12>
+            <img class="logo" src="assets/img/help.png" style="text-align: center;opacity: 0.2;" alt="logo" />
+          </ion-col>
+        </ion-row>
+
+        <ion-row justify-content-center>
+          <ion-col col-12>
+            <h3 ion-text style="text-align: center;opacity: 0.2;">locate marker</h3>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div #content [ngStyle]="getContentStyle()">
+      <ion-slides
+        [options]="slideOpts"
+        #slideWithNav
+        (ionSlideDidChange)="slideChanged()"
+        (ionSlideNextStart)="slideNextStart()"
+        (ionSlideNextEnd)="slideNextEnd()"
+      >
+        <ion-slide color="white" *ngFor="let obj of objectsData">
+          <ion-grid color="white">
+            <ion-row>
+              <h3 ion-text color="white">{{ obj.title }}</h3>
+            </ion-row>
+            <ion-row>
+              <p ion-text>{{ obj.description }}</p>
+            </ion-row>
+          </ion-grid>
+        </ion-slide>
+      </ion-slides>
+    </div>
+
+    <div style="position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1" id="appscene">
+      <canvas #canvas></canvas>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer no-border>
+  <div #footer>
+    <ion-toolbar>
+      <ion-tabs>
+        <ion-tab-bar color="primary" slot="bottom">
+          <ion-tab-button tab="3d" disabled>
+            <ion-icon name="cube" size="small"></ion-icon>
+            <ion-label>3D</ion-label>
+          </ion-tab-button>
+
+          <ion-tab-button tab="vr" disabled>
+            <ion-icon name="infinite" size="small"></ion-icon>
+            <ion-label>VR</ion-label>
+          </ion-tab-button>
+
+          <ion-tab-button tab="ar" disabled>
+            <ion-icon name="phone-portrait" size="small"></ion-icon>
+            <ion-label>AR</ion-label>
+          </ion-tab-button>
+        </ion-tab-bar>
+      </ion-tabs>
+    </ion-toolbar>
+  </div>
+</ion-footer>
