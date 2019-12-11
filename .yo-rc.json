@@ -1,0 +1,43 @@
+{
+  "generator-ngx-rocket": {
+    "version": "7.1.0",
+    "props": {
+      "location": "path",
+      "strict": false,
+      "skipInstall": false,
+      "skipQuickstart": false,
+      "initGit": true,
+      "target": [
+        "web",
+        "cordova",
+        "electron"
+      ],
+      "pwa": true,
+      "mobile": [
+        "ios",
+        "android"
+      ],
+      "desktop": [
+        "windows",
+        "mac",
+        "linux"
+      ],
+      "ui": "ionic",
+      "layout": "side-menu",
+      "auth": false,
+      "lazy": true,
+      "angulartics": false,
+      "tools": [
+        "prettier",
+        "hads"
+      ],
+      "utility": [
+        "lodash",
+        "moment"
+      ],
+      "appName": "lifts-app",
+      "projectName": "lifts-app",
+      "packageManager": "npm"
+    }
+  }
+}
