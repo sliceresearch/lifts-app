@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { App3Component } from './app3.component';
+import { AppXComponent } from './appx.component';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [App3Component],
-  exports: [App3Component]
+  declarations: [AppXComponent],
+  exports: [AppXComponent]
 })
 export class App3Module {}
