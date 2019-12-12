@@ -1,5 +1,5 @@
 
-################################### akit update
+################################### appx update
 cd /lab/assimilate.kit
 git reset --hard
 git pull ssh://git@bitbucket.org/damski/assimilate.kit.git
@@ -11,6 +11,6 @@ git pull ssh://git@bitbucket.org/damski/choice-toastar.git
 
 chmod +x /lab/choice-toastar/conf/docker/*
 
-cp -r /lab/assimilate.kit/* /lab/choice-toastar/src/app/app3/js/akit/
+cp -r /lab/assimilate.kit/* /lab/choice-toastar/src/app/app3/js/appx/
 
 sudo docker system prune -af

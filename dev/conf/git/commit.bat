@@ -1,6 +1,6 @@
 
 
-cd d:/Projects/ainteractive/choice-toastar/src/app/app3/js/akit
+cd d:/Projects/ainteractive/choice-toastar/src/app/app3/js/appx
 
 git pull
 

@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 
 import { Router } from '@angular/router';
-import { App3Service } from '@app/core';
+import { AppXService } from '@app/core';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +12,7 @@ import { App3Service } from '@app/core';
 export class HomeComponent implements OnInit, AfterViewInit {
   isLoading: boolean;
 
-  constructor(private router: Router, private app3Service: App3Service) {}
+  constructor(private router: Router, private app3Service: AppXService) {}
 
   ngOnInit() {
     this.isLoading = true;

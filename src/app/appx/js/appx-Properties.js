@@ -3,7 +3,6 @@ export default class APP_Properties {
     /////////////////////////////////////////// app config
     APP = {
       ///////////////////////////////////////////////////////////basic
-      platformAR: '8wall', /// webxr, arjs,web3ar,8wall,tracking,opencv
       language: 'en', //cn
 
       ///////////////////////////////////////////////////////////dir
@@ -26,7 +25,7 @@ export default class APP_Properties {
       markerDirDevelopment: 'assets/marker/',
 
       rendererOptions: {
-        canvas: AKIT.canvas,
+        canvas: APPX.canvas,
         antialias: true,
         alpha: true
         //   precision: 'mediump'
@@ -83,46 +82,9 @@ export default class APP_Properties {
           displayWidth: 640,
           displayHeight: 480 //640
         }
-      },
-      //////////////////////////////////////////////////platforms
-
-      arjs: {
-        markerDistance: 1000,
-        cameraParametersUrl: '/assets/platform/arjs/camera_para.dat',
-        patternUrl: APP.markerDirectory,
-
-        // handle default parameters
-        parameters: {}
-      },
-
-      webxr: {},
-
-      '8wall': {},
-
-      ///////////////////////////////////////////////////////////app
-      carouselRadius: 100,
-      controlRadius: 5,
-      itemProperties: { widthD: 45, heightD: 60, width: 6, height: 6 }
+      }
     };
 
-    /////////////////////////////////////////////  AR objects
-    ////////////// "location": "file" "url"
-    ////////////// "filetype": "obj" "usd"
-
-    // id: string;
-    // description: string;
-    //  url: string;
-    //  product: {'brand': string, 'dimensions': {}, 'type': string, 'image': string };
-
-    /////////////////////////////////////////////////////////////////////MARKERS
-    /// objectPerMarker - each marker has 1 object
-    /// objectSelect = each marker has 1 select object
-    var markerScheme = 'objectPerMarker';
-    APP.markers = [
-      //    { name: '1', marker: 'pattern-marker.patt', scheme: markerScheme }
-      //  { name: '2', marker: 'pattern-marker.patt', scheme: markerScheme }
-      //  { name: '11', marker: 'pattern-marker.patt', scheme: markerScheme }
-    ];
 
     APP.properties = {
       /*    video: {
@@ -190,7 +152,7 @@ export default class APP_Properties {
 
     //////////////////////////////////////////////////////////////////////APP
 
-    AKIT.loaded = false;
+    APPX.loaded = false;
     APP.directory = 0;
     APP.renderer = 0;
     APP.displayStats = false;

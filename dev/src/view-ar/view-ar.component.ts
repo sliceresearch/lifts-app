@@ -3,7 +3,7 @@ import { AfterViewInit, Component, OnInit, ViewChild, OnDestroy, ElementRef } fr
 import { environment } from '@env/environment';
 import { IonSlides } from '@ionic/angular';
 
-import { App3Service } from '@app/core';
+import { AppXService } from '@app/core';
 
 @Component({
   selector: 'app-arview',
@@ -43,7 +43,7 @@ export class ViewArComponent implements OnInit, AfterViewInit, OnDestroy {
 
   iconNames = { video: 'film', obj: 'cube' };
 
-  constructor(private app3Service: App3Service) {
+  constructor(private app3Service: AppXService) {
     // this.app3Service.parentSet(this);
     this.app3Service.call('objectGroup', []);
     this.app3Service.getData('objectGroup').subscribe(data => {
@@ -76,7 +76,7 @@ export class ViewArComponent implements OnInit, AfterViewInit, OnDestroy {
 
     //  console.log('ar view init 0');
 
-    window.AKIT.devices.initMediaDevices(this);
+    window.APPX.devices.initMediaDevices(this);
 
     //  console.log('ar view init 1');
   }

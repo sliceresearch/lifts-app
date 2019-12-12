@@ -1,4 +1,4 @@
-export default class APP_ToastARUI {
+export default class APP_LIFTSUI {
   constructor() {
     this.init();
   }

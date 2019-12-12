@@ -4,35 +4,33 @@ import { HttpClient } from '@angular/common/http';
 
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
-// import AKIT_AppDevices from './js/akit/app/akit-AppDevices.js';
+// import APPX_AppDevices from './js/appx/app/appx-AppDevices.js';
 
 import { Router } from '@angular/router';
 
-import AKIT_AppThree from './js/akit/app/akit-AppThree';
-import APP_run from './js/app3-Run';
+import APP_run from './js/appx-Run';
 
-import AKIT_AppDevices from './js/akit/app/akit-AppDevices.js';
+import APPX_AppDevices from './js/lib/app/appx-AppDevices.js';
 
 declare global {
   interface Window {
     APP: any;
-    AKIT: any;
+    APPX: any;
   }
 }
 
 window.APP = {};
-window.AKIT = {};
+window.APPX = {};
 
-// import APP_Data from './js/app3-Data';
+// import APP_Data from './js/appx-Data';
 
 @Injectable({
   providedIn: 'root'
 })
-export class App3Service {
+export class AppXService {
   public data = {};
   // private dataObj: BehaviorSubject<{}>;
 
-  private three: any;
   private host: any;
   private objdir: any;
   private running: any;
@@ -51,8 +49,7 @@ export class App3Service {
   constructor(private http: HttpClient, private router: Router) {
     // this.host = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
 
-    this.three = new AKIT_AppThree();
-    window.AKIT.devices = new AKIT_AppDevices();
+    window.APPX.devices = new APPX_AppDevices();
     window.APP.run = new APP_run(); // this.canvas);
 
     this.host = window.APP.host;
@@ -68,7 +65,7 @@ export class App3Service {
     this.running = false;
     this.inited = false;
 
-    console.log('app3 service: ' + this.host);
+    console.log('appx service: ' + this.host);
   }
 
   init() {
@@ -80,7 +77,7 @@ export class App3Service {
       window.APP.run.parentSet(this);
       window.APP.run.init();
 
-      console.log('app3 service init');
+      console.log('appx service init');
     }
   }
 
@@ -97,12 +94,12 @@ export class App3Service {
   }
 
   route(router: any) {
-    console.log('app3 service route' + router);
+    console.log('appx service route' + router);
     if (router) {
-      window.AKIT.devices.setStartRoute('/ar');
-      window.AKIT.devices.initInfoDevices();
+      window.APPX.devices.setStartRoute('/ar');
+      window.APPX.devices.initInfoDevices();
 
-      const startRoute = window.AKIT.devices.getStartRoute();
+      const startRoute = window.APPX.devices.getStartRoute();
       this.navigate(router, startRoute);
     }
   }
@@ -120,7 +117,7 @@ export class App3Service {
     }
   }
 
-  // // this.app3Service.markerVisibleUpdated(true);
+  // // this.appxService.markerVisibleUpdated(true);
   ///////////////////////////////////////////////////////// OBJECTS
 
   loadObjects(id: any) {
@@ -146,17 +143,6 @@ export class App3Service {
   }
 
   /////////////////////////////////////// DATA
-  triggerUpdated(update: string) {
-    this.triggerUpdateSubject.next(update);
-  }
-
-  triggerUpdatedMarker(update: string) {
-    this.triggerUpdateMarkerSubject.next(update);
-  }
-
-  markerVisibleUpdated(update: string) {
-    this.markerVisibleSubject.next(update);
-  }
 
   public call(msg: any, d: any) {
     // console.log('call:', msg, d);
@@ -200,7 +186,6 @@ export class App3Service {
     window.APP.run.canvasSet(c);
   }
 
-  // start() { window.APP.run.start(); }
   setSceneWindow() {
     window.APP.run.app.setSceneWindow();
   }
@@ -214,57 +199,5 @@ export class App3Service {
     window.APP.run.app.setVideoElement();
   }
 
-  startedVRCheck() {
-    return window.APP.run.app.startedVRCheck();
-  }
-  loadVR() {
-    window.APP.run.app.loadVR();
-  }
-  startVR(platform: any) {
-    window.APP.run.app.startVR(platform);
-  }
-
-  stopVR() {
-    window.APP.run.app.stopVR();
-  }
-
-  // vr.display() {  window.APP.run.app.vr.display(); }
-
-  startedARCheck() {
-    return window.APP.run.app.startedARCheck();
-  }
-  loadAR() {
-    window.APP.run.app.loadAR();
-  }
-  startAR(platform: any) {
-    window.APP.run.app.startAR(platform);
-  }
-
-  stopAR() {
-    window.APP.run.app.stopAR();
-  }
-
-  // window.APP.run.animate() { window.APP.run.animate(); }
-  // window.APP.run.step() { window.APP.run.step();}
 }
 
-/*
-
- <ion-list>
-
-
-            <button menuClose ion-item routerLink="/home" routerLinkActive="active">
-              <span translate>Home</span>
-            </button>
-            <button menuClose ion-item routerLink="/arview" routerLinkActive="active">
-              <span translate>AR</span>
-            </button>
-          <button menuClose ion-item routerLink="/vrview" routerLinkActive="active">
-            <span translate>VR</span>
-          </button>
-          <button menuClose ion-item routerLink="/debug" routerLinkActive="active">
-            <span translate>Debug</span>
-          </button>
-
-        </ion-list>
- */

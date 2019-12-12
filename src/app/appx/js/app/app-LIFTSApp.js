@@ -1,17 +1,17 @@
-import AKIT_ARApp from '../akit/xr/app/akit-XRApp';
+import APPX_ARApp from '../appx/xr/app/appx-XRApp';
 
-import AKIT_ObjectTypeSphereDebug from '../akit/object/type/akit-ObjectTypeSphereDebug';
+import APPX_ObjectTypeSphereDebug from '../appx/object/type/appx-ObjectTypeSphereDebug';
 
-import APP_ToastARUI from './app-ToastARAppUI';
-//import {AKIT_ObjectTypeSphereWorldControl3DRay} from "../akit/object/type/akit-ObjectTypeSphereWorldControl3DRay";
+import APP_LIFTSUI from './app-LIFTSAppUI';
+//import {APPX_ObjectTypeSphereWorldControl3DRay} from "../appx/object/type/appx-ObjectTypeSphereWorldControl3DRay";
 //import APP_UICarousel from '../ui/carousel/app-UICarousel';
-//import AKIT_ObjectARTypeCube from '../akit/object/ar/akit-ObjectARTypeCube';
+//import APPX_ObjectARTypeCube from '../appx/object/ar/appx-ObjectARTypeCube';
 
-export default class APP_ToastAR extends AKIT_ARApp {
+export default class APP_LIFTS extends APPX_ARApp {
   constructor() {
     super();
 
-    AKIT.alogApp('app_app: (new)');
+    APPX.alogApp('app_app: (new)');
   }
 
   init() {
@@ -21,27 +21,27 @@ export default class APP_ToastAR extends AKIT_ARApp {
 
     // this.initObjects();
 
-    AKIT.alogApp('app_app: (ready)');
+    APPX.alogApp('app_app: (ready)');
   }
 
   initUI() {
-    this.ui = new APP_ToastARUI();
+    this.ui = new APP_LIFTSUI();
   }
 
   initAppScene() {
-    AKIT.alogApp('toastar_app: (init)');
+    APPX.alogApp('toastar_app: (init)');
     //  this.space = new APP_HoloSpace();
     //  this.space.init();
 
     //  this.portal = new APP_HoloPortal();
     //  this.portal.init();
 
-    //   this.debugObjs = new AKIT_ObjectTypeSphereDebug(.1, 4, 4);
+    //   this.debugObjs = new APPX_ObjectTypeSphereDebug(.1, 4, 4);
     //   this.debugObjs.add();
 
     //   this.debugObjs.positionXYZ(.1,0,-1);
 
-    //   console.log(this,AKIT.scene)
+    //   console.log(this,APPX.scene)
   }
 
   start() {
