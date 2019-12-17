@@ -134,19 +134,8 @@ export default class APP_Properties {
         app: {
           system: 'local',
           scene: 'simple' // peppers, vr, standard,simple
-        },
-
-        camera: {
-          cameraDistanceFar: 10000,
-          cameraDistanceNear: 0.1,
-          cameraDistanceViewAngle: 45,
-          cameraPositionX: 0,
-          cameraPositionY: 0,
-          cameraPositionZ: 0,
-          cameraTargetX: 0,
-          cameraTargetY: 0,
-          cameraTargetZ: 0
         }
+
       }
     };
 
@@ -161,16 +150,6 @@ export default class APP_Properties {
 
     //////////////////////////////////////////////////////camera
     APP.sceneType = APP.currentPreset.app.scene;
-
-    APP.cameraDistanceFar = APP.currentPreset.camera.cameraDistanceFar;
-    APP.cameraDistanceNear = APP.currentPreset.camera.cameraDistanceNear;
-    APP.cameraDistanceViewAngle = APP.currentPreset.camera.cameraDistanceViewAngle;
-    APP.cameraPositionX = APP.currentPreset.camera.cameraPositionX;
-    APP.cameraPositionY = APP.currentPreset.camera.cameraPositionY;
-    APP.cameraPositionZ = APP.currentPreset.camera.cameraPositionZ;
-
-    APP.cameraName = 'camera1';
-
     APP.hostname = window.document.hostname;
   }
 }

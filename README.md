@@ -1,5 +1,17 @@
 # lifts-app
 
+# roadmap
+
+Web application (angular/ionic) with 2 modes (so far)
+	Analytics – done with nodeJS to python server application
+	Presentation – outputs to various formats (md2html beta)
+
+	NodeJS server – application to interact with python and return data to web app. (https://github.com/extrabacon/python-shell)
+
+
+
+#  ngX-Rocket
+
 This project was generated with [ngX-Rocket](https://github.com/ngx-rocket/generator-ngx-rocket/)
 version 7.1.0
 

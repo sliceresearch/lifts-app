@@ -1,33 +1,51 @@
-<ion-header no-border> </ion-header>
-
+<ion-header no-border>
+	<ion-toolbar mode="ios" color="primary">
+	  <ion-buttons slot="start">
+		<ion-button>
+		  <ion-menu-toggle>
+			<ion-icon name="menu" id="menubutton" size="large"></ion-icon>
+		  </ion-menu-toggle>
+		</ion-button>
+	  </ion-buttons>
+  
+	  <ion-title> <h3 ion-text>LIFTS</h3></ion-title>
+  
+	  <ion-buttons slot="end">
+		<ion-button [disabled]="true">
+		  <ion-icon name="search" size="large"></ion-icon>
+		</ion-button>
+	  </ion-buttons>
+	</ion-toolbar>
+  </ion-header>
+  
 <ion-content>
   <div ion-fixed class="fixed-content">
     <div class="row row-center">
       <div class="col col-center">
         <ion-grid>
-          <ion-row justify-content-center>
+          <ion-row class="ion-justify-content-center">
             <ion-col col-12>
               <p style="text-align:center"></p>
             </ion-col>
           </ion-row>
 
-          <ion-row justify-content-center>
+          <ion-row class="ion-justify-content-center">
             <ion-col col-12>
               <p style="text-align:center">
-                <img class="logo" src="assets/img/logo.png" style="text-align: center;" alt="logo" />
+                <img class="logo" src="assets/img/logo.jpg" style="text-align: center;" alt="logo" />
               </p>
             </ion-col>
           </ion-row>
 
-          <ion-row justify-content-center>
+          <ion-row class="ion-justify-content-center">
             <ion-col col-2></ion-col>
             <ion-col col-8>
-              <h1 ion-text color="dark" style="text-align: center;">LIFTS App</h1>
+              <h1 ion-text color="dark" style="text-align: center;">LIFTS</h1>
             </ion-col>
             <ion-col col-2></ion-col>
           </ion-row>
 
-          <ion-row justify-content-center>
+          <ion-row class="ion-justify-content-center">
             <ion-col col-2></ion-col>
             <ion-col col-8>
               <h6 ion-text color="dark" style="text-align: center;">Learning Interactively in Future Teaching Spaces</h6>
@@ -35,11 +53,11 @@
             <ion-col col-2></ion-col>
           </ion-row>
 
-          <ion-row justify-content-center>
+          <ion-row class="ion-justify-content-center">
             <ion-col col-2></ion-col>
             <ion-col col-8>
               <button ion-item routerLink="/ar" routerLinkActive="active">
-                <h6 ion-text color="dark" style="text-align: center;">AR</h6>
+                <h6 ion-text color="dark" style="text-align: center;">link</h6>
               </button>
             </ion-col>
             <ion-col col-2></ion-col>
@@ -50,4 +68,21 @@
   </div>
 </ion-content>
 
-<ion-footer no-border> </ion-footer>
+<ion-footer no-border>
+	<div #footer>
+	  <ion-toolbar>
+		<ion-tabs>
+		  <ion-tab-bar color="primary" slot="bottom">
+			<ion-tab-button
+			  [selected]="getSelectedIdx(i)"
+			  *ngFor="let obj of tabsData; index as i"
+			  (click)="setGroupTabIdx(i)"
+			>
+			  <ion-icon [name]="getSelectedIdxNameIcon(obj.filetype)" size="small"></ion-icon>
+			  <ion-label>{{ i + 1 }}</ion-label>
+			</ion-tab-button>
+		  </ion-tab-bar>
+		</ion-tabs>
+	  </ion-toolbar>
+	</div>
+  </ion-footer>

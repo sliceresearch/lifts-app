@@ -11,19 +11,13 @@ export default class APP_run {
     //  console.log('app run construct 0');
 
     APP.directory = window.location.pathname;
-    // APPX.canvas = canvas;
-
     APPX.loader = new APPX_AppLoader();
     APPX.loader.add('spinner', { size: 1, len: 1, rotate: { x: -0.5, y: 0, z: 0 } });
 
     //  APPX.video = new APPX_AppVideo();
     APPX.env = new APPX_AppEnv();
-    //   APPX.promise = new APPX_AppPromise();
-
     this.objectStore = new APPX_AppObjectStore();
     APPX.initObjectStore();
-
-    //APPX.scene = this.scene = new APPX_Scene();
 
     this.app = new APP_LIFTS();
 
@@ -59,7 +53,6 @@ export default class APP_run {
 
   animate() {
     APPX.alogKit('(app-animate) ');
-  //  APP.renderer.setAnimationLoop(cycleRender);
     this.unstep();
   }
 

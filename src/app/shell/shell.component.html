@@ -1,33 +1,65 @@
-<ion-split-pane>
-  <ion-menu>
-    <ion-header>
-      <ion-toolbar color="primary">
-        <ion-buttons *ngIf="isWeb" slot="end">
-          <ion-menu-toggle auto-hide="false">
-            <ion-button class="profile-button" (click)="changeLanguage()">
-              <ion-icon name="globe"></ion-icon>
-            </ion-button>
-          </ion-menu-toggle>
-        </ion-buttons>
-        <ion-title>{{ 'APP_NAME' | translate }}</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content>
-      <div ion-fixed>
-        <ion-list>
-          <ion-menu-toggle auto-hide="false">
-            <ion-item [routerDirection]="'root'" routerLink="/home" routerLinkActive="active">
-              <ion-label><span translate>Home</span></ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-          <ion-menu-toggle auto-hide="false">
-            <ion-item [routerDirection]="'root'" routerLink="/about" routerLinkActive="active">
-              <ion-label><span translate>About</span></ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-        </ion-list>
-      </div>
-    </ion-content>
-  </ion-menu>
-  <ion-router-outlet main></ion-router-outlet>
-</ion-split-pane>
+<ion-split-pane contentId="main-content">
+	<ion-menu type="overlay" contentId="main-content">
+	  <ion-content>
+		<div ion-fixed>
+		  <div style="padding-top: 25px;">
+			<ion-grid>
+			  <ion-row class="ion-justify-content-center">
+				<ion-col col-2></ion-col>
+				<ion-col col-8>
+				  <img class="logo" src="assets/img/logo.jpg" style="text-align: center;" alt="logo" />
+				</ion-col>
+				<ion-col col-2></ion-col>
+			  </ion-row>
+  
+			  <ion-row class="ion-justify-content-center">
+				<ion-col col-2></ion-col>
+				<ion-col col-8>
+				  <h4 ion-text color="dark" style="text-align: center;">LIFTS</h4>
+				</ion-col>
+				<ion-col col-2></ion-col>
+			  </ion-row>
+  
+			  <ion-row class="ion-justify-content-center">
+				<ion-col col-12>
+				  <h6 ion-text color="dark" style="text-align: center;">Learning Interactively in Future Teaching Spaces</h6>
+				</ion-col>
+			  </ion-row>
+			</ion-grid>
+		  </div>
+  
+		  <ion-list>
+			<ion-item ion-item *ngFor="let obj of objectsData; index as i" (click)="setGroupTabIdx(i)">
+			  <ion-grid>
+				<ion-row>
+				  <ion-col col-2>
+					<ion-label>{{ i + 1 }}</ion-label>
+					<ion-icon [name]="getSelectedIdxNameIcon(obj.filetype)" size="small"></ion-icon>
+				  </ion-col>
+				  <ion-col col-10>
+					<h6 ion-text color="black">{{ obj.title }}</h6></ion-col
+				  >
+				</ion-row>
+  
+				<ion-row>
+				  <p ion-text color="black">{{ obj.description }}</p>
+				</ion-row>
+			  </ion-grid>
+			</ion-item>
+		  </ion-list>
+  
+		  <div style="padding-top: 25px;">
+			<ion-grid>
+			  <ion-row class="ion-justify-content-center">
+				<ion-col col-2></ion-col>
+				<ion-col col-8> </ion-col>
+				<ion-col col-2></ion-col>
+			  </ion-row>
+			</ion-grid>
+		  </div>
+		</div>
+	  </ion-content>
+	</ion-menu>
+	<ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+  
