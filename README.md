@@ -1,21 +1,21 @@
-# lifts-app
+# LIFTS - app
 
-# roadmap
+## roadmap
 
 Web application (angular/ionic) with 2 modes (so far)
 	Analytics – done with nodeJS to python server application
 	Presentation – outputs to various formats (md2html beta)
 
-	NodeJS server – application to interact with python and return data to web app. (https://github.com/extrabacon/python-shell)
+NodeJS server – application to interact with python and return data to web app. (https://github.com/extrabacon/python-shell)
 
 
 
-#  ngX-Rocket
+##  ngX-Rocket
 
 This project was generated with [ngX-Rocket](https://github.com/ngx-rocket/generator-ngx-rocket/)
 version 7.1.0
 
-# Getting started
+## Getting started
 
 1. Go to project folder and install dependencies:
  ```sh
@@ -27,7 +27,7 @@ version 7.1.0
  npm start
  ```
 
-# Project structure
+## Project structure
 
 ```
 www/                         web app production build
@@ -57,7 +57,7 @@ reports/                     test and coverage reports
 proxy.conf.js                backend proxy configuration
 ```
 
-# Main tasks
+## Main tasks
 
 Task automation is based on [NPM scripts](https://docs.npmjs.com/misc/scripts).
 
