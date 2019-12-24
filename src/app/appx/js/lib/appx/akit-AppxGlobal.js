@@ -1,15 +1,12 @@
 ///// APPX - application toolkit (assimilate interactive three.js toolkit)
 
-import APPX_Scene from '../scene/appx-Scene';
-import APPX_SceneBasic from '../scene/appx-SceneBasic';
 
-export default class APPX_Global {
+export default class AKIT_AppXGlobal {
   constructor() {
     APPX = {};
 
     //////////////////////////////////////////////////globals
     APPX.system = 0;
-    APPX.scene = 0;
 
     APPX.canvas = 0;
     APPX.renderer = 0;
@@ -19,42 +16,12 @@ export default class APPX_Global {
     APPX.container = 0;
     APPX.workerTimeDelay = [];
 
-    APPX.clock = new THREE.Clock();
-
-    APPX.InteractionModes = {
-      MOUSE: 1,
-      TOUCH: 2,
-      VR_0DOF: 3,
-      VR_3DOF: 4,
-      VR_6DOF: 5
-    };
-
-    APPX.InteractionMode = 2; /// -1 = get gamepads  - otherwise override    MOUSE: 1,TOUCH: 2,  VR_0DOF: 3,VR_3DOF: 4,VR_6DOF: 5
-
     APPX.running = false;
     APPX.ready = false;
 
     APPX.windowHeight = window.innerHeight;
     APPX.windowWidth = window.innerWidth;
 
-    APPX.loadedAR = false;
-
-    //////////////////////////////////////////////////scene
-
-    APPX.getSceneObject = function() {
-      /*  var hasaframe;
-
-      try {
-            hasaframe = AFRAME;
-      } catch (e) {
-        if (e instanceof ReferenceError) {
-
-        }
-      }*/
-
-      if (APP.system == 'aframe') return new APPX_SceneBasic();
-      else return new APPX_Scene();
-    };
 
     //////////////////////////////////////////////////test
 

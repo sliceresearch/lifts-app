@@ -1,4 +1,4 @@
-export default class APPX_AppEnv {
+export default class AKIT_AppxEnv {
   constructor() {
     this.browser = 'generic';
 

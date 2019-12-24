@@ -1,7 +1,4 @@
-import APPX_AppEnv from './appx/app/appx-AppEnv.js';
-import APPX_AppLoader from './appx/app/appx-AppLoader.js';
-import APPX_AppKeys from './appx/app/appx-AppKeys.js';
-import APPX_AppObjectStore from './appx/app/appx-AppObjectStore.js';
+
 
 import APP_LIFTS from './app/app-LIFTSApp';
 
@@ -11,13 +8,7 @@ export default class APP_run {
     //  console.log('app run construct 0');
 
     APP.directory = window.location.pathname;
-    APPX.loader = new APPX_AppLoader();
-    APPX.loader.add('spinner', { size: 1, len: 1, rotate: { x: -0.5, y: 0, z: 0 } });
 
-    //  APPX.video = new APPX_AppVideo();
-    APPX.env = new APPX_AppEnv();
-    this.objectStore = new APPX_AppObjectStore();
-    APPX.initObjectStore();
 
     this.app = new APP_LIFTS();
 

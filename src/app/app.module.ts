@@ -18,6 +18,9 @@ import { ShellModule } from './shell/shell.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { AppXModule } from './appx/appx.module';
+import { AnalyticsModule } from './analytics/analytics.module';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -29,7 +32,9 @@ import { AppRoutingModule } from './app-routing.module';
     CoreModule,
     SharedModule,
     ShellModule,
-    HomeModule,
+	HomeModule,
+	AnalyticsModule,
+	AppXModule,
     AppRoutingModule // must be imported as the last module as it contains the fallback route
   ],
   declarations: [AppComponent],

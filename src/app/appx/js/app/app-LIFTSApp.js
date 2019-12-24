@@ -1,17 +1,10 @@
-import APPX_ARApp from '../appx/xr/app/appx-XRApp';
+import AKIT_AppXApp from '../lib/appx/akit-AppxApp';
 
-import APPX_ObjectTypeSphereDebug from '../appx/object/type/appx-ObjectTypeSphereDebug';
 
-import APP_LIFTSUI from './app-LIFTSAppUI';
-//import {APPX_ObjectTypeSphereWorldControl3DRay} from "../appx/object/type/appx-ObjectTypeSphereWorldControl3DRay";
-//import APP_UICarousel from '../ui/carousel/app-UICarousel';
-//import APPX_ObjectARTypeCube from '../appx/object/ar/appx-ObjectARTypeCube';
-
-export default class APP_LIFTS extends APPX_ARApp {
+export default class APP_LIFTS extends AKIT_AppXApp {
   constructor() {
     super();
 
-    APPX.alogApp('app_app: (new)');
   }
 
   init() {
@@ -25,7 +18,7 @@ export default class APP_LIFTS extends APPX_ARApp {
   }
 
   initUI() {
-    this.ui = new APP_LIFTSUI();
+   // this.ui = new APP_LIFTSUI();
   }
 
   initAppScene() {
@@ -33,15 +26,6 @@ export default class APP_LIFTS extends APPX_ARApp {
     //  this.space = new APP_HoloSpace();
     //  this.space.init();
 
-    //  this.portal = new APP_HoloPortal();
-    //  this.portal.init();
-
-    //   this.debugObjs = new APPX_ObjectTypeSphereDebug(.1, 4, 4);
-    //   this.debugObjs.add();
-
-    //   this.debugObjs.positionXYZ(.1,0,-1);
-
-    //   console.log(this,APPX.scene)
   }
 
   start() {

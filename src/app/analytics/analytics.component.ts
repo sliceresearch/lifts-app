@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 
+
+import { AppXService } from '../appx/appx.service'
+
 @Component({
   selector: 'app-analytics',
   templateUrl: './analytics.component.html',
@@ -11,7 +14,7 @@ export class AnalyticsComponent implements OnInit {
   quote: string | undefined;
   isLoading = false;
 
-  constructor() {}
+  constructor(private appXService: AppXService) {}
 
   ngOnInit() {
     this.isLoading = true;

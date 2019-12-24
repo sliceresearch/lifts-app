@@ -56,8 +56,9 @@ export class AppXService {
     this.objdir = window.APP.objDir;
 
     this.init();
-    this.route(router);
+    //this.route(router);
 
+	console.log('appx service: ' + this.host);
     // this.service();
   }
 
@@ -65,7 +66,7 @@ export class AppXService {
     this.running = false;
     this.inited = false;
 
-    console.log('appx service: ' + this.host);
+   // console.log('appx service: ' + this.host);
   }
 
   init() {
@@ -96,7 +97,7 @@ export class AppXService {
   route(router: any) {
     console.log('appx service route' + router);
     if (router) {
-      window.APPX.devices.setStartRoute('/ar');
+      window.APPX.devices.setStartRoute('/home');
       window.APPX.devices.initInfoDevices();
 
       const startRoute = window.APPX.devices.getStartRoute();
