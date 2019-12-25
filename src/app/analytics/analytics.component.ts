@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 
 
-import { AppXService } from '../appx/appx.service'
+import { AppXService } from '@app/core';
 
 @Component({
   selector: 'app-analytics',
@@ -14,11 +14,21 @@ export class AnalyticsComponent implements OnInit {
   quote: string | undefined;
   isLoading = false;
 
-  constructor(private appXService: AppXService) {}
+  constructor(private appXService: AppXService) {
+
+  }
 
   ngOnInit() {
     this.isLoading = true;
    
+  }
+
+  navigateTo(link) {
+	this.appXService.navigate(link)
+  }
+  
+  isSelectedTab(type) {
+	return this.appXService.islocation(type)
   }
 
 ///////

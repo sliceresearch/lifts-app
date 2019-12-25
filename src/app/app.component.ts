@@ -10,7 +10,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { Keyboard } from '@ionic-native/keyboard/ngx';
 
 import { environment } from '@env/environment';
-import { Logger, I18nService, untilDestroyed } from '@app/core';
+import { Logger, I18nService, untilDestroyed, AppXService } from '@app/core';
 
 const log = new Logger('App');
 
@@ -29,8 +29,12 @@ export class AppComponent implements OnInit, OnDestroy {
     private keyboard: Keyboard,
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
-    private i18nService: I18nService
-  ) {}
+	private i18nService: I18nService,
+	private appXService: AppXService
+  ) {
+
+
+  }
 
   async ngOnInit() {
     // Setup logger
