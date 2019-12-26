@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
-// import { HttpService } from '@app/core';
 import { HttpClient } from '@angular/common/http';
 
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-
-// import APPX_AppDevices from './js/appx/app/appx-AppDevices.js';
-
 import { Router } from '@angular/router';
 
 import APP_run from './js/appx-Run';
@@ -21,8 +17,6 @@ declare global {
 
 window.APP = {};
 window.APPX = {};
-
-// import APP_Data from './js/appx-Data';
 
 @Injectable({
 	providedIn: 'root'
@@ -104,7 +98,7 @@ export class AppXService {
 	}
 
 	route() {
-		console.log('appx service route:' + this.routeStart);
+		console.log('appx route:' + this.routeStart);
 
 		//window.APPX.devices.setStartRoute('/home');
 		//window.APPX.devices.initInfoDevices();
@@ -137,7 +131,6 @@ export class AppXService {
 		}
 	}
 
-	// // this.appxService.markerVisibleUpdated(true);
 	///////////////////////////////////////////////////////// OBJECTS
 
 	loadObjects(id: any) {

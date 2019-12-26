@@ -1,32 +1,21 @@
 import { Injectable } from '@angular/core';
-import { HttpService } from '@app/core';
-
-
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-
-import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-@Injectable()
-export class AppXDataService {
-  http: HttpService;
 
+export class ApiService {
+  
   baseUri:string = 'http://localhost:4000/api';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
-  
-  constructor() {}
 
-  get(): Promise<any[]> {
-    return this.http.get<any[]>('http://localhost:4200/assets/data/data.json').toPromise();
-  }
+  constructor(private http: HttpClient) { }
 
-
-  
-/////////////////////////////////////////////////////////objects
- createData(data): Observable<any> {
+  // Create
+  createEmployee(data): Observable<any> {
     let url = `${this.baseUri}/create`;
     return this.http.post(url, data)
       .pipe(
@@ -34,12 +23,13 @@ export class AppXDataService {
       )
   }
 
-
-  getDatas() {
+  // Get all employees
+  getEmployees() {
     return this.http.get(`${this.baseUri}`);
   }
 
-  getData(id): Observable<any> {
+  // Get employee
+  getEmployee(id): Observable<any> {
     let url = `${this.baseUri}/read/${id}`;
     return this.http.get(url, {headers: this.headers}).pipe(
       map((res: Response) => {
@@ -49,14 +39,16 @@ export class AppXDataService {
     )
   }
 
-  updateData(id, data): Observable<any> {
+  // Update employee
+  updateEmployee(id, data): Observable<any> {
     let url = `${this.baseUri}/update/${id}`;
     return this.http.put(url, data, { headers: this.headers }).pipe(
       catchError(this.errorMgmt)
     )
   }
 
-  deleteData(id): Observable<any> {
+  // Delete employee
+  deleteEmployee(id): Observable<any> {
     let url = `${this.baseUri}/delete/${id}`;
     return this.http.delete(url, { headers: this.headers }).pipe(
       catchError(this.errorMgmt)
@@ -76,8 +68,5 @@ export class AppXDataService {
     console.log(errorMessage);
     return throwError(errorMessage);
   }
-
-
-
 
 }
