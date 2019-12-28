@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Define collection and schema
-let Slide = new Schema({
+let Presentation = new Schema({
    name: {
       type: String
    },
@@ -19,4 +19,4 @@ let Slide = new Schema({
    collection: 'slides'
 })
 
-module.exports = mongoose.model('Slide', Slide)
+module.exports = mongoose.model('Presentation', Presentation)

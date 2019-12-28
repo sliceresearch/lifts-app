@@ -19,16 +19,20 @@ mongoose.connect(dbConfig.db, {
 )
 
 // Setting up port with express js
-const slideRoute = require('./routes/slide.route')
+const presentationRoute = require('./routes/presentation.route')
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
    extended: false
 }));
+
+var appPath = path.join(__dirname, '../../../www/index.html')
+var appPath = 'www/index.html';
+console.log('app path:' + appPath)
 app.use(cors()); 
 //app.use(express.static(path.join(__dirname, 'dist/liftsapp')));
-app.use('/', express.static(path.join(__dirname, 'www/index.html')));
-app.use('/api', slideRoute)
+app.use('/', express.static(appPath));
+app.use('/api', presentationRoute)
 
 // Create port
 const port = process.env.PORT || 4000;
