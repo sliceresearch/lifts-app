@@ -70,19 +70,31 @@
 
 <ion-footer no-border>
 	<div #footer>
-	  <ion-toolbar>
-		<ion-tabs>
-		  <ion-tab-bar color="primary" slot="bottom">
-			<ion-tab-button
-			  [selected]="getSelectedIdx(i)"
-			  *ngFor="let obj of tabsData; index as i"
-			  (click)="setGroupTabIdx(i)"
-			>
-			  <ion-icon [name]="getSelectedIdxNameIcon(obj.filetype)" size="small"></ion-icon>
-			  <ion-label>{{ i + 1 }}</ion-label>
-			</ion-tab-button>
-		  </ion-tab-bar>
-		</ion-tabs>
-	  </ion-toolbar>
+		<ion-toolbar>
+			<ion-tabs>
+				<ion-tab-bar color="primary" slot="bottom">
+					<ion-tab-button tab="home" size="small" menuClose [selected]="isSelectedTab('home')" (click)="navigateTo('/home')">
+						<ion-icon name="home"></ion-icon>
+						<ion-label>Home</ion-label>
+					</ion-tab-button>
+					<ion-tab-button tab="analyse" size="small" menuClose [selected]="isSelectedTab('analytics')" (click)="navigateTo('/analytics')">
+						<ion-icon name="flask"></ion-icon>
+						<ion-label>Analyse</ion-label>
+					</ion-tab-button>
+					<ion-tab-button tab="resolve" size="small" menuClose [selected]="isSelectedTab('resolve')" disabled (click)="navigateTo('/resolve')">
+							<ion-icon name="information-circle-outline"></ion-icon>
+							<ion-label>Resolve</ion-label>
+					</ion-tab-button>
+					<ion-tab-button tab="present" size="small" menuClose [selected]="isSelectedTab('present')" disabled (click)="navigateTo('/present')">
+						<ion-icon name="tv"></ion-icon>
+						<ion-label>Present</ion-label>
+					</ion-tab-button>
+					<ion-tab-button tab="export" size="small" menuClose [selected]="isSelectedTab('export')" disabled (click)="navigateTo('/export')">
+						<ion-icon name="share-alt"></ion-icon>
+						<ion-label>Export</ion-label>
+					</ion-tab-button>
+				</ion-tab-bar>
+			</ion-tabs>
+		</ion-toolbar>
 	</div>
-  </ion-footer>
+</ion-footer>

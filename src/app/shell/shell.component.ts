@@ -12,7 +12,12 @@ import { I18nService } from '@app/core';
   templateUrl: './shell.component.html',
   styleUrls: ['./shell.component.scss']
 })
+
+
 export class ShellComponent {
+
+	objectsData = [];
+
   constructor(
     private router: Router,
     private translateService: TranslateService,

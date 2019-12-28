@@ -5,13 +5,13 @@ import { IonicModule } from '@ionic/angular';
 
 import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
-import { AnalyticsRoutingModule } from './present-routing.module';
-import { AnalyticsComponent } from './present.component';
+import { PresentRoutingModule } from './present-routing.module';
+import { PresentComponent } from './present.component';
 
 
 @NgModule({
-  imports: [CommonModule, TranslateModule, CoreModule, SharedModule, IonicModule, AnalyticsRoutingModule],
-  entryComponents: [AnalyticsComponent],
-  declarations: [AnalyticsComponent]
+  imports: [CommonModule, TranslateModule, CoreModule, SharedModule, IonicModule, PresentRoutingModule],
+  entryComponents: [PresentComponent],
+  declarations: [PresentComponent]
 })
-export class AnalyticsModule {}
+export class PresentModule {}

@@ -8,7 +8,8 @@ let express = require('express'),
 // Connecting with mongo db
 mongoose.Promise = global.Promise;
 mongoose.connect(dbConfig.db, {
-   useNewUrlParser: true
+   useNewUrlParser: true,
+   useUnifiedTopology: true
 }).then(() => {
       console.log('Database sucessfully connected')
    },
@@ -25,8 +26,8 @@ app.use(bodyParser.urlencoded({
    extended: false
 }));
 app.use(cors()); 
-app.use(express.static(path.join(__dirname, 'dist/liftsapp')));
-app.use('/', express.static(path.join(__dirname, 'dist/liftsapp')));
+//app.use(express.static(path.join(__dirname, 'dist/liftsapp')));
+app.use('/', express.static(path.join(__dirname, 'www/index.html')));
 app.use('/api', slideRoute)
 
 // Create port
@@ -34,7 +35,7 @@ const port = process.env.PORT || 4000;
 const server = app.listen(port, () => {
   console.log('Connected to port ' + port)
 })
-
+ 
 // Find 404 and hand over to error handler
 app.use((req, res, next) => {
    next(createError(404));

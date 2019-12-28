@@ -1,6 +1,7 @@
-export class Slide {
+export class Presentation {
    name: string;
-   email: string;
-   designation: string;
-   phoneNumber: number;
+   owner:string;
+   copyright:string;
+   title: string;
+   slides: Object;
 }

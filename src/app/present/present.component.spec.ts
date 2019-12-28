@@ -5,24 +5,24 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
-import { AnalyticsComponent } from './present.component';
+import { PresentComponent } from './present.component';
 
 
-describe('AnalyticsComponent', () => {
-  let component: AnalyticsComponent;
-  let fixture: ComponentFixture<AnalyticsComponent>;
+describe('PresentComponent', () => {
+  let component: PresentComponent;
+  let fixture: ComponentFixture<PresentComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [IonicModule.forRoot(), CoreModule, SharedModule, HttpClientTestingModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      declarations: [AnalyticsComponent],
+      declarations: [PresentComponent],
       providers: []
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AnalyticsComponent);
+    fixture = TestBed.createComponent(PresentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
