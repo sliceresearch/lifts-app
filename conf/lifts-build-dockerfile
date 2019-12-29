@@ -59,8 +59,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -yq python-certbot-nginx
 
 ######################### PERMS
 
-RUN chmod +x /lifts/conf/docker/*
-RUN chmod +x /lifts/conf/git/*
+RUN chmod +x /lifts/conf/*
+RUN chmod +x /lifts/conf/*
 
 #################################### clean
 

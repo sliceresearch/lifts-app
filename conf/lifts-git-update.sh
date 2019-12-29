@@ -11,10 +11,7 @@ git pull https://github.com/sliceresearch/lifts-app.git #ssh://git@bitbucket.org
 
 chmod +x /lab/lifts/conf/*
 
-#cp -r /lab/assimilate.kit/* /lab/guangcai/src/app/app3/js/akit/
-
 sudo docker system prune -af
 
-ls -l /lab/lifts/conf
 ls -l 
-/lab/lifts/conf/docker-build-remote.sh  #> /log/lifts.log &
+
