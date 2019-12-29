@@ -53,7 +53,6 @@ app.use(function (err, req, res, next) {
   res.status(err.statusCode).send(err.message); // All HTTP requests must have a response, so let's send back an error with its status code and message
 });
 
-
 //python
 
 let pyshell = require('python-shell');
