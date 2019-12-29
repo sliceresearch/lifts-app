@@ -5,7 +5,8 @@ let express = require('express'),
    bodyParser = require('body-parser'),
    dbConfig = require('./database/db');
 
-
+   let pyshell = require('python-shell');
+   
 // Connecting with mongo db
 mongoose.Promise = global.Promise;
 mongoose.connect(dbConfig.db, {
@@ -55,9 +56,8 @@ app.use(function (err, req, res, next) {
 
 //python
 
-let pyshell = require('python-shell');
 
-//let pyshell = new PythonShell("../analytics/py/read_powerpoint.py");
+let ppt = new PythonShell('../analytics/py/read_powerpoint.py');
  
 // sends a message to the Python script via stdin
 //pyshell.send('hello');
