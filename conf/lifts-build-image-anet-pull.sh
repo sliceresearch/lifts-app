@@ -13,4 +13,5 @@ ssh -t damski@www.assimilate.net 'sudo docker login --username=damski@gmail.com 
 ssh -t damski@www.assimilate.net 'sudo docker pull registry.gitlab.com/damski/lifts'
 ssh -t damski@www.assimilate.net '/lab/lifts/conf/lifts-run.sh'
 
+exit
 

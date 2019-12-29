@@ -12,4 +12,4 @@ git pull https://github.com/sliceresearch/lifts-app.git #ssh://git@bitbucket.org
 chmod +x /lab/lifts/conf/*
 
 ls -l 
-
+exit
