@@ -57,7 +57,7 @@ app.use(function (err, req, res, next) {
 //python
 
 
-let ppt = new PythonShell('../analytics/py/read_powerpoint.py');
+//let ppt = new PythonShell('../analytics/py/read_powerpoint.py');
  
 // sends a message to the Python script via stdin
 //pyshell.send('hello');
