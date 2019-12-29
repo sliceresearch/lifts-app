@@ -1,2 +1,2 @@
 
-ssh damski@lab.assimilate.net "bash -s" < ./lab-git.sh
+ssh damski@lab.assimilate.net "bash -s" < ./lifts-git.sh
