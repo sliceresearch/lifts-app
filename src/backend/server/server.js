@@ -58,8 +58,6 @@ app.use(function (err, req, res, next) {
 
 let pyshell = require('python-shell');
 
-
-
 //let pyshell = new PythonShell("../analytics/py/read_powerpoint.py");
  
 // sends a message to the Python script via stdin
