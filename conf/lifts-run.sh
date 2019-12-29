@@ -7,3 +7,4 @@
 ###################################
 #cd /lab/lifts
 #npm run serve
+echo 'run'
