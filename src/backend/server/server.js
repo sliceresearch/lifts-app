@@ -1,3 +1,4 @@
+
 let express = require('express'),
    path = require('path'),
    mongoose = require('mongoose'),
@@ -7,6 +8,7 @@ let express = require('express'),
 
 let pyshell = require('python-shell');
 var createError = require('createerror');
+
 
 // Connecting with mongo db
 mongoose.Promise = global.Promise;
@@ -30,13 +32,16 @@ app.use(bodyParser.urlencoded({
 }));
 
 //var appPath = path.join(__dirname, '../../../www/index.html')
-var appPath = 'www/index.html';
-console.log('app path:' + appPath)
+//var appPath = 'www/index.html';
+//console.log('app path:' + appPath)
 
 app.use(cors()); 
 
+//app.use(express.static(path.join(__dirname, "www")));
+app.use(express.static('www'));
+
 //app.use(express.static(path.join(__dirname, 'dist/liftsapp')));
-app.get('/', (req, res) =>  res.sendFile(path.resolve(appPath)));
+//app.get('/', (req, res) =>  res.sendFile(path.resolve(appPath)));
 //app.use('/', express.static(appPath));
 
 app.use('/api', presentationRoute)
