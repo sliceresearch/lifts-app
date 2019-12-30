@@ -5,8 +5,9 @@ let express = require('express'),
    bodyParser = require('body-parser'),
    dbConfig = require('./database/db');
 
-   let pyshell = require('python-shell');
-   
+let pyshell = require('python-shell');
+var createError = require('createerror');
+
 // Connecting with mongo db
 mongoose.Promise = global.Promise;
 mongoose.connect(dbConfig.db, {
@@ -28,12 +29,16 @@ app.use(bodyParser.urlencoded({
    extended: false
 }));
 
-var appPath = path.join(__dirname, '../../../www/index.html')
+//var appPath = path.join(__dirname, '../../../www/index.html')
 var appPath = 'www/index.html';
 console.log('app path:' + appPath)
+
 app.use(cors()); 
+
 //app.use(express.static(path.join(__dirname, 'dist/liftsapp')));
-app.use('/', express.static(appPath));
+app.get('/', (req, res) =>  res.sendFile(path.resolve(appPath)));
+//app.use('/', express.static(appPath));
+
 app.use('/api', presentationRoute)
 
 // Create port
@@ -44,9 +49,11 @@ const server = app.listen(port, () => {
  
 // Find 404 and hand over to error handler
 app.use((req, res, next) => {
-   next(createError(404));
+	next(console.log("404"));
+  // next(createError({ name: '404', message: '404 error' }));
 });
 
+ 
 // error handler
 app.use(function (err, req, res, next) {
   console.error(err.message); // Log error message in our server's console
