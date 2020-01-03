@@ -6,6 +6,8 @@ cd /lab/lifts
 
 sudo docker system prune -af
 
+cat  ~/.ssh/herokupw
+
 sudo heroku login -i #damski@gmail.com  < ~/.ssh/herokupw
 sudo heroku container:login
 
