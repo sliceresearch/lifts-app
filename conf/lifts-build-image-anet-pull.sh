@@ -8,3 +8,6 @@ ssh -t damski@www.assimilate.net '/lab/lifts/conf/lifts-run.sh'
 
 exit
 
+
+
+
