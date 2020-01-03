@@ -4,7 +4,9 @@
 
 cd /lab/lifts
 
-sudo heroku login -i damski@gmail.com  < ~/.ssh/herokupw
+sudo docker system prune -af
+
+sudo heroku login -i #damski@gmail.com  < ~/.ssh/herokupw
 sudo heroku container:login
 
 sudo docker build --build-arg host_id=lifts --build-arg host_name=lifts -t liftsappheroku -f ./conf/lifts-build-dockerfile .
