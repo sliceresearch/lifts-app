@@ -11,11 +11,23 @@ var createError = require('createerror');
 
 let {PythonShell} = require('python-shell')
 
+
 // Connecting with mongo db
 mongoose.Promise = global.Promise;
 mongoose.connect(dbConfig.db, {
    useNewUrlParser: true,
-   useUnifiedTopology: true
+   useUnifiedTopology: true,
+   server: { 
+	socketOptions: { 
+	  keepAlive: 300000, connectTimeoutMS: 30000 
+	} 
+  }, 
+  replset: { 
+	socketOptions: { 
+	  keepAlive: 300000, 
+	  connectTimeoutMS : 30000 
+	} 
+  } 
 }).then(() => {
       console.log('Database sucessfully connected')
    },
