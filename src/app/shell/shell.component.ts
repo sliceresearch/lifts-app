@@ -17,7 +17,7 @@ import { AppXService, AppXDataService } from '@app/core';
 
 export class ShellComponent {
 
-	//objectsData = [];
+	objectsData = [];
 	presentations:any = [];
 
   constructor(
