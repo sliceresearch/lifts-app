@@ -6,9 +6,10 @@ let express = require('express'),
    bodyParser = require('body-parser'),
    dbConfig = require('./database/db');
 
-let pyshell = require('python-shell');
+//let PythonShell  = require('python-shell');
 var createError = require('createerror');
 
+let {PythonShell} = require('python-shell')
 
 // Connecting with mongo db
 mongoose.Promise = global.Promise;
@@ -46,6 +47,8 @@ app.use(express.static('www'));
 
 app.use('/api', presentationRoute)
 
+
+
 // Create port
 const port = process.env.PORT || 8080;
 const server = app.listen(port, () => {
@@ -68,13 +71,11 @@ app.use(function (err, req, res, next) {
 
 //python
 
+var pythonServerPath = path.join(__dirname, '/modules/pythonServer.js')
+console.log('pyserver:' + pythonServerPath)
+var PythonServer = require(pythonServerPath);
+global.pyServer = new PythonServer();
+global.pyServer.init();
 
-//let ppt = new PythonShell('../analytics/py/read_powerpoint.py');
- 
-// sends a message to the Python script via stdin
-//pyshell.send('hello');
- 
-//pyshell.on('message', function (message) {
-  // received a message sent from the Python script (a simple "print" statement)
-//  console.log(message);
-//});
+
+//global.pyServer.run()

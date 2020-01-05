@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 
 
-import { AppXService } from '@app/core';
+import { AppXService, AppXDataService } from '@app/core';
 
 @Component({
   selector: 'app-analytics',
@@ -14,8 +14,10 @@ export class AnalyticsComponent implements OnInit {
   quote: string | undefined;
   isLoading = false;
 
-  constructor(private appXService: AppXService) {
+  presentations:any = [];
 
+  constructor(private appXService: AppXService, private appXDataService: AppXDataService) {
+	this.readData();
   }
 
   ngOnInit() {
@@ -33,7 +35,15 @@ export class AnalyticsComponent implements OnInit {
 
 ///////
 
+readData() {
+    this.appXDataService.getData().subscribe((data) => {
+	 this.presentations = data;
+	// console.log(this.presentations);
+    })    
+  }
 
+
+/////////////////////////////////////////////////////////////////////
 setGroupData(d: any) {
    // this.objectsData = d;
     //   console.log('call', this.objectsData);
@@ -59,5 +69,6 @@ setGroupData(d: any) {
   getSelectedIdxNameIcon(fn: any) {
     return null;// this.iconNames[fn];
   }
+
 
 }

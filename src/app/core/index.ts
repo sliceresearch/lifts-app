@@ -10,3 +10,5 @@ export * from './logger.service';
 export * from './until-destroyed';
 
 export * from '../appx/appx.service';
+
+export * from '../appx/appx.data.service';

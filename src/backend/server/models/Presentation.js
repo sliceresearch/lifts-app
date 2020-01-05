@@ -1,22 +1,24 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// Define collection and schema
 let Presentation = new Schema({
    name: {
       type: String
    },
+   author: {
+	type: String
+ 	},
    email: {
       type: String
    },
-   designation: {
-      type: String
+   slides: {
+	 type:String
    },
-   phoneNumber: {
-      type: Number
-   }
+   analytics: {
+	type:String
+  }
 }, {
-   collection: 'slides'
+   collection: 'presentations'
 })
 
 module.exports = mongoose.model('Presentation', Presentation)

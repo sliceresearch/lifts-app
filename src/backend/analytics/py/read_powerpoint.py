@@ -11,10 +11,10 @@
 
 # In[89]:
 
-
 from pptx import Presentation
 import collections
 from typing import List
+import sys
 
 
 # In[63]:
@@ -22,20 +22,17 @@ from typing import List
 
 # pres_name = "ICT112_Week09_HTML.pptx"
 # pres_name = "presentation-template_teaching-lecture_wide_2018.pptx"
-pres_name = "presentation-example1.pptx"
+pres_name = sys.argv[1] #"presentation-example1.pptx"
 
 
 # In[65]:
-
 
 prs = Presentation(pres_name)
 
 
 # In[66]:
 
-
 print(pres_name, "has", len(prs.slides), "slides")
-
 
 # ## Print summary of all slides, plus text
 

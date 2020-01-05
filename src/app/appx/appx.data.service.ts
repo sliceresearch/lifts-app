@@ -12,22 +12,22 @@ import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 })
 @Injectable()
 export class AppXDataService {
-  http: HttpService;
+  //http: HttpService;
 
-  baseUri:string = 'http://localhost:4000/api';
+  baseUri:string = 'http://localhost:8080/api';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
   
-  constructor() {}
+  constructor(private http: HttpService) {}
 
-  get(): Promise<any[]> {
-    return this.http.get<any[]>('http://localhost:4200/assets/data/data.json').toPromise();
-  }
+ // get(): Promise<any[]> {
+ //   return this.http.get<any[]>('http://localhost:4200/assets/data/data.json').toPromise();
+ // }
 
 
   
 /////////////////////////////////////////////////////////objects
  createData(data): Observable<any> {
-    let url = `${this.baseUri}/create`;
+	let url = `${this.baseUri}/create`;
     return this.http.post(url, data)
       .pipe(
         catchError(this.errorMgmt)
@@ -35,11 +35,11 @@ export class AppXDataService {
   }
 
 
-  getDatas() {
+  getData() {
     return this.http.get(`${this.baseUri}`);
   }
 
-  getData(id): Observable<any> {
+  getDataId(id): Observable<any> {
     let url = `${this.baseUri}/read/${id}`;
     return this.http.get(url, {headers: this.headers}).pipe(
       map((res: Response) => {
