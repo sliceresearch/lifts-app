@@ -1,13 +1,12 @@
 const express = require('express');
 const app = express();
-const presentationRoute = express.Router();
+const liftsRoute = express.Router();
 
-// Presentation model
-let Presentation = require('../models/Presentation');
+let Lifts = require('../models/Lifts');
 
-presentationRoute.route('/create').post((req, res, next) => {
+liftsRoute.route('/create').post((req, res, next) => {
 
-	Presentation.create(req.body, async (error, data) => {
+	Lifts.create(req.body, async (error, data) => {
 		if (error) {
 			return next(error)
 		} else {
@@ -24,8 +23,8 @@ presentationRoute.route('/create').post((req, res, next) => {
 });
 
 
-presentationRoute.route('/latest').get((req, res) => {
-	Presentation.findOne((error, data) => {
+liftsRoute.route('/latest').get((req, res) => {
+	Lifts.findOne((error, data) => {
 		if (error) {
 			return next(error)
 		} else {
@@ -34,19 +33,9 @@ presentationRoute.route('/latest').get((req, res) => {
 	})
 })
 
-  //Tweet.findOne({}, {}, { sort: { 'created_at' : -1 } }, function(err, post) {
-//	cb( null, post.created_at.getTime() );
- // });
-
-
-
-
-
-
-
-// Get All Presentations
-presentationRoute.route('/').get((req, res) => {
-	Presentation.find((error, data) => {
+// Get All Liftss
+liftsRoute.route('/').get((req, res) => {
+	Lifts.find((error, data) => {
 		if (error) {
 			return next(error)
 		} else {
@@ -55,9 +44,9 @@ presentationRoute.route('/').get((req, res) => {
 	})
 })
 
-// Get single presentation
-presentationRoute.route('/read/:id').get((req, res) => {
-	Presentation.findById(req.params.id, (error, data) => {
+// Get single lifts
+liftsRoute.route('/read/:id').get((req, res) => {
+	Lifts.findById(req.params.id, (error, data) => {
 		if (error) {
 			return next(error)
 		} else {
@@ -66,8 +55,8 @@ presentationRoute.route('/read/:id').get((req, res) => {
 	})
 })
 
-presentationRoute.route('/read/:name').get((req, res) => {
-	Presentation.findById(req.params.name, (error, data) => {
+liftsRoute.route('/read/:name').get((req, res) => {
+	Lifts.findById(req.params.name, (error, data) => {
 		if (error) {
 			return next(error)
 		} else {
@@ -76,9 +65,9 @@ presentationRoute.route('/read/:name').get((req, res) => {
 	})
 })
 
-// Update presentation
-presentationRoute.route('/update/:id').put((req, res, next) => {
-	Presentation.findByIdAndUpdate(req.params.id, {
+// Update lifts
+liftsRoute.route('/update/:id').put((req, res, next) => {
+	Lifts.findByIdAndUpdate(req.params.id, {
 		$set: req.body
 	}, (error, data) => {
 		if (error) {
@@ -91,9 +80,9 @@ presentationRoute.route('/update/:id').put((req, res, next) => {
 	})
 })
 
-// Delete presentation
-presentationRoute.route('/delete/:id').delete((req, res, next) => {
-	Presentation.findOneAndRemove(req.params.id, (error, data) => {
+// Delete lifts
+liftsRoute.route('/delete/:id').delete((req, res, next) => {
+	Lifts.findOneAndRemove(req.params.id, (error, data) => {
 		if (error) {
 			return next(error);
 		} else {
@@ -104,19 +93,22 @@ presentationRoute.route('/delete/:id').delete((req, res, next) => {
 	})
 })
 
-module.exports = presentationRoute;
+module.exports = liftsRoute;
 
 
 
+  //Tweet.findOne({}, {}, { sort: { 'created_at' : -1 } }, function(err, post) {
+//	cb( null, post.created_at.getTime() );
+ // });
 
 //express.get('/', asyncHandler(async (req, res, next) => {
 //	const bar = await foo.findAll();
 //	res.send(bar)
 //}))
 /*
-presentationRoute.route('/create').post(asyncHandler(async (req, res, next) => {
+liftsRoute.route('/create').post(asyncHandler(async (req, res, next) => {
 
-	Presentation.create(req.body, (error, data) => {
+	Lifts.create(req.body, (error, data) => {
 		console.log('create')
 		var analysis = await global.pyServer.run()
 	
@@ -133,9 +125,9 @@ presentationRoute.route('/create').post(asyncHandler(async (req, res, next) => {
 
 
 /*
-// Add Presentation
-presentationRoute.route('/create').post((req, res, next) => {
-  Presentation.create(req.body, (error, data) => {
+// Add Lifts
+liftsRoute.route('/create').post((req, res, next) => {
+  Lifts.create(req.body, (error, data) => {
 	console.log('create')
 	var analysis = global.pyServer.run()
 

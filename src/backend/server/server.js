@@ -6,11 +6,7 @@ let express = require('express'),
    bodyParser = require('body-parser'),
    dbConfig = require('./database/db');
 
-//let PythonShell  = require('python-shell');
 var createError = require('createerror');
-
-let {PythonShell} = require('python-shell')
-
 
 // Connecting with mongo db
 mongoose.Promise = global.Promise;
@@ -37,7 +33,7 @@ mongoose.connect(dbConfig.db, {
 )
 
 // Setting up port with express js
-const presentationRoute = require('./routes/presentation.route')
+const liftsRoute = require('./routes/lifts.route')
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -57,7 +53,7 @@ app.use(express.static('www'));
 //app.get('/', (req, res) =>  res.sendFile(path.resolve(appPath)));
 //app.use('/', express.static(appPath));
 
-app.use('/api', presentationRoute)
+app.use('/api', liftsRoute)
 
 
 
