@@ -6,16 +6,42 @@ const presentationRoute = express.Router();
 let Presentation = require('../models/Presentation');
 
 presentationRoute.route('/create').post((req, res, next) => {
+
 	Presentation.create(req.body, async (error, data) => {
-		var presult = await global.pyServer.run()
 		if (error) {
 			return next(error)
 		} else {
-			console.log('result', presult)
-			res.json(presult)
+			var data_new = {};
+			data_new['id'] = data.id
+			data_new['name'] = data.name
+			var presult = await global.pyServer.run()
+			data_new.analytics = presult;
+			console.log('data',data_new)
+			res.json(data_new)
 		}
 	})
+
 });
+
+
+presentationRoute.route('/latest').get((req, res) => {
+	Presentation.findOne((error, data) => {
+		if (error) {
+			return next(error)
+		} else {
+			res.json(data)
+		}
+	})
+})
+
+  //Tweet.findOne({}, {}, { sort: { 'created_at' : -1 } }, function(err, post) {
+//	cb( null, post.created_at.getTime() );
+ // });
+
+
+
+
+
 
 
 // Get All Presentations
@@ -40,6 +66,15 @@ presentationRoute.route('/read/:id').get((req, res) => {
 	})
 })
 
+presentationRoute.route('/read/:name').get((req, res) => {
+	Presentation.findById(req.params.name, (error, data) => {
+		if (error) {
+			return next(error)
+		} else {
+			res.json(data)
+		}
+	})
+})
 
 // Update presentation
 presentationRoute.route('/update/:id').put((req, res, next) => {

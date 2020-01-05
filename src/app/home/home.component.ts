@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit {
 
 	importPresentation() {
 
-		this.appXDataService.createData('hello').subscribe(
+		this.appXDataService.createData({name:'ICT221',analytics:'none'}).subscribe(
 			(res) => {
 				console.log('Data successfully created!')
 			    this.ngZone.run(() => this.appXService.navigate('/analytics'))

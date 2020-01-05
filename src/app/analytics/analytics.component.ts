@@ -17,7 +17,7 @@ export class AnalyticsComponent implements OnInit {
   presentations:any = [];
 
   constructor(private appXService: AppXService, private appXDataService: AppXDataService) {
-	this.readData();
+	//this.readData({name:'ICT221'});
   }
 
   ngOnInit() {
@@ -35,10 +35,10 @@ export class AnalyticsComponent implements OnInit {
 
 ///////
 
-readData() {
+readData(name) {
     this.appXDataService.getData().subscribe((data) => {
 	 this.presentations = data;
-	// console.log(this.presentations);
+	 console.log('pres',this.presentations);
     })    
   }
 

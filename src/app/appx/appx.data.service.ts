@@ -34,13 +34,32 @@ export class AppXDataService {
       )
   }
 
-
   getData() {
     return this.http.get(`${this.baseUri}`);
   }
 
+  getDataLatest(): Observable<any> {
+    let url = `${this.baseUri}/latest`;
+    return this.http.get(url, {headers: this.headers}).pipe(
+      map((res: Response) => {
+        return res || {}
+      }),
+      catchError(this.errorMgmt)
+    )
+  }
+
   getDataId(id): Observable<any> {
     let url = `${this.baseUri}/read/${id}`;
+    return this.http.get(url, {headers: this.headers}).pipe(
+      map((res: Response) => {
+        return res || {}
+      }),
+      catchError(this.errorMgmt)
+    )
+  }
+
+  getDataName(name): Observable<any> {
+    let url = `${this.baseUri}/read/${name}`;
     return this.http.get(url, {headers: this.headers}).pipe(
       map((res: Response) => {
         return res || {}
