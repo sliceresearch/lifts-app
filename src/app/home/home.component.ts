@@ -1,7 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 
-import { AppXService, AppXDataService } from '@app/core';
+import { AppXService } from '@app/core';
 
 @Component({
 	selector: 'app-home',
@@ -14,16 +14,15 @@ export class HomeComponent implements OnInit {
 	isLoading = false;
 
 	constructor(
-		private appXService: AppXService,
-		private appXDataService: AppXDataService,
-		private ngZone: NgZone
+		private appXService: AppXService
+	///	private appXDataService: AppXDataService,
+	//	private ngZone: NgZone
 	) {
-
+	
 	}
 
 	ngOnInit() {
 		this.isLoading = true;
-
 	}
 
 	navigateTo(link) {
@@ -36,6 +35,18 @@ export class HomeComponent implements OnInit {
 	///////
 
 
+	importPresentation() {
+		
+	}
+
+
+
+
+}
+
+
+
+/*
 	setGroupData(d: any) {
 		// this.objectsData = d;
 		//   console.log('call', this.objectsData);
@@ -52,27 +63,10 @@ export class HomeComponent implements OnInit {
 	}
 
 	getSelectedIdx(i: any) {
-		/* if (i === this.app3Service.objectIndexGet()) {
-		   return true;
-		 }
-		 return false;*/
-	}
 
-	getSelectedIdxNameIcon(fn: any) {
-		return null;// this.iconNames[fn];
-	}
+		}
 
-	importPresentation() {
-
-		this.appXDataService.createData({name:'ICT221',analytics:'none'}).subscribe(
-			(res) => {
-				console.log('Data successfully created!')
-			    this.ngZone.run(() => this.appXService.navigate('/analytics'))
-			}, (error) => {
-				console.log(error);
-			});
-
-	}
-
-
-}
+		getSelectedIdxNameIcon(fn: any) {
+			return null;// this.iconNames[fn];
+		}
+	*/

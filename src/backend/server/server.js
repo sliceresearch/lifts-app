@@ -8,22 +8,26 @@ let express = require('express'),
 
 var createError = require('createerror');
 
-// Connecting with mongo db
-mongoose.Promise = global.Promise;
-mongoose.connect(dbConfig.db, {
-   useNewUrlParser: true,
-   useUnifiedTopology: true,
+/*
+,
    server: { 
 	socketOptions: { 
 	  keepAlive: 300000, connectTimeoutMS: 30000 
 	} 
-  }, 
+, 
   replset: { 
 	socketOptions: { 
 	  keepAlive: 300000, 
 	  connectTimeoutMS : 30000 
 	} 
   } 
+  */
+// Connecting with mongo db
+mongoose.Promise = global.Promise;
+mongoose.connect(dbConfig.db, {
+   useNewUrlParser: true,
+   useUnifiedTopology: true
+  
 }).then(() => {
       console.log('Database sucessfully connected')
    },

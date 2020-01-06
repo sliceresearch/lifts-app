@@ -5,7 +5,7 @@ import { ActionSheetButton, ActionSheetOptions, TextFieldTypes } from '@ionic/co
 import { TranslateService } from '@ngx-translate/core';
 
 import { I18nService } from '@app/core';
-import { AppXService, AppXDataService } from '@app/core';
+import { AppXService } from '@app/core';
 
 
 @Component({
@@ -27,8 +27,8 @@ export class ShellComponent {
     private alertController: AlertController,
     private actionSheetController: ActionSheetController,
 	private i18nService: I18nService,
-	private appXService: AppXService, 
-	private appXDataService: AppXDataService
+	private appXService: AppXService
+	//private appXDataService: AppXDataService
   ) {
 
  //   this.app3Service.call('objectGroup', []);
@@ -40,11 +40,11 @@ export class ShellComponent {
 
   
   ngOnInit() {
-    this.getPresentations();
+  //  this.getPresentations();
   }
 
   //
-
+/*
   getPresentations() {
 	  console.log('get')
     this.appXDataService.getData().subscribe((data) => {
@@ -52,7 +52,7 @@ export class ShellComponent {
 	 console.log('pres',this.presentations);
     })    
   }
-
+*/
 
   get isWeb(): boolean {
     return !this.platform.is('cordova');

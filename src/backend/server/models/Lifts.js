@@ -23,8 +23,8 @@ let Lifts = new Schema({
 			type: String
 		},
 
-		slides: [{ 
-		//	index: Int16Array,
+		slides: [{
+			//	index: Int16Array,
 			name: String,
 			analytics: {}
 		}],
@@ -39,5 +39,7 @@ let Lifts = new Schema({
 }, {
 	collection: 'lifts'
 })
+
+
 
 module.exports = mongoose.model('Lifts', Lifts)
