@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 let Lifts = new Schema({
 
 	user: {
-		type: String
+		type: String, unique: true 
 	},
 
 	email: {
@@ -20,6 +20,10 @@ let Lifts = new Schema({
 		},
 
 		author: {
+			type: String
+		},
+
+		file_url_source: {
 			type: String
 		},
 

@@ -29,28 +29,16 @@
 		  </div>
   
 		  <ion-list>
-		  <tr *ngFor="let presentation of presentations; let i = index">
-									<th scope="row">{{presentation._id}}</th>
-									<td>{{presentation.name}}</td>
-									
-								
-							</tr>
-
-
-			<ion-item ion-item *ngFor="let obj of objectsData; index as i" (click)="setGroupTabIdx(i)">
+			<ion-item ion-item *ngFor="let obj of presentations; index as i" (click)="appXService.dataPresentationIndexSet(i)">
 			  <ion-grid>
 				<ion-row>
 				  <ion-col col-2>
 					<ion-label>{{ i + 1 }}</ion-label>
-					<ion-icon [name]="getSelectedIdxNameIcon(obj.filetype)" size="small"></ion-icon>
+					<h6 ion-text color="black">{{ obj.name }}</h6>
 				  </ion-col>
 				  <ion-col col-10>
-					<h6 ion-text color="black">{{ obj.title }}</h6></ion-col
-				  >
-				</ion-row>
-  
-				<ion-row>
-				  <p ion-text color="black">{{ obj.description }}</p>
+					<h6 ion-text color="black">{{ obj.description }}</h6>
+					</ion-col>
 				</ion-row>
 			  </ion-grid>
 			</ion-item>

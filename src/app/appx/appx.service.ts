@@ -25,7 +25,7 @@ window.APPX = {};
 })
 export class AppXService {
 
-	public data = {};
+	public data: any;
 	// private dataObj: BehaviorSubject<{}>;
 
 	private host: any;
@@ -146,15 +146,26 @@ export class AppXService {
 	dataInit() {
 		var name = 'liftsuser'
 		this.dataUserInit(name);
-	//	this.dataUserAll();
+		//	this.dataUserAll();
 	}
 
 	dataUserInit(name: any) {
 		this.getDataName(name).subscribe((data) => {
 			this.data = data;
-			console.log('data', this.data);
+			console.log('data (init)', this.data);
 		})
 	}
+
+	dataUserUpdate() {
+		let id = this.data._id;
+		this.updateData(id, this.data)
+			.subscribe(res => {
+				console.log('data (update)', id, this.data);
+			}, (error) => {
+				console.log(error)
+			})
+	}
+
 
 	dataUserAll() {
 		this.getData().subscribe((data) => {
@@ -164,13 +175,29 @@ export class AppXService {
 	}
 
 
-	dataUserPresentationAdd(user, pres_name, pres_data) {
-
-		//this.data.presentations.push();
-
-		//	('/read/:name'
-
+	dataUserPresentationAdd(pres_name, pres_file) {
+		if (this.data) {
+			let p = { name: pres_name, file_url_source: pres_file }
+			this.data.presentations.push(p);
+			console.log("pres added:", p);
+			this.dataUserUpdate();
+		}
 	}
+
+	dataPresentationIndexSet(i) {
+
+		console.log("pres idx:", i);
+	}
+
+	dataPresentationsGet() {
+		
+	//	console.log(this.data);
+
+	//	if (this.data)
+	//		return this.data.presentations;
+	}
+
+
 
 	//////////////////////////////////http
 

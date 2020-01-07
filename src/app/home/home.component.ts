@@ -34,12 +34,17 @@ export class HomeComponent implements OnInit {
 	}
 	///////
 
-
 	importPresentation() {
-		
+
+		let name = 'ICT221'
+		let file = ""
+
+		this.appXService.dataUserPresentationAdd(name,file)
 	}
 
+	analysePresentation() {
 
+	}
 
 
 }

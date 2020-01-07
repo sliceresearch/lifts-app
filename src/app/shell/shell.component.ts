@@ -14,11 +14,9 @@ import { AppXService } from '@app/core';
   styleUrls: ['./shell.component.scss']
 })
 
-
 export class ShellComponent {
 
-	objectsData = [];
-	presentations:any = [];
+  presentations:any = [];
 
   constructor(
     private router: Router,
@@ -28,31 +26,17 @@ export class ShellComponent {
     private actionSheetController: ActionSheetController,
 	private i18nService: I18nService,
 	private appXService: AppXService
-	//private appXDataService: AppXDataService
   ) {
 
- //   this.app3Service.call('objectGroup', []);
-  //  this.app3Service.getData('objectGroup').subscribe(data => {
-   //   this.objectsData = data['objectGroup'];
-  //  });
-
   }
 
-  
   ngOnInit() {
-  //  this.getPresentations();
+	  this.setPresentations();
   }
 
-  //
-/*
-  getPresentations() {
-	  console.log('get')
-    this.appXDataService.getData().subscribe((data) => {
-	 this.presentations = data;
-	 console.log('pres',this.presentations);
-    })    
+  setPresentations() {
+	this.presentations = this.appXService.dataPresentationsGet();
   }
-*/
 
   get isWeb(): boolean {
     return !this.platform.is('cordova');
