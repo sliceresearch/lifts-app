@@ -1,49 +1,49 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+let Lifts = new Schema(
+  {
+    user: {
+      type: String,
+      unique: true
+    },
 
-let Lifts = new Schema({
+    email: {
+      type: String
+    },
 
-	user: {
-		type: String, unique: true 
-	},
+    //// user presentations
+    presentations: [
+      {
+        name: {
+          type: String
+        },
 
-	email: {
-		type: String
-	},
+        author: {
+          type: String
+        },
 
-	//// user presentations
-	presentations: [{
+        file_url_source: {
+          type: String
+        },
 
-		name: {
-			type: String
-		},
+        slides: [
+          {
+            //	index: Int16Array,
+            name: String,
+            analytics: {}
+          }
+        ],
 
-		author: {
-			type: String
-		},
+        analytics: {
+          type: String
+        }
+      }
+    ]
+  },
+  {
+    collection: 'lifts'
+  }
+);
 
-		file_url_source: {
-			type: String
-		},
-
-		slides: [{
-			//	index: Int16Array,
-			name: String,
-			analytics: {}
-		}],
-
-		analytics: {
-			type: String
-		}
-
-	}],
-
-
-}, {
-	collection: 'lifts'
-})
-
-
-
-module.exports = mongoose.model('Lifts', Lifts)
+module.exports = mongoose.model('Lifts', Lifts);

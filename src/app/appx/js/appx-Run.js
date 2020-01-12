@@ -1,5 +1,3 @@
-
-
 import APP_LIFTS from './app/app-LIFTSApp';
 
 export default class APP_run {
@@ -8,7 +6,6 @@ export default class APP_run {
     //  console.log('app run construct 0');
 
     APP.directory = window.location.pathname;
-
 
     this.app = new APP_LIFTS();
 
@@ -66,7 +63,6 @@ export default class APP_run {
   parentSet(p) {
     this.parent = p;
   }
-
 }
 
 function cycleStep() {

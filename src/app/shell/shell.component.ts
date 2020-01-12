@@ -7,16 +7,13 @@ import { TranslateService } from '@ngx-translate/core';
 import { I18nService } from '@app/core';
 import { AppXService } from '@app/core';
 
-
 @Component({
   selector: 'app-shell',
   templateUrl: './shell.component.html',
   styleUrls: ['./shell.component.scss']
 })
-
 export class ShellComponent {
-
-  presentations:any = [];
+  presentations: any = [];
 
   constructor(
     private router: Router,
@@ -24,18 +21,16 @@ export class ShellComponent {
     private platform: Platform,
     private alertController: AlertController,
     private actionSheetController: ActionSheetController,
-	private i18nService: I18nService,
-	private appXService: AppXService
-  ) {
-
-  }
+    private i18nService: I18nService,
+    private appXService: AppXService
+  ) {}
 
   ngOnInit() {
-	  this.setPresentations();
+    this.setPresentations();
   }
 
   setPresentations() {
-	this.presentations = this.appXService.dataPresentationsGet();
+    this.presentations = this.appXService.dataPresentationsGet();
   }
 
   get isWeb(): boolean {
@@ -68,4 +63,3 @@ export class ShellComponent {
     alertController.present();
   }
 }
-

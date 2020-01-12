@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 
-
 import { AppXService } from '@app/core';
 
 @Component({
@@ -9,37 +8,31 @@ import { AppXService } from '@app/core';
   templateUrl: './analytics.component.html',
   styleUrls: ['./analytics.component.scss']
 })
-
 export class AnalyticsComponent implements OnInit {
   quote: string | undefined;
   isLoading = false;
 
-  presentations:any = [];
+  presentations: any = [];
 
-  constructor(private appXService: AppXService) {
-	
-  }
+  constructor(private appXService: AppXService) {}
 
   ngOnInit() {
     this.isLoading = true;
-   
   }
 
   navigateTo(link) {
-	this.appXService.navigate(link)
+    this.appXService.navigate(link);
   }
-  
+
   isSelectedTab(type) {
-	return this.appXService.islocation(type)
+    return this.appXService.islocation(type);
   }
 
-///////
+  ///////
 
-
-
-/////////////////////////////////////////////////////////////////////
-setGroupData(d: any) {
-   // this.objectsData = d;
+  /////////////////////////////////////////////////////////////////////
+  setGroupData(d: any) {
+    // this.objectsData = d;
     //   console.log('call', this.objectsData);
   }
 
@@ -49,20 +42,18 @@ setGroupData(d: any) {
 
   setGroupTabIdx(i: any) {
     this.setGroupIdx(i);
-   // this.slides.slideTo(i);
+    // this.slides.slideTo(i);
     // this.slideChanged();
   }
 
   getSelectedIdx(i: any) {
-   /* if (i === this.app3Service.objectIndexGet()) {
+    /* if (i === this.app3Service.objectIndexGet()) {
       return true;
     }
     return false;*/
   }
 
   getSelectedIdxNameIcon(fn: any) {
-    return null;// this.iconNames[fn];
+    return null; // this.iconNames[fn];
   }
-
-
 }

@@ -4,79 +4,78 @@ const liftsRoute = express.Router();
 
 let Lifts = require('../models/Lifts');
 
-
 liftsRoute.route('/read/:user').get((req, res) => {
-	Lifts.findOne({ user: req.params.user }, (error, data) => {
-		if (data == undefined) {
-			let ndata = new Lifts({ user: req.params.user })
-			Lifts.create(ndata, async (error, data) => {
-				if (error) {
-					console.log('error', error)
-				} else {
-					res.json(data)
-				}
-			})
-
-		} else {
-			
-			res.json(data)
-		}
-	})
-})
+  Lifts.findOne({ user: req.params.user }, (error, data) => {
+    if (data == undefined) {
+      let ndata = new Lifts({ user: req.params.user });
+      Lifts.create(ndata, async (error, data) => {
+        if (error) {
+          console.log('error', error);
+        } else {
+          res.json(data);
+        }
+      });
+    } else {
+      res.json(data);
+    }
+  });
+});
 
 // Get All Liftss
 liftsRoute.route('/').get((req, res) => {
-	Lifts.find((error, data) => {
-		if (error) {
-			return next(error)
-		} else {
-			res.json(data)
-		}
-	})
-})
+  Lifts.find((error, data) => {
+    if (error) {
+      return next(error);
+    } else {
+      res.json(data);
+    }
+  });
+});
 
 // Get  lifts id
 liftsRoute.route('/read/:id').get((req, res) => {
-	Lifts.findById(req.params.id, (error, data) => {
-		if (error) {
-			return next(error)
-		} else {
-			res.json(data)
-		}
-	})
-})
-
+  Lifts.findById(req.params.id, (error, data) => {
+    if (error) {
+      return next(error);
+    } else {
+      res.json(data);
+    }
+  });
+});
 
 // Update lifts
 liftsRoute.route('/update/:id').put((req, res, next) => {
-	Lifts.findByIdAndUpdate(req.params.id, {
-		$set: req.body
-	}, (error, data) => {
-		if (error) {
-			return next(error);
-			console.log(error)
-		} else {
-			res.json(data)
-			console.log('Data updated successfully')
-		}
-	})
-})
+  Lifts.findByIdAndUpdate(
+    req.params.id,
+    {
+      $set: req.body
+    },
+    (error, data) => {
+      if (error) {
+        return next(error);
+        console.log(error);
+      } else {
+        res.json(data);
+        console.log('Data updated successfully');
+      }
+    }
+  );
+});
 
 // Delete lifts
 liftsRoute.route('/delete/:id').delete((req, res, next) => {
-	Lifts.findOneAndRemove(req.params.id, (error, data) => {
-		if (error) {
-			return next(error);
-		} else {
-			res.status(200).json({
-				msg: data
-			})
-		}
-	})
-})
+  Lifts.findOneAndRemove(req.params.id, (error, data) => {
+    if (error) {
+      return next(error);
+    } else {
+      res.status(200).json({
+        msg: data
+      });
+    }
+  });
+});
 
 module.exports = liftsRoute;
-
 
 /*
 liftsRoute.route('/create').post((req, res, next) => {
@@ -110,10 +109,9 @@ liftsRoute.route('/create1').post((req, res, next) => {
 
 //const ryu = await Character.findOne({ name: 'Ryu' })
 
-
-  //Tweet.findOne({}, {}, { sort: { 'created_at' : -1 } }, function(err, post) {
+//Tweet.findOne({}, {}, { sort: { 'created_at' : -1 } }, function(err, post) {
 //	cb( null, post.created_at.getTime() );
- // });
+// });
 
 //express.get('/', asyncHandler(async (req, res, next) => {
 //	const bar = await foo.findAll();
@@ -136,7 +134,6 @@ liftsRoute.route('/create').post(asyncHandler(async (req, res, next) => {
 	  })
 
 }))*/
-
 
 /*
 // Add Lifts

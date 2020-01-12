@@ -8,8 +8,6 @@ import { AppXService } from '@app/core';
   templateUrl: './present.component.html',
   styleUrls: ['./present.component.scss']
 })
-
-
 export class PresentComponent implements OnInit {
   quote: string | undefined;
   isLoading = false;
@@ -18,23 +16,20 @@ export class PresentComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = true;
-   
   }
 
   navigateTo(link) {
-	this.appXService.navigate(link)
+    this.appXService.navigate(link);
   }
-  
+
   isSelectedTab(type) {
-	return this.appXService.islocation(type)
+    return this.appXService.islocation(type);
   }
 
+  ///////
 
-///////
-
-
-setGroupData(d: any) {
-   // this.objectsData = d;
+  setGroupData(d: any) {
+    // this.objectsData = d;
     //   console.log('call', this.objectsData);
   }
 
@@ -44,19 +39,18 @@ setGroupData(d: any) {
 
   setGroupTabIdx(i: any) {
     this.setGroupIdx(i);
-   // this.slides.slideTo(i);
+    // this.slides.slideTo(i);
     // this.slideChanged();
   }
 
   getSelectedIdx(i: any) {
-   /* if (i === this.app3Service.objectIndexGet()) {
+    /* if (i === this.app3Service.objectIndexGet()) {
       return true;
     }
     return false;*/
   }
 
   getSelectedIdxNameIcon(fn: any) {
-    return null;// this.iconNames[fn];
+    return null; // this.iconNames[fn];
   }
-
 }

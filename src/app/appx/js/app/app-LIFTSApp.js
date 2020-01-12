@@ -1,10 +1,8 @@
 import AKIT_AppXApp from '../lib/appx/akit-AppxApp';
 
-
 export default class APP_LIFTS extends AKIT_AppXApp {
   constructor() {
     super();
-
   }
 
   init() {
@@ -18,14 +16,13 @@ export default class APP_LIFTS extends AKIT_AppXApp {
   }
 
   initUI() {
-   // this.ui = new APP_LIFTSUI();
+    // this.ui = new APP_LIFTSUI();
   }
 
   initAppScene() {
     APPX.alogApp('toastar_app: (init)');
     //  this.space = new APP_HoloSpace();
     //  this.space.init();
-
   }
 
   start() {

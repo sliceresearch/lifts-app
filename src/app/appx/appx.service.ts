@@ -1,4 +1,4 @@
-import { Injectable, } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 
@@ -11,274 +11,248 @@ import APP_run from './js/appx-Run';
 //import { AppXDataService } from '@app/core';
 
 declare global {
-	interface Window {
-		APP: any;
-		APPX: any;
-	}
+  interface Window {
+    APP: any;
+    APPX: any;
+  }
 }
 
 window.APP = {};
 window.APPX = {};
 
 @Injectable({
-	providedIn: 'root'
+  providedIn: 'root'
 })
 export class AppXService {
+  public data: any;
+  // private dataObj: BehaviorSubject<{}>;
 
-	public data: any;
-	// private dataObj: BehaviorSubject<{}>;
+  private host: any;
+  private objdir: any;
+  private running: any;
+  private inited: any;
 
-	private host: any;
-	private objdir: any;
-	private running: any;
-	private inited: any;
+  baseUri: string = 'http://localhost:8080/api';
+  headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-	baseUri: string = 'http://localhost:8080/api';
-	headers = new HttpHeaders().set('Content-Type', 'application/json');
+  // https://angular.io/guide/component-interaction
+  //	private triggerUpdateSubject = new Subject<string>();
+  //	triggerUpdate = this.triggerUpdateSubject.asObservable();
 
-	// https://angular.io/guide/component-interaction
-	//	private triggerUpdateSubject = new Subject<string>();
-	//	triggerUpdate = this.triggerUpdateSubject.asObservable();
+  //	private markerVisibleSubject = new Subject<string>();
+  //	markerVisible = this.markerVisibleSubject.asObservable();
 
-	//	private markerVisibleSubject = new Subject<string>();
-	//	markerVisible = this.markerVisibleSubject.asObservable();
+  //	private triggerUpdateMarkerSubject = new Subject<string>();
+  //	triggerUpdateMarker = this.triggerUpdateMarkerSubject.asObservable();
 
-	//	private triggerUpdateMarkerSubject = new Subject<string>();
-	//	triggerUpdateMarker = this.triggerUpdateMarkerSubject.asObservable();
+  private routeLocation: string;
+  private routeStart: string;
 
-	private routeLocation: string;
-	private routeStart: string;
+  constructor(private http: HttpClient, private router: Router) //private appXDataService: AppXDataService
+  {
+    // this.host = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
 
-	constructor(
-		private http: HttpClient,
-		private router: Router
-		//private appXDataService: AppXDataService
-	) {
-		// this.host = window.location.protocol + '//' + window.location.hostname + ':' + window.location.port;
+    //	window.APPX.devices = new APPX_AppDevices();
+    window.APP.run = new APP_run(); // this.canvas);
 
-		//	window.APPX.devices = new APPX_AppDevices();
-		window.APP.run = new APP_run(); // this.canvas);
+    this.host = window.APP.host;
+    this.objdir = window.APP.objDir;
 
-		this.host = window.APP.host;
-		this.objdir = window.APP.objDir;
+    this.init();
 
-		this.init();
+    this.routeStart = '/home';
+    this.routeLocation = '/home';
 
-		this.routeStart = '/home'
-		this.routeLocation = '/home'
+    this.route();
 
-		this.route();
+    console.log('appx service: ' + this);
+    // this.service();
+  }
 
-		console.log('appx service: ' + this);
-		// this.service();
-	}
+  service() {
+    this.running = false;
+    this.inited = false;
+    // console.log('appx service: ' + this.host);
+  }
 
-	service() {
-		this.running = false;
-		this.inited = false;
-		// console.log('appx service: ' + this.host);
-	}
+  init() {
+    if (!this.inited) {
+      this.inited = true;
 
-	init() {
-		if (!this.inited) {
-			this.inited = true;
+      this.service();
 
-			this.service();
+      window.APP.run.parentSet(this);
+      window.APP.run.init();
 
-			window.APP.run.parentSet(this);
-			window.APP.run.init();
+      this.dataInit();
 
-			this.dataInit();
+      console.log('appx service init');
+    }
+  }
 
-			console.log('appx service init');
-		}
-	}
+  start() {
+    window.APP.run.start();
+  }
 
-	start() {
-		window.APP.run.start();
-	}
+  stop() {
+    window.APP.run.stop();
+  }
 
-	stop() {
-		window.APP.run.stop();
-	}
+  load(id: any) {
+    window.APP.run.load(id);
+  }
 
-	load(id: any) {
-		window.APP.run.load(id);
-	}
+  route() {
+    console.log('appx route:' + this.routeStart);
 
-	route() {
-		console.log('appx route:' + this.routeStart);
+    //window.APPX.devices.setStartRoute('/home');
+    //window.APPX.devices.initInfoDevices();
 
-		//window.APPX.devices.setStartRoute('/home');
-		//window.APPX.devices.initInfoDevices();
+    //const startRoute = this.routeStart;//window.APPX.devices.getStartRoute();
+    this.navigate(this.routeStart);
+  }
 
-		//const startRoute = this.routeStart;//window.APPX.devices.getStartRoute();
-		this.navigate(this.routeStart);
+  navigate(link: any) {
+    console.log('appx navTo:' + link);
+    this.routeLocation = link;
+    this.router.navigateByUrl(link);
+    // this.router.navigate([link], { replaceUrl: true });
+  }
 
-	}
+  islocation(link: any) {
+    //console.log(this.routeLocation,link)
+    if (this.routeLocation == '/' + link) return true;
+    return false;
+  }
 
-	navigate(link: any) {
-		console.log('appx navTo:' + link)
-		this.routeLocation = link;
-		this.router.navigateByUrl(link);
-		// this.router.navigate([link], { replaceUrl: true });
-	}
+  cycleStart() {
+    if (!this.running) {
+      this.running = true;
+      window.APP.run.step();
+      //    window.APP.run.animate();
+      //   console.log('cycleStart');
+    }
+  }
 
-	islocation(link: any) {
-		//console.log(this.routeLocation,link)
-		if (this.routeLocation == '/' + link)
-			return true;
-		return false;
-	}
+  //////////////////////////////////////////////////////////////////////////datamanage
 
-	cycleStart() {
-		if (!this.running) {
-			this.running = true;
-			window.APP.run.step();
-			//    window.APP.run.animate();
-			//   console.log('cycleStart');
-		}
-	}
+  dataInit() {
+    var name = 'liftsuser';
+    this.dataUserInit(name);
+    //	this.dataUserAll();
+  }
 
+  dataUserInit(name: any) {
+    this.getDataName(name).subscribe(data => {
+      this.data = data;
+      console.log('data (init)', this.data);
+    });
+  }
 
-	//////////////////////////////////////////////////////////////////////////datamanage
+  dataUserUpdate() {
+    let id = this.data._id;
+    this.updateData(id, this.data).subscribe(
+      res => {
+        console.log('data (update)', id, this.data);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
 
-	dataInit() {
-		var name = 'liftsuser'
-		this.dataUserInit(name);
-		//	this.dataUserAll();
-	}
+  dataUserAll() {
+    this.getData().subscribe(data => {
+      this.data = data;
+      console.log('data', this.data);
+    });
+  }
 
-	dataUserInit(name: any) {
-		this.getDataName(name).subscribe((data) => {
-			this.data = data;
-			console.log('data (init)', this.data);
-		})
-	}
+  dataUserPresentationAdd(pres_name, pres_file) {
+    if (this.data) {
+      let p = { name: pres_name, file_url_source: pres_file };
+      this.data.presentations.push(p);
+      console.log('pres added:', p);
+      this.dataUserUpdate();
+    }
+  }
 
-	dataUserUpdate() {
-		let id = this.data._id;
-		this.updateData(id, this.data)
-			.subscribe(res => {
-				console.log('data (update)', id, this.data);
-			}, (error) => {
-				console.log(error)
-			})
-	}
+  dataPresentationIndexSet(i) {
+    console.log('pres idx:', i);
+  }
 
+  dataPresentationsGet() {
+    //	console.log(this.data);
+    //	if (this.data)
+    //		return this.data.presentations;
+  }
 
-	dataUserAll() {
-		this.getData().subscribe((data) => {
-			this.data = data;
-			console.log('data', this.data);
-		})
-	}
+  //////////////////////////////////http
 
+  /////////////////////////////////////////////////////////objects
+  createData(data): Observable<any> {
+    let url = `${this.baseUri}/create`;
+    return this.http.post(url, data).pipe(catchError(this.errorMgmt));
+  }
 
-	dataUserPresentationAdd(pres_name, pres_file) {
-		if (this.data) {
-			let p = { name: pres_name, file_url_source: pres_file }
-			this.data.presentations.push(p);
-			console.log("pres added:", p);
-			this.dataUserUpdate();
-		}
-	}
+  getData() {
+    return this.http.get(`${this.baseUri}`);
+  }
 
-	dataPresentationIndexSet(i) {
+  getDataLatest(): Observable<any> {
+    let url = `${this.baseUri}/latest`;
+    return this.http.get(url, { headers: this.headers }).pipe(
+      map((res: Response) => {
+        return res || {};
+      }),
+      catchError(this.errorMgmt)
+    );
+  }
 
-		console.log("pres idx:", i);
-	}
+  getDataId(id): Observable<any> {
+    let url = `${this.baseUri}/read/${id}`;
+    return this.http.get(url, { headers: this.headers }).pipe(
+      map((res: Response) => {
+        return res || {};
+      }),
+      catchError(this.errorMgmt)
+    );
+  }
 
-	dataPresentationsGet() {
-		
-	//	console.log(this.data);
+  getDataName(name): Observable<any> {
+    let url = `${this.baseUri}/read/${name}`;
+    return this.http.get(url, { headers: this.headers }).pipe(
+      map((res: Response) => {
+        return res || {};
+      }),
+      catchError(this.errorMgmt)
+    );
+  }
 
-	//	if (this.data)
-	//		return this.data.presentations;
-	}
+  updateData(id, data): Observable<any> {
+    let url = `${this.baseUri}/update/${id}`;
+    return this.http.put(url, data, { headers: this.headers }).pipe(catchError(this.errorMgmt));
+  }
 
+  deleteData(id): Observable<any> {
+    let url = `${this.baseUri}/delete/${id}`;
+    return this.http.delete(url, { headers: this.headers }).pipe(catchError(this.errorMgmt));
+  }
 
-
-	//////////////////////////////////http
-
-
-	/////////////////////////////////////////////////////////objects
-	createData(data): Observable<any> {
-		let url = `${this.baseUri}/create`;
-		return this.http.post(url, data)
-			.pipe(
-				catchError(this.errorMgmt)
-			)
-	}
-
-	getData() {
-		return this.http.get(`${this.baseUri}`);
-	}
-
-	getDataLatest(): Observable<any> {
-		let url = `${this.baseUri}/latest`;
-		return this.http.get(url, { headers: this.headers }).pipe(
-			map((res: Response) => {
-				return res || {}
-			}),
-			catchError(this.errorMgmt)
-		)
-	}
-
-	getDataId(id): Observable<any> {
-		let url = `${this.baseUri}/read/${id}`;
-		return this.http.get(url, { headers: this.headers }).pipe(
-			map((res: Response) => {
-				return res || {}
-			}),
-			catchError(this.errorMgmt)
-		)
-	}
-
-	getDataName(name): Observable<any> {
-		let url = `${this.baseUri}/read/${name}`;
-		return this.http.get(url, { headers: this.headers }).pipe(
-			map((res: Response) => {
-				return res || {}
-			}),
-			catchError(this.errorMgmt)
-		)
-	}
-
-	updateData(id, data): Observable<any> {
-		let url = `${this.baseUri}/update/${id}`;
-		return this.http.put(url, data, { headers: this.headers }).pipe(
-			catchError(this.errorMgmt)
-		)
-	}
-
-	deleteData(id): Observable<any> {
-		let url = `${this.baseUri}/delete/${id}`;
-		return this.http.delete(url, { headers: this.headers }).pipe(
-			catchError(this.errorMgmt)
-		)
-	}
-
-	// Error handling 
-	errorMgmt(error: HttpErrorResponse) {
-		let errorMessage = '';
-		if (error.error instanceof ErrorEvent) {
-			// Get client-side error
-			errorMessage = error.error.message;
-		} else {
-			// Get server-side error
-			errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-		}
-		console.log(errorMessage);
-		return throwError(errorMessage);
-	}
-
-
+  // Error handling
+  errorMgmt(error: HttpErrorResponse) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // Get client-side error
+      errorMessage = error.error.message;
+    } else {
+      // Get server-side error
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    console.log(errorMessage);
+    return throwError(errorMessage);
+  }
 }
-
-
-
-
 
 //this.readData({name:'ICT221'});
 
@@ -303,7 +277,7 @@ export class AppXService {
 	}
 */
 
-	///////////////////////////////////////////////////////// OBJECTS
+///////////////////////////////////////////////////////// OBJECTS
 
 /*	loadObjects(id: any) {
 		return window.APP.run.app.objectsLoad(id);
@@ -383,4 +357,3 @@ export class AppXService {
 	setVideoElement() {
 		window.APP.run.app.setVideoElement();
 	}*/
-

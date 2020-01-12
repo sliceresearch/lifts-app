@@ -4,52 +4,40 @@ import { finalize } from 'rxjs/operators';
 import { AppXService } from '@app/core';
 
 @Component({
-	selector: 'app-home',
-	templateUrl: './home.component.html',
-	styleUrls: ['./home.component.scss']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
-
 export class HomeComponent implements OnInit {
-	quote: string | undefined;
-	isLoading = false;
+  quote: string | undefined;
+  isLoading = false;
 
-	constructor(
-		private appXService: AppXService
-	///	private appXDataService: AppXDataService,
-	//	private ngZone: NgZone
-	) {
-	
-	}
+  constructor(private appXService: AppXService) ///	private appXDataService: AppXDataService,
+  //	private ngZone: NgZone
+  {}
 
-	ngOnInit() {
-		this.isLoading = true;
-	}
+  ngOnInit() {
+    this.isLoading = true;
+  }
 
-	navigateTo(link) {
-		this.appXService.navigate(link)
-	}
+  navigateTo(link) {
+    this.appXService.navigate(link);
+  }
 
-	isSelectedTab(type) {
-		return this.appXService.islocation(type)
-	}
-	///////
+  isSelectedTab(type) {
+    return this.appXService.islocation(type);
+  }
+  ///////
 
-	importPresentation() {
+  importPresentation() {
+    let name = 'ICT221';
+    let file = '';
 
-		let name = 'ICT221'
-		let file = ""
+    this.appXService.dataUserPresentationAdd(name, file);
+  }
 
-		this.appXService.dataUserPresentationAdd(name,file)
-	}
-
-	analysePresentation() {
-
-	}
-
-
+  analysePresentation() {}
 }
-
-
 
 /*
 	setGroupData(d: any) {

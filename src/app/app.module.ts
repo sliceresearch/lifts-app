@@ -32,9 +32,9 @@ import { AnalyticsModule } from './analytics/analytics.module';
     CoreModule,
     SharedModule,
     ShellModule,
-	HomeModule,
-	AnalyticsModule,
-	AppXModule,
+    HomeModule,
+    AnalyticsModule,
+    AppXModule,
     AppRoutingModule // must be imported as the last module as it contains the fallback route
   ],
   declarations: [AppComponent],

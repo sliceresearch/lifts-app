@@ -1,34 +1,29 @@
+var path = require('path');
 
+let { PythonShell } = require('python-shell');
 
-var path = require('path')
+const { promisify } = require('util');
 
-let { PythonShell } = require('python-shell')
+var pyPath = path.join(__dirname, '../../analytics/py/read_powerpoint.py');
+var presPath = path.join(__dirname, '../../../assets/test/py-pres-test.pptx');
 
-const { promisify } = require("util");
-
-var pyPath = path.join(__dirname, '../../analytics/py/read_powerpoint.py')
-var presPath = path.join(__dirname, '../../../assets/test/py-pres-test.pptx')
-
-console.log(pyPath, presPath)
+console.log(pyPath, presPath);
 
 var py_options = { pythonPath: 'python3', args: [presPath] };
 
-var PythonServer = function () {
+var PythonServer = function() {
+  var _me = this;
 
-	var _me = this;
+  //////////////////////////////////////////////////////////////commands
+  this.init = function() {
+    console.log('pyserver: (init)');
+  };
 
-	//////////////////////////////////////////////////////////////commands
-	this.init = function () {
-		console.log('pyserver: (init)');
-	};
-
-
-	this.run = async function () {
-		const pythonPromise = promisify(PythonShell.run);
-		const result = await pythonPromise(pyPath, py_options);
-		return result
-	};
-
+  this.run = async function() {
+    const pythonPromise = promisify(PythonShell.run);
+    const result = await pythonPromise(pyPath, py_options);
+    return result;
+  };
 };
 
 module.exports = PythonServer;

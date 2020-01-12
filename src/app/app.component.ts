@@ -29,12 +29,9 @@ export class AppComponent implements OnInit, OnDestroy {
     private keyboard: Keyboard,
     private statusBar: StatusBar,
     private splashScreen: SplashScreen,
-	private i18nService: I18nService,
-	private appXService: AppXService
-  ) {
-
-
-  }
+    private i18nService: I18nService,
+    private appXService: AppXService
+  ) {}
 
   async ngOnInit() {
     // Setup logger

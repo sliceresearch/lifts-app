@@ -7,7 +7,6 @@ import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
 import { AnalyticsComponent } from './analytics.component';
 
-
 describe('AnalyticsComponent', () => {
   let component: AnalyticsComponent;
   let fixture: ComponentFixture<AnalyticsComponent>;

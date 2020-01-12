@@ -8,7 +8,6 @@ import { SharedModule } from '@app/shared';
 import { AnalyticsRoutingModule } from './analytics-routing.module';
 import { AnalyticsComponent } from './analytics.component';
 
-
 @NgModule({
   imports: [CommonModule, TranslateModule, CoreModule, SharedModule, IonicModule, AnalyticsRoutingModule],
   entryComponents: [AnalyticsComponent],

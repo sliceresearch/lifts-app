@@ -1,6 +1,5 @@
 ///// APPX - application toolkit (assimilate interactive three.js toolkit)
 
-
 export default class AKIT_AppXGlobal {
   constructor() {
     APPX = {};
@@ -21,7 +20,6 @@ export default class AKIT_AppXGlobal {
 
     APPX.windowHeight = window.innerHeight;
     APPX.windowWidth = window.innerWidth;
-
 
     //////////////////////////////////////////////////test
 
@@ -57,12 +55,7 @@ export default class AKIT_AppXGlobal {
 
     ///////////////////////////////////////////////////////////////RGB
     APPX.getValueRGBAString = function(rf, gf, bf, af) {
-      return APPX.getRGBAString(
-        Math.round(rf * 255),
-        Math.round(gf * 255),
-        Math.round(bf * 255),
-        af
-      );
+      return APPX.getRGBAString(Math.round(rf * 255), Math.round(gf * 255), Math.round(bf * 255), af);
     };
 
     APPX.getRGBAString = function(r, g, b, a) {

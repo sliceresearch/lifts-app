@@ -6,9 +6,7 @@ import { AnalyticsComponent } from './analytics.component';
 import { Shell } from '@app/shell/shell.service';
 
 const routes: Routes = [
-  Shell.childRoutes([
-    { path: 'analytics', component: AnalyticsComponent, data: { title: extract('Analytics') } }
-  ])
+  Shell.childRoutes([{ path: 'analytics', component: AnalyticsComponent, data: { title: extract('Analytics') } }])
 ];
 
 @NgModule({

@@ -85,7 +85,6 @@ export default class APP_Properties {
       }
     };
 
-
     APP.properties = {
       /*    video: {
         scale: 0.15,
@@ -135,7 +134,6 @@ export default class APP_Properties {
           system: 'local',
           scene: 'simple' // peppers, vr, standard,simple
         }
-
       }
     };
 

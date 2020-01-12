@@ -7,7 +7,6 @@ import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
 import { PresentComponent } from './present.component';
 
-
 describe('PresentComponent', () => {
   let component: PresentComponent;
   let fixture: ComponentFixture<PresentComponent>;

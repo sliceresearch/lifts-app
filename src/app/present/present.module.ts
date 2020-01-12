@@ -8,7 +8,6 @@ import { SharedModule } from '@app/shared';
 import { PresentRoutingModule } from './present-routing.module';
 import { PresentComponent } from './present.component';
 
-
 @NgModule({
   imports: [CommonModule, TranslateModule, CoreModule, SharedModule, IonicModule, PresentRoutingModule],
   entryComponents: [PresentComponent],
