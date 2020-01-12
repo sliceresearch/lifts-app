@@ -5,9 +5,9 @@
   "main": "electron.main.js",
   "scripts": {
     "ng": "ng",
-    "serve:prod": "pm2 start ./src/backend/server/server.js",
+    "serve:prod": "pm2 start ./src/server/server.js",
     "monitor": "pm2 monitor",
-    "serve": "npx supervisor  ./src/backend/server/server.js",
+    "serve": "npx supervisor  ./src/server/server.js",
     "build": "npm run env -s && ng build --prod",
     "start": "npm run env -s && ng serve",
     "startp": "npm run env -s && ng serve --proxy-config proxy.conf.js",
