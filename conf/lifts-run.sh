@@ -7,4 +7,7 @@
 ###################################
 #cd /lab/lifts
 #npm run serve
+
+#mongo lifts --eval "db.dropDatabase()"
+
 echo 'run'

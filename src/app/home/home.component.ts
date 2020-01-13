@@ -31,12 +31,18 @@ export class HomeComponent implements OnInit {
 
   importPresentation() {
     let name = 'ICT221';
-    let file = '';
-
+	let file = 'filedir';
+	
+	this.appXService.dataUserPresentationCurrentSet(name);
     this.appXService.dataUserPresentationAdd(name, file);
   }
 
-  analysePresentation() {}
+  analysePresentation() {
+
+	//let name = this.appXService.dataUserPresentationCurrentGet();  //check ?
+	this.appXService.dataUserProcess();
+
+  }
 }
 
 /*

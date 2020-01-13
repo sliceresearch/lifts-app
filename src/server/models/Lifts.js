@@ -4,15 +4,19 @@ const Schema = mongoose.Schema;
 let Lifts = new Schema(
   {
     user: {
-      type: String,
-      unique: true
+      type: String
     },
 
     email: {
       type: String
     },
 
-    //// user presentations
+	// current working presentation
+	presentationLatest: {
+		type: String
+	},
+
+	//// user presentations
     presentations: [
       {
         name: {

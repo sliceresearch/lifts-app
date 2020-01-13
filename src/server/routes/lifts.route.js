@@ -4,6 +4,8 @@ const liftsRoute = express.Router();
 
 let Lifts = require('../models/Lifts');
 
+
+/// find lifts user or create
 liftsRoute.route('/read/:user').get((req, res) => {
   Lifts.findOne({ user: req.params.user }, (error, data) => {
     if (data == undefined) {
@@ -21,6 +23,26 @@ liftsRoute.route('/read/:user').get((req, res) => {
   });
 });
 
+// process lifts
+liftsRoute.route('/process/:id').put(async (req, res, next) => {
+
+
+	//var presult = await global.pyServer.run()
+	//console.log(presult)
+
+	Lifts.findByIdAndUpdate( req.params.id, {$set: req.body}, (error, data) => {
+		if (error) {
+		  return next(error);
+		  console.log(error);
+		} else {
+		  res.json(data);
+		  console.log('Data updated successfully');
+		}
+	  }
+	);
+  });
+
+////////////////////////////////////////////////////////////////////////
 // Get All Liftss
 liftsRoute.route('/').get((req, res) => {
   Lifts.find((error, data) => {
@@ -78,23 +100,12 @@ liftsRoute.route('/delete/:id').delete((req, res, next) => {
 module.exports = liftsRoute;
 
 /*
-liftsRoute.route('/create').post((req, res, next) => {
 
-	Lifts.create(req.body, async (error, data) => {
-		if (error) {
-			return next(error)
-		} else {
 			var data_new = {};
 			data_new['id'] = data.id
 			data_new['name'] = data.name
 			var presult = await global.pyServer.run()
-			data_new.analytics = presult;
-			console.log('data', data_new)
-			res.json(data_new)
-		}
-	})
-
-});*/
+		*/
 
 /*
 liftsRoute.route('/create1').post((req, res, next) => {

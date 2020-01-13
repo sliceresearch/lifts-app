@@ -161,9 +161,21 @@ export class AppXService {
     );
   }
 
+  dataUserProcess() {
+    let id = this.data._id;
+    this.processData(id, this.data).subscribe(
+      res => {
+        console.log('data (processed)', id, this.data);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
   dataUserAll() {
     this.getData().subscribe(data => {
-      this.data = data;
+	  this.data = data;
       console.log('data', this.data);
     });
   }
@@ -178,6 +190,7 @@ export class AppXService {
   }
 
   dataPresentationIndexSet(i) {
+	
     console.log('pres idx:', i);
   }
 
@@ -187,6 +200,17 @@ export class AppXService {
     //		return this.data.presentations;
   }
 
+  dataUserPresentationCurrentSet(name) {
+	this.data.presentationLatest=name;
+  }
+
+  dataUserPresentationCurrentGet() {
+	return this.data.presentationLatest;
+  }
+
+  //dataUserPresentationCurrentCheck() {
+//	this.data.presentationLatest=name;
+  //}
   //////////////////////////////////http
 
   /////////////////////////////////////////////////////////objects
@@ -231,6 +255,11 @@ export class AppXService {
 
   updateData(id, data): Observable<any> {
     let url = `${this.baseUri}/update/${id}`;
+    return this.http.put(url, data, { headers: this.headers }).pipe(catchError(this.errorMgmt));
+  }
+
+  processData(id, data): Observable<any> {
+    let url = `${this.baseUri}/process/${id}`;
     return this.http.put(url, data, { headers: this.headers }).pipe(catchError(this.errorMgmt));
   }
 
