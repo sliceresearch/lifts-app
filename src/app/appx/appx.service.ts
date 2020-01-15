@@ -84,7 +84,8 @@ export class AppXService {
 	}
 
 	initUserData() {
-		this.userDataInit('presentations')
+		this.userDataInit('presentations',[])
+		this.userDataInit('test',{})
 	}
 
 	start() {
@@ -216,8 +217,8 @@ export class AppXService {
 
 	////////////////////////////////////////////////////subscribe
 
-	userDataInit(property: any) {
-		this.user[property] = new BehaviorSubject<Object>({});
+	userDataInit(property: any, data: any) {
+		this.user[property] = new BehaviorSubject<Object>(data);
 		this.userProperties.push(property)
 	}
 

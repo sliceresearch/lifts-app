@@ -18,16 +18,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
 	this.isLoading = true;
-	
-	this.appXService.userDataGet('presentations').subscribe(data => {
-	
-		console.log('home data (init)', data);
-	  });
-
-/*	this.appXService.dataUserSubscribe().subscribe(data => {
-		//this.data = data;
-		console.log('data (init)', data);
-	  });*/
 
   }
 
