@@ -1,0 +1,38 @@
+
+
+{
+
+	//{ name:'Cognitive Load', rules: {} }
+
+
+
+}
+
+/*
+Cognitive Load
+•	Word limit per slide exceeded
+•	Bullet points per slides exceed
+ 
+Visual Learners
+•	Slide deck contains no images
+•	Slides 3-6 contain no images, recommend breaking up long text content with diagrams, charts of images that visually explain your content. Leave length text content for slide notes.
+ 
+Typography
+•	Slide contains text too small to be read by students in back row of lecturer theatre
+o	Slide 4 contains text with font size 3px
+ 
+Accessibility
+•	Slide contains background and foreground colours that are too visually similar.
+o	People with accessibility vision issues will not be able to see your content
+•	Slide contains an image without descriptive text
+o	People that rely on screen readers to read your content need to have descriptive text on images to understand what the image is.
+ 
+Spelling / Grammar
+•	Slides 4,7,8 contain spelling errors
+•	Slides 4,7,8 contain grammar errors
+o	Might be the first rule to be turned off given slide decks use point form which is not always grammatically correct.
+ 
+Readability
+•	Slide exceeds the readability level desired for a Level 1 course
+o	This could be determined via sending text ( slides/notes ) from bullet points to a Cognitive AI based service that provides textual interpretation information that could be used in rules.
+*/

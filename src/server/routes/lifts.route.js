@@ -4,9 +4,29 @@ const liftsRoute = express.Router();
 
 let Lifts = require('../models/Lifts');
 
-
 /// find lifts user or create
 liftsRoute.route('/read/:user').get((req, res) => {
+	Lifts.findOneAndUpdate({
+        user: req.params.user
+    },{
+        $set: {
+            title: req.body.name,
+            author: req.body.file,
+            file_url_source: req.body.file_url_source
+        }
+    },{
+        upsert: true
+    },function(err, newLifts){
+        if(err) {
+            res.send('error updating lifts');
+        } else {
+            console.log(newLifts);
+            res.send(newLifts);
+        }
+    });
+});
+
+/*
   Lifts.findOne({ user: req.params.user }, (error, data) => {
     if (data == undefined) {
       let ndata = new Lifts({ user: req.params.user });
@@ -20,9 +40,46 @@ liftsRoute.route('/read/:user').get((req, res) => {
     } else {
       res.json(data);
     }
-  });
+  });*/
+
+
+/*
+router.post('/', function(req, res){
+    var newBook = new Book();
+    newBook.title = req.body.title;
+    newBook.author = req.body.author;
+    newBook.category = req.body.category;
+    newBook.save(function(err, book){
+        if(err) {
+            res.send('error saving book');
+        } else {
+            console.log(book);
+            res.send(book);
+        }
+    });
 });
 
+router.put('/:id', function(req, res){
+    Book.findOneAndUpdate({
+        _id: req.params.id
+    },{
+        $set: {
+            title: req.body.title,
+            author: req.body.author,
+            category: req.body.category
+        }
+    },{
+        upsert: true
+    },function(err, newBook){
+        if(err) {
+            res.send('error updating book');
+        } else {
+            console.log(newBook);
+            res.send(newBook);
+        }
+    });
+});
+*/
 // process lifts
 liftsRoute.route('/process/:id').put(async (req, res, next) => {
 

@@ -26,11 +26,12 @@ export class ShellComponent {
   ) {}
 
   ngOnInit() {
-    this.setPresentations();
+    this.getPresentations();
   }
 
-  setPresentations() {
-    this.presentations = this.appXService.dataPresentationsGet();
+  getPresentations() {
+//	this.presentations = this.appXService.dataPresentationsGet();
+//	console.log('presentations:' + this.presentations )
   }
 
   get isWeb(): boolean {

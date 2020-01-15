@@ -17,7 +17,18 @@ export class HomeComponent implements OnInit {
   {}
 
   ngOnInit() {
-    this.isLoading = true;
+	this.isLoading = true;
+	
+	this.appXService.userDataGet('presentations').subscribe(data => {
+	
+		console.log('home data (init)', data);
+	  });
+
+/*	this.appXService.dataUserSubscribe().subscribe(data => {
+		//this.data = data;
+		console.log('data (init)', data);
+	  });*/
+
   }
 
   navigateTo(link) {
@@ -38,11 +49,10 @@ export class HomeComponent implements OnInit {
   }
 
   analysePresentation() {
-
 	//let name = this.appXService.dataUserPresentationCurrentGet();  //check ?
 	this.appXService.dataUserProcess();
-
   }
+
 }
 
 /*
