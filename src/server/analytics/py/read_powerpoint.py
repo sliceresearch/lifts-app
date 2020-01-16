@@ -2,9 +2,9 @@
 # coding: utf-8
 
 # # Interactive Powerpoint Analytics Tool (IPAT)
-#
+# 
 # A product of the **LIFTS** project (**Learning in Future Teaching Spaces**), 2019-2020.
-#
+# 
 # Authors:
 # * Mark Utting
 # * Jacqui Blake
@@ -14,41 +14,52 @@
 
 from pptx import Presentation
 import collections
-import json
-import sys
-from typing import List, Dict, Tuple, Any
+from typing import List
 
 
 # In[63]:
 
-MAX_WORDS_PER_SLIDE = 65
 
 # pres_name = "ICT112_Week09_HTML.pptx"
 # pres_name = "presentation-template_teaching-lecture_wide_2018.pptx"
-pres_name = "presentation-example1.pptx"
+pres_name = "pres_test.pptx"
 
 
 # In[65]:
 
-def debug_dump(prs:Presentation):
-    """Print lots of basic information about the given presentation."""
-    print("Presentation has", len(prs.slides), "slides")
 
-    # Print summary of all slides, plus text
-    n = 0
-    for slide in prs.slides:
-        n += 1
-        print("========== slide {} ========== [{}]".format(n, slide.slide_layout.name))
-        for shape in slide.shapes:
-            if not shape.has_text_frame:
-                continue
-            print(shape.name)
-            for paragraph in shape.text_frame.paragraphs:
-                for run in paragraph.runs:
-                    print("    " + run.text)
+prs = Presentation(pres_name)
 
 
-# %%
+# In[66]:
+
+
+print(pres_name, "has", len(prs.slides), "slides")
+
+
+# ## Print summary of all slides, plus text
+
+# In[67]:
+
+
+# print some meta-data plus all text
+n = 0
+for slide in prs.slides:
+    n += 1
+    print("========== slide {} ========== [{}]".format(n, slide.slide_layout.name))
+    for shape in slide.shapes:
+        if not shape.has_text_frame:
+            continue
+        print(shape.name)
+        for paragraph in shape.text_frame.paragraphs:
+            for run in paragraph.runs:
+                print("    " + run.text)
+
+
+# ## Collect Layout Statistics
+
+# In[90]:
+
 
 def get_word_counts(slides) -> List[int]:
     """Count the amount of text in each slide."""
@@ -91,73 +102,40 @@ assert calculate_text_stars([10, 30, 60]) == 5  # TODO: penalise text-heavy slid
 
 
 INTERACTIVE = set(["MS Forms Quiz/Survey", "Video", "Demo"])
-
-def count_layouts(prs:Presentation) -> Tuple[int, Dict[str, int]]:
-    """Counts how many times each PPT layout is used.
-    Returns the total number of interactive layouts, plus a dictionary of the layout counts.
-    """
-    layouts = collections.defaultdict(int)
-    layouts_interactive = 0
-    for slide in prs.slides:
-        layouts[slide.slide_layout.name] += 1
-        if slide.slide_layout.name in INTERACTIVE:
-            layouts_interactive += 1
-    return (layouts_interactive, layouts)
+layouts = collections.defaultdict(int)
+layouts_interactive = 0
+for slide in prs.slides:
+    layouts[slide.slide_layout.name] += 1
+    if slide.slide_layout.name in INTERACTIVE:
+        layouts_interactive += 1
 
 
 # In[94]:
 
-def analyse_presentation(pres_name:str, verbose=False) -> Dict[str, Any]:
-    """Analyses a presentation and returns a dictionary of star-ratings, plus extra details.
-    Works best on presentations that use the LIFTS template, with known layout names.
-    """
-    prs = Presentation(pres_name)
-    if verbose:
-        debug_dump(prs)
-    (layouts_interactive, layouts) = count_layouts(prs)
-    interaction_stars = min(layouts_interactive, 5)
-    topic_stars = ([1,1,3,5,5,4,3,2,1]+[1]*100)[layouts["Section Header"]]
 
-    word_count = get_word_counts(prs.slides)
-    words_per_slide = sum(word_count) / len(word_count)
-    # ideal words/slide is 30-40 (5 stars)
-    text_stars = calculate_text_stars(word_count)
-    # print("word counts:", word_count)
-
-    # Create a list of warnings about very text-heavy slides
-    heavy_warnings = []
-    for slide, words in enumerate(word_count):
-        if words > MAX_WORDS_PER_SLIDE:
-            heavy_warnings.append(f"WARNING: slide {slide} has {words} words!")
-
-    result = {
-        "Interaction Stars": interaction_stars,
-        "Sectioned Stars": topic_stars,
-        "Accessibility Stars": 3,   # not implemented yet!
-        "Text Stars": text_stars,
-        # some other statistics
-        "Name": pres_name,  # TODO: strip any Path and just return file name?
-        "Slide Count": len(prs.slides),
-        "Layout Counts": layouts,  # dictionary that maps layout name to count
-        "Words per Slide": words_per_slide,  # a float
-        "Text Heavy Slides": heavy_warnings  # a list of warning strings
-        }
-    return result
+# print the slide layout analytics
+print(f"Slide Layout counts:")
+for name, count in layouts.items():
+    print(f"    {count} {name} slides.")
+i_score = min(layouts_interactive, 5)
+topic_score = ([1,1,3,5,5,4,3,2,1]+[1]*100)[layouts["Section Header"]]
+word_count = get_word_counts(prs.slides)
+# print("word counts:", word_count)
+words_per_slide = sum(word_count) / len(word_count)
+# ideal words/slide is 30-40 (5 stars)
+text_stars = calculate_text_stars(word_count)
+print(f"Interaction score   : {i_score} stars.")
+print(f"Sections score      : {topic_score} stars.")
+print(f"Accessibility score : coming soon...")
+print(f"Text score          : {text_stars} stars   ({words_per_slide:.1f} words/slide)")
+# Warn about very text-heavy slides
+for slide, words in enumerate(word_count):
+    if words > 65:
+        print(f"    WARNING: slide {slide} has {words} words!")
 
 
-# %%
+# In[ ]:
 
-if __name__ == "__main__":
-    verbose = False
-    if len(sys.argv) > 1:
-        for arg in sys.argv:
-            if arg == "--verbose":
-                verbose = True
-            else:
-                analytics = analyse_presentation(arg, verbose=verbose)
-                print(json.dumps(analytics, indent=2))
-    else:
-        print("Usage: [--verbose] file1.pptx file2.pptx ...")
-        analytics = analyse_presentation(pres_name)  # the default example
-        print(json.dumps(analytics, indent=2))
+
+
 

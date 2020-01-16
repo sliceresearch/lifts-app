@@ -9,7 +9,7 @@ var presPath = path.join(__dirname, '../../assets/test/py-pres-test.pptx');
 
 console.log(pyPath, presPath);
 
-var py_options = { pythonPath: 'python3', args: [presPath], mode:'json' };
+var py_options = { pythonPath: 'python3', args: [presPath]};   //, mode:'json' 
 
 var PythonServer = function() {
   var _me = this;
