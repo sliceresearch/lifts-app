@@ -85,7 +85,7 @@ export class AppXService {
 
 	initUserData() {
 		this.userDataInit('presentations',[])
-		this.userDataInit('test',{})
+		//this.userDataInit('test',{})
 	}
 
 	start() {
@@ -149,6 +149,7 @@ export class AppXService {
 
 	dataUserProcess() {
 		let id = this.data._id;
+	//	let pname = this.dataUserPresentationCurrentGet();
 		this.processData(id, this.data).subscribe(
 			res => {
 				console.log('data (processed)', id, this.data);
@@ -243,15 +244,7 @@ export class AppXService {
 		let url = `${this.baseUri}/update/${id}`;
 		return this.http.put(url, data, { headers: this.headers }).pipe(catchError(this.errorMgmt));
 	}
-	/*
-	  user: req.params.user
-		},{
-			$set: {
-				title: req.body.name,
-				author: req.body.file,
-				file_url_source: req.body.file_url_source
-			}
-			*/
+
 	processData(id, data): Observable<any> {
 		let url = `${this.baseUri}/process/${id}`;
 		return this.http.put(url, data, { headers: this.headers }).pipe(catchError(this.errorMgmt));

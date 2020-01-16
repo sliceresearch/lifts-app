@@ -80,13 +80,15 @@ router.put('/:id', function(req, res){
     });
 });
 */
+
 // process lifts
 liftsRoute.route('/process/:id').put(async (req, res, next) => {
 
+	var presName = req.body.presentationLatest;
+	//var presData = req.body.presentations
+	var presult = await global.pyServer.run()
 
-	//var presult = await global.pyServer.run()
-	//console.log(presult)
-
+	console.log(presName, presult)
 	Lifts.findByIdAndUpdate( req.params.id, {$set: req.body}, (error, data) => {
 		if (error) {
 		  return next(error);
