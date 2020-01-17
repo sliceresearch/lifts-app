@@ -4,12 +4,12 @@ let { PythonShell } = require('python-shell');
 
 const { promisify } = require('util');
 
-var pyPath = path.join(__dirname, '../analytics/py/read_powerpoint.py');
+var pyPath = path.join(__dirname, '../analytics/py/process_ppt.py');
 var presPath = path.join(__dirname, '../../assets/test/py-pres-test.pptx');
 
 console.log(pyPath, presPath);
 
-var py_options = { pythonPath: 'python3', args: [presPath]};   //, mode:'json' 
+var py_options = { pythonPath: 'python3', args: [presPath], mode:'json' };   //
 
 var PythonServer = function() {
   var _me = this;

@@ -90,4 +90,13 @@ var PythonServer = require(pythonServerPath);
 global.pyServer = new PythonServer();
 global.pyServer.init();
 
+
+//rules
+
+var rulesServerPath = path.join(__dirname, '/modules/rulesServer.js');
+console.log('pyserver:' + rulesServerPath);
+var RulesServer = require(rulesServerPath);
+global.rulesServer = new RulesServer();
+global.rulesServer.init();
+
 //global.pyServer.run()

@@ -25,7 +25,7 @@ MAX_WORDS_PER_SLIDE = 65
 
 # pres_name = "ICT112_Week09_HTML.pptx"
 # pres_name = "presentation-template_teaching-lecture_wide_2018.pptx"
-pres_name = "presentation-example1.pptx"
+pres_name = "pres_test.pptx"
 
 
 # In[65]:
@@ -131,33 +131,36 @@ def analyse_presentation(pres_name:str, verbose=False) -> Dict[str, Any]:
             heavy_warnings.append(f"WARNING: slide {slide} has {words} words!")
 
     result = {
-        "Interaction Stars": interaction_stars,
-        "Sectioned Stars": topic_stars,
-        "Accessibility Stars": 3,   # not implemented yet!
-        "Text Stars": text_stars,
+        "stars_interation": interaction_stars,
+        "stars_section": topic_stars,
+        "stars_accessibility": 3,   # not implemented yet!
+        "stars_text": text_stars,
         # some other statistics
-        "Name": pres_name,  # TODO: strip any Path and just return file name?
-        "Slide Count": len(prs.slides),
-        "Layout Counts": layouts,  # dictionary that maps layout name to count
-        "Words per Slide": words_per_slide,  # a float
-        "Text Heavy Slides": heavy_warnings  # a list of warning strings
+        "filename": pres_name,  # TODO: strip any Path and just return file name?
+        "count_slide": len(prs.slides),
+        "count_layout": layouts,  # dictionary that maps layout name to count
+        "slide_words_per": words_per_slide,  # a float
+        "slides_text_heavy": heavy_warnings  # a list of warning strings
         }
     return result
 
 
 # %%
-
-if __name__ == "__main__":
-    verbose = False
-    if len(sys.argv) > 1:
-        for arg in sys.argv:
-            if arg == "--verbose":
-                verbose = True
-            else:
-                analytics = analyse_presentation(arg, verbose=verbose)
-                print(json.dumps(analytics, indent=2))
-    else:
-        print("Usage: [--verbose] file1.pptx file2.pptx ...")
-        analytics = analyse_presentation(pres_name)  # the default example
-        print(json.dumps(analytics, indent=2))
+#print(sys.argv[1])
+analytics = analyse_presentation(sys.argv[1])  # the default example
+jout = json.dumps(analytics)
+print(jout)
+#if __name__ == "__main__":
+#    verbose = False
+#    if len(sys.argv) > 1:
+#        for arg in sys.argv:
+#            if arg == "--verbose":
+#                verbose = True
+#            else:
+#                analytics = analyse_presentation(arg, verbose=verbose)
+#                print(json.dumps(analytics, indent=2))
+#    else:
+#        print("Usage: [--verbose] file1.pptx file2.pptx ...")
+#        analytics = analyse_presentation(pres_name)  # the default example
+#        print(json.dumps(analytics, indent=2))
 

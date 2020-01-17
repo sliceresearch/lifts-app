@@ -6,25 +6,60 @@ let Lifts = require('../models/Lifts');
 
 /// find lifts user or create
 liftsRoute.route('/read/:user').get((req, res) => {
+
+	//console.log('create:', req.params)
+	console.log('find (read):', req.params.user)
+	//console.log('body:', req.body)
+
 	Lifts.findOneAndUpdate({
-        user: req.params.user
-    },{
-        $set: {
-            title: req.body.name,
-            author: req.body.file,
-            file_url_source: req.body.file_url_source
-        }
-    },{
-        upsert: true
-    },function(err, newLifts){
-        if(err) {
-            res.send('error updating lifts');
-        } else {
-            console.log(newLifts);
-            res.send(newLifts);
-        }
-    });
+		user: req.params.user
+	}, {
+		$set: {
+			email: "req.params.email"
+		}
+	}, {
+		upsert: true
+	}, function (err, newLifts) {
+		if (err) {
+			res.send('error updating lifts');
+		} else {
+			console.log('update (read):', newLifts);
+			res.send(newLifts);
+		}
+	});
 });
+
+
+// process lifts
+liftsRoute.route('/process/:user').put( async (req, res) => {
+
+	console.log('find (process):', req.params.user,req.body.presentationLatest)
+
+	//var py_result = await global.pyServer.run();
+
+	var rule_result = await global.rulesServer.process_presentation();
+
+	console.log(rule_result)
+
+	Lifts.findOneAndUpdate({
+		user: req.params.user
+	}, {
+		$set: {
+			presentations: { name: req.body.presentationLatest },
+			analytics: rule_result 
+		}
+	}, {
+		upsert: true
+	}, function (err, data) {
+		if (err) {
+			res.send('error updating lifts:',data);
+		} else {
+			res.send(data);
+		}
+	});
+
+});
+
 
 /*
   Lifts.findOne({ user: req.params.user }, (error, data) => {
@@ -81,79 +116,74 @@ router.put('/:id', function(req, res){
 });
 */
 
-// process lifts
-liftsRoute.route('/process/:id').put(async (req, res, next) => {
 
-	var presName = req.body.presentationLatest;
-	//var presData = req.body.presentations
-	var presult = await global.pyServer.run()
+/*
 
-	console.log(presName, presult)
-	Lifts.findByIdAndUpdate( req.params.id, {$set: req.body}, (error, data) => {
-		if (error) {
-		  return next(error);
-		  console.log(error);
-		} else {
-		  res.json(data);
-		  console.log('Data updated successfully');
-		}
+  Lifts.findByIdAndUpdate( req.params.id, {$set: req.body}, (error, data) => {
+	  if (error) {
+		return next(error);
+		console.log(error);
+	  } else {
+		res.json(data);
+		console.log('Data updated successfully',req.body,data);
 	  }
-	);
-  });
+	}
+  );
 
+  */
 ////////////////////////////////////////////////////////////////////////
 // Get All Liftss
 liftsRoute.route('/').get((req, res) => {
-  Lifts.find((error, data) => {
-    if (error) {
-      return next(error);
-    } else {
-      res.json(data);
-    }
-  });
+	Lifts.find((error, data) => {
+		if (error) {
+			return next(error);
+		} else {
+			res.json(data);
+		}
+	});
 });
 
 // Get  lifts id
 liftsRoute.route('/read/:id').get((req, res) => {
-  Lifts.findById(req.params.id, (error, data) => {
-    if (error) {
-      return next(error);
-    } else {
-      res.json(data);
-    }
-  });
+	Lifts.findById(req.params.id, (error, data) => {
+		if (error) {
+			return next(error);
+		} else {
+			res.json(data);
+		}
+	});
 });
 
 // Update lifts
 liftsRoute.route('/update/:id').put((req, res, next) => {
-  Lifts.findByIdAndUpdate(
-    req.params.id,
-    {
-      $set: req.body
-    },
-    (error, data) => {
-      if (error) {
-        return next(error);
-        console.log(error);
-      } else {
-        res.json(data);
-        console.log('Data updated successfully');
-      }
-    }
-  );
+	Lifts.findByIdAndUpdate(
+		req.params.id,
+		{
+			$set: req.body
+		},
+		(error, data) => {
+			if (error) {
+				return next(error);
+				console.log(error);
+			} else {
+				res.json(data);
+				console.log('Data updated successfully');
+			}
+		}
+	);
 });
 
 // Delete lifts
 liftsRoute.route('/delete/:id').delete((req, res, next) => {
-  Lifts.findOneAndRemove(req.params.id, (error, data) => {
-    if (error) {
-      return next(error);
-    } else {
-      res.status(200).json({
-        msg: data
-      });
-    }
-  });
+	Lifts.findOneAndRemove(req.params.id, (error, data) => {
+		if (error) {
+			return next(error);
+		} else {
+			res.status(200).json({
+				msg: data
+			});
+		}
+	});
 });
 
 module.exports = liftsRoute;

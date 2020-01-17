@@ -2,52 +2,94 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let Lifts = new Schema(
-  {
-    user: {
-      type: String
-    },
+	{
+		user: {
+			type: String
+		},
 
-    email: {
-      type: String
-    },
+		email: {
+			type: String
+		},
 
-	// current working presentation
-	presentationLatest: {
-		type: String
+		// current working presentation
+		presentationLatest: {
+			type: String
+		},
+
+		//// user presentations
+		presentations: [
+			{
+				name: {
+					type: String
+				},
+
+				author: {
+					type: String
+				},
+
+				file_url_source: {
+					type: String
+				},
+
+				slides: [
+					{
+						//	index: Int16Array,
+						name: String,
+						analytics: [
+
+							{
+
+								code: {
+									type: String
+								},
+
+								type: {
+									type: String
+								},
+
+								rule: {
+									type: String
+								},
+
+								description: {
+									type: String
+								},
+
+								value: {}
+
+							}
+
+						]
+
+
+					}
+				],
+
+				analytics: [
+					{
+						code: {
+							type: String
+						},
+
+						type: {
+							type: String
+						},
+
+						description: {
+							type: String
+						},
+
+						value: {
+							type: String
+						}
+					}
+				]
+			}
+		]
 	},
-
-	//// user presentations
-    presentations: [
-      {
-        name: {
-          type: String
-        },
-
-        author: {
-          type: String
-        },
-
-        file_url_source: {
-          type: String
-        },
-
-        slides: [
-          {
-            //	index: Int16Array,
-            name: String,
-            analytics: {}
-          }
-        ],
-
-        analytics: {
-          type: String
-        }
-      }
-    ]
-  },
-  {
-    collection: 'lifts'
-  }
+	{
+		collection: 'lifts'
+	}
 );
 
 module.exports = mongoose.model('Lifts', Lifts);

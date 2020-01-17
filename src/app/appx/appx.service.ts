@@ -79,12 +79,12 @@ export class AppXService {
 	}
 
 	initData() {
-		var name = 'lifts';
+		var name = 'lifts1';
 		this.dataUserInit(name);
 	}
 
 	initUserData() {
-		this.userDataInit('presentations',[])
+		this.userDataInit('presentations', [])
 		//this.userDataInit('test',{})
 	}
 
@@ -137,6 +137,7 @@ export class AppXService {
 
 	dataUserUpdate() {
 		let id = this.data._id;
+		console.log("update:",id,this.data)
 		this.updateData(id, this.data).subscribe(
 			res => {
 				console.log('data (update)', id, this.data);
@@ -148,11 +149,12 @@ export class AppXService {
 	}
 
 	dataUserProcess() {
-		let id = this.data._id;
-	//	let pname = this.dataUserPresentationCurrentGet();
-		this.processData(id, this.data).subscribe(
+		let user = this.data.user;
+		//	let pname = this.dataUserPresentationCurrentGet();
+		console.log("process:",user)
+		this.processData(user, this.data).subscribe(
 			res => {
-				console.log('data (processed)', id, this.data);
+				console.log('data (processed)', user, this.data);
 			},
 			error => {
 				console.log(error);
@@ -201,9 +203,11 @@ export class AppXService {
 	}
 
 	dataPresentationIndexGet(name: String) {
-		for (var i = 0; i < this.data.presentations.length; i++) {
-			var pres = this.data.presentations[i];
-			if (pres.name === name) return i;
+		if (this.data.presentations) {
+			for (var i = 0; i < this.data.presentations.length; i++) {
+				var pres = this.data.presentations[i];
+				if (pres.name === name) return i;
+			}
 		}
 		return -1;
 	}
@@ -225,7 +229,7 @@ export class AppXService {
 
 	userDataUpdate(data: any) {
 		for (var i = 0; i < this.userProperties.length; i++) {
-			var prop=this.userProperties[i];
+			var prop = this.userProperties[i];
 			this.user[prop].next(data[prop]);
 		}
 	}
