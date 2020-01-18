@@ -22,7 +22,7 @@ window.APPX = {};
 	providedIn: 'root'
 })
 export class AppXService {
-	public data: any;
+	public data: any = {user:""};
 	public user: BehaviorSubject<{}> = new BehaviorSubject<Object>({});
 	private userProperties = [];
 
@@ -128,19 +128,36 @@ export class AppXService {
 	//////////////////////////////////////////////////////////////////////////data commands
 
 	dataUserInit(name: any) {
+		this.data.user = name;
+		console.log('appx data (init)', this.data.user);
+		this.dataUserGet();
+	}
+
+	dataUserGet() {
+		let name = this.data.user;
 		this.getDataName(name).subscribe(data => {
 			this.data = data;
 			this.userDataUpdate(data)
-			console.log('data (init)', this.data);
+			console.log('appx data (get)', this.data);
+
+			if (!this.data.user) {    ///////check on init user record
+				this.getDataName(name).subscribe(data => {
+					this.data = data;
+					this.userDataUpdate(data)
+					console.log('appx data (get-init)', this.data.user);
+				});
+			}
 		});
 	}
 
-	dataUserUpdate() {
+	dataUserUpdate(getok: boolean) {
 		let id = this.data._id;
-		console.log("update:",id,this.data)
+		//console.log("update:", id, this.data)
 		this.updateData(id, this.data).subscribe(
 			res => {
-				console.log('data (update)', id, this.data);
+				console.log('appx data (update)', id);
+				if (getok)
+					this.dataUserGet()
 			},
 			error => {
 				console.log(error);
@@ -148,23 +165,26 @@ export class AppXService {
 		);
 	}
 
-	dataUserProcess() {
+	dataUserProcess(getok: boolean) {
 		let user = this.data.user;
-		console.log("process:",user)
-		this.processData(user, this.data).subscribe(
+		return this.processData(user, this.data).subscribe(
 			res => {
-				console.log('data (processed)', user, this.data);
+				console.log('appx data (process)', user);
+				if (getok)
+					this.dataUserGet()
 			},
 			error => {
 				console.log(error);
+				return false;
 			}
 		);
+
 	}
 
 	dataUserAll() {
 		this.getData().subscribe(data => {
 			this.data = data;
-			console.log('data', this.data);
+			console.log('appx data', this.data);
 		});
 	}
 
@@ -176,7 +196,7 @@ export class AppXService {
 			else
 				this.dataPresentationUpdate(pindex, pres_name, pres_file);
 
-			this.dataUserUpdate();
+			this.dataUserUpdate(true);
 
 		}
 	}
@@ -197,7 +217,7 @@ export class AppXService {
 	}
 
 	dataPresentationsGet() {
-		console.log('data presentation (get):', this.data);
+		console.log('appx data presentation (get):', this.data);
 		return [];
 	}
 
@@ -212,11 +232,11 @@ export class AppXService {
 	}
 
 	dataUserPresentationCurrentSet(name) {
-		this.data.presentationLatest = name;
+		this.data.presentation = name;
 	}
 
 	dataUserPresentationCurrentGet() {
-		return this.data.presentationLatest;
+		return this.data.presentation;
 	}
 
 	////////////////////////////////////////////////////subscribe

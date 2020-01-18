@@ -4,66 +4,60 @@ const liftsRoute = express.Router();
 
 let Lifts = require('../models/Lifts');
 
-/// find lifts user 
+/// lifts - read/save user
 liftsRoute.route('/read/:user').get((req, res) => {
 
 	console.log('find (read):', req.params.user, req.body)
 
 	Lifts.findOneAndUpdate({
 		user: req.params.user
-	}, 
-	{
-		$set: req.body
 	},
-	{
-		upsert: true
-	}, function (err, newLifts) {
-		if (err) {
-			res.send('error updating lifts');
-		} else {
-			console.log('update (read):', newLifts);
-			res.send(newLifts);
-		}
-	});
+		{
+			$set: req.body
+		},
+		{
+			upsert: true
+		}, function (err, data) {
+			if (err) {
+				res.send('error updating lifts');
+			} else {
+				console.log('update (read):', data);
+				//res.send(data);
+				res.json(data);
+			}
+		});
 });
 
 
-// process lifts
+/// lifts - process current presentation
 liftsRoute.route('/process/:user').put(async (req, res) => {
 
 	console.log('find (process):', req.params.user, req.body)
 
-	//var py_result = await global.pyServer.run();
-
 	var rule_result = await global.rulesServer.process_presentation();
 
-	console.log('rules (process):',req.body.presentationLatest,rule_result)
+	console.log('rules (process):', req.body.presentation, rule_result)
 
 	Lifts.findOneAndUpdate({
 		user: req.params.user
 	}, {
 		$set: {
-			presentations: { name: req.body.presentationLatest, analytics: rule_result },
-			
+			presentations: { name: req.body.presentation, analytics: rule_result },
 		},
-
-		//$push: {
-		//	analytics: {test:'rule_result'} 
-		//}
 	}, {
 		upsert: true
 	}, function (err, data) {
 		if (err) {
 			res.send('error updating lifts:', data);
 		} else {
-			res.send(data);
+			res.json(data);
 		}
 	});
 
 });
 
 
-// Update lifts
+/// lifts - update
 liftsRoute.route('/update/:id').put((req, res, next) => {
 	Lifts.findByIdAndUpdate(
 		req.params.id,
@@ -82,102 +76,6 @@ liftsRoute.route('/update/:id').put((req, res, next) => {
 	);
 });
 
-//var data_new = [];
-//data_new['analytics']=rule_result
-//console.log("result:",data_new)
-/*
-  Lifts.findOne({ user: req.params.user }, (error, data) => {
-    if (data == undefined) {
-      let ndata = new Lifts({ user: req.params.user });
-      Lifts.create(ndata, async (error, data) => {
-        if (error) {
-          console.log('error', error);
-        } else {
-          res.json(data);
-        }
-      });
-    } else {
-      res.json(data);
-    }
-  });*/
-
-
-/*
-router.post('/', function(req, res){
-    var newBook = new Book();
-    newBook.title = req.body.title;
-    newBook.author = req.body.author;
-    newBook.category = req.body.category;
-    newBook.save(function(err, book){
-        if(err) {
-            res.send('error saving book');
-        } else {
-            console.log(book);
-            res.send(book);
-        }
-    });
-});
-
-router.put('/:id', function(req, res){
-    Book.findOneAndUpdate({
-        _id: req.params.id
-    },{
-        $set: {
-            title: req.body.title,
-            author: req.body.author,
-            category: req.body.category
-        }
-    },{
-        upsert: true
-    },function(err, newBook){
-        if(err) {
-            res.send('error updating book');
-        } else {
-            console.log(newBook);
-            res.send(newBook);
-        }
-    });
-});
-*/
-
-
-/*
-
-  Lifts.findByIdAndUpdate( req.params.id, {$set: req.body}, (error, data) => {
-	  if (error) {
-		return next(error);
-		console.log(error);
-	  } else {
-		res.json(data);
-		console.log('Data updated successfully',req.body,data);
-	  }
-	}
-  );
-
-  */
-////////////////////////////////////////////////////////////////////////
-// Get All Liftss
-liftsRoute.route('/').get((req, res) => {
-	Lifts.find((error, data) => {
-		if (error) {
-			return next(error);
-		} else {
-			res.json(data);
-		}
-	});
-});
-
-// Get  lifts id
-liftsRoute.route('/read/:id').get((req, res) => {
-	Lifts.findById(req.params.id, (error, data) => {
-		if (error) {
-			return next(error);
-		} else {
-			res.json(data);
-		}
-	});
-});
-
 
 // Delete lifts
 liftsRoute.route('/delete/:id').delete((req, res, next) => {
@@ -193,6 +91,8 @@ liftsRoute.route('/delete/:id').delete((req, res, next) => {
 });
 
 module.exports = liftsRoute;
+
+
 
 /*
 

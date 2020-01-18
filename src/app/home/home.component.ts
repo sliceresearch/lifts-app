@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
 
   analysePresentation() {
 	//let name = this.appXService.dataUserPresentationCurrentGet();  //check ?
-	this.appXService.dataUserProcess();
+	this.appXService.dataUserProcess(true);
   }
 
 }

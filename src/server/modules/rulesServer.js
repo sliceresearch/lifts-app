@@ -1,4 +1,3 @@
-var path = require('path');
 
 var RulesServer = function () {
 	var _me = this;
@@ -20,7 +19,7 @@ var RulesServer = function () {
 
 		Object.entries(py_result[0]).forEach(([key, value]) => {
 			let rule = this.process_rule(key, value);
-			if (rule!=-1)
+			if (rule != -1)
 				analytics.push(rule)
 		})
 
@@ -34,7 +33,7 @@ var RulesServer = function () {
 			var analytic = {
 
 				code: rule,
-				type: rtype, //this.process_rule_type_py(rcode),
+				type: rtype,
 				description: 'test description of rule', //this.process_rule_desc_py(rcode),
 				value: value
 

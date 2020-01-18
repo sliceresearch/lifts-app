@@ -12,7 +12,7 @@ let Lifts = new Schema(
 		},
 
 		// current working presentation
-		presentationLatest: {
+		presentation: {
 			type: String
 		},
 
