@@ -66,6 +66,8 @@ export class AppXService {
 		if (!this.inited) {
 			this.inited = true;
 
+			console.log('appx service init');
+
 			this.service();
 
 			window.APP.run.parentSet(this);
@@ -74,7 +76,6 @@ export class AppXService {
 			this.initData();
 			this.initUserData();
 
-			console.log('appx service init');
 		}
 	}
 
@@ -239,7 +240,7 @@ export class AppXService {
 		return this.data.presentation;
 	}
 
-	////////////////////////////////////////////////////subscribe
+	////////////////////////////////////////////////////user subscriptions
 
 	userDataInit(property: any, data: any) {
 		this.user[property] = new BehaviorSubject<Object>(data);
