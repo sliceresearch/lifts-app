@@ -74,7 +74,7 @@ RUN chmod +x /lifts/conf/*
 
 #################################### clean
 
-RUN  rm -fr /lifts/src
+RUN  rm -fr /lifts/src/app
 RUN  rm -fr /lifts/dev
 RUN ls -l
 
