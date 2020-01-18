@@ -79,7 +79,7 @@ export class AppXService {
 	}
 
 	initData() {
-		var name = 'lifts1';
+		var name = 'lifts6';
 		this.dataUserInit(name);
 	}
 
@@ -150,7 +150,6 @@ export class AppXService {
 
 	dataUserProcess() {
 		let user = this.data.user;
-		//	let pname = this.dataUserPresentationCurrentGet();
 		console.log("process:",user)
 		this.processData(user, this.data).subscribe(
 			res => {

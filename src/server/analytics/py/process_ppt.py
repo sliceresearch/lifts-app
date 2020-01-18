@@ -131,10 +131,10 @@ def analyse_presentation(pres_name:str, verbose=False) -> Dict[str, Any]:
             heavy_warnings.append(f"WARNING: slide {slide} has {words} words!")
 
     result = {
-        "stars_interation": interaction_stars,
-        "stars_section": topic_stars,
-        "stars_accessibility": 3,   # not implemented yet!
-        "stars_text": text_stars,
+        "presentation_rating_stars_interaction": interaction_stars,
+        "presentation_rating_stars_section": topic_stars,
+        "presentation_rating_stars_accessibility": 3,   # not implemented yet!
+        "presentation_rating_stars_text": text_stars,
         # some other statistics
         "filename": pres_name,  # TODO: strip any Path and just return file name?
         "count_slide": len(prs.slides),

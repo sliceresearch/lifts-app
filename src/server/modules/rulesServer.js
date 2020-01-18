@@ -29,44 +29,46 @@ var RulesServer = function () {
 
 	this.process_rule = function (rule, value) {
 
-		var rcode = this.process_rule_code_py(rule);
-		if (rcode != -1) {
+		var rtype = this.process_rule_type_py(rule);
+		if (rtype != -1) {
 			var analytic = {
 
-				code: rcode,
-				type: 'thistype', //this.process_rule_type_py(rcode),
+				code: rule,
+				type: rtype, //this.process_rule_type_py(rcode),
 				description: 'test description of rule', //this.process_rule_desc_py(rcode),
 				value: value
 
 			}
 			return analytic;
 		}
+		console.log('rules_server: (process) - rule not found:' + rule);
 		return -1;
 	}
 
-	this.process_rule_code_py = function (rule) {
+	// media_group_type
+	this.process_rule_type_py = function (rule) {
 
-		let rcode;
+		let rtype;
 
 		switch (rule) {
-			case "stars_interaction":
-				rcode = 'rating_stars_interaction'
+			case "presentation_rating_stars_interaction":
+				rtype = 'Interaction score'
 				break;
-			case "stars_section":
-				rcode = 'rating_stars_section'
+			case "presentation_rating_stars_section":
+				rtype = 'Sections score'
 				break;
-			case "stars_accessibility":
-				rcode = 'rating_stars_accessibility'
+			case "presentation_rating_stars_accessibility":
+				rtype = 'Accessibility score'
 				break;
-			case "stars_text":
-				rcode = 'rating_stars_text'
+			case "presentation_rating_stars_text":
+				rtype = 'Text score'
 				break;
 			default:
-				rcode = -1
+				rtype = -1
 				break;
 		}
 
-		return rcode;
+		return rtype;
 
 	}
 

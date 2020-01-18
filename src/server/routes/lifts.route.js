@@ -4,20 +4,18 @@ const liftsRoute = express.Router();
 
 let Lifts = require('../models/Lifts');
 
-/// find lifts user or create
+/// find lifts user 
 liftsRoute.route('/read/:user').get((req, res) => {
 
-	//console.log('create:', req.params)
-	console.log('find (read):', req.params.user)
-	//console.log('body:', req.body)
+	console.log('find (read):', req.params.user, req.body)
 
 	Lifts.findOneAndUpdate({
 		user: req.params.user
-	}, {
-		$set: {
-			email: "req.params.email"
-		}
-	}, {
+	}, 
+	{
+		$set: req.body
+	},
+	{
 		upsert: true
 	}, function (err, newLifts) {
 		if (err) {
@@ -31,28 +29,32 @@ liftsRoute.route('/read/:user').get((req, res) => {
 
 
 // process lifts
-liftsRoute.route('/process/:user').put( async (req, res) => {
+liftsRoute.route('/process/:user').put(async (req, res) => {
 
-	console.log('find (process):', req.params.user,req.body.presentationLatest)
+	console.log('find (process):', req.params.user, req.body)
 
 	//var py_result = await global.pyServer.run();
 
 	var rule_result = await global.rulesServer.process_presentation();
 
-	console.log(rule_result)
+	console.log('rules (process):',req.body.presentationLatest,rule_result)
 
 	Lifts.findOneAndUpdate({
 		user: req.params.user
 	}, {
 		$set: {
-			presentations: { name: req.body.presentationLatest },
-			analytics: rule_result 
-		}
+			presentations: { name: req.body.presentationLatest, analytics: rule_result },
+			
+		},
+
+		//$push: {
+		//	analytics: {test:'rule_result'} 
+		//}
 	}, {
 		upsert: true
 	}, function (err, data) {
 		if (err) {
-			res.send('error updating lifts:',data);
+			res.send('error updating lifts:', data);
 		} else {
 			res.send(data);
 		}
@@ -61,6 +63,28 @@ liftsRoute.route('/process/:user').put( async (req, res) => {
 });
 
 
+// Update lifts
+liftsRoute.route('/update/:id').put((req, res, next) => {
+	Lifts.findByIdAndUpdate(
+		req.params.id,
+		{
+			$set: req.body
+		},
+		(error, data) => {
+			if (error) {
+				return next(error);
+				console.log(error);
+			} else {
+				res.json(data);
+				console.log('Data updated successfully');
+			}
+		}
+	);
+});
+
+//var data_new = [];
+//data_new['analytics']=rule_result
+//console.log("result:",data_new)
 /*
   Lifts.findOne({ user: req.params.user }, (error, data) => {
     if (data == undefined) {
@@ -154,24 +178,6 @@ liftsRoute.route('/read/:id').get((req, res) => {
 	});
 });
 
-// Update lifts
-liftsRoute.route('/update/:id').put((req, res, next) => {
-	Lifts.findByIdAndUpdate(
-		req.params.id,
-		{
-			$set: req.body
-		},
-		(error, data) => {
-			if (error) {
-				return next(error);
-				console.log(error);
-			} else {
-				res.json(data);
-				console.log('Data updated successfully');
-			}
-		}
-	);
-});
 
 // Delete lifts
 liftsRoute.route('/delete/:id').delete((req, res, next) => {
