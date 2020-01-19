@@ -105,6 +105,15 @@ def count_layouts(prs:Presentation) -> Tuple[int, Dict[str, int]]:
     return (layouts_interactive, layouts)
 
 
+def get_slide_analytics(slides) -> List[int]:
+    slides_out = []
+    for slide in slides:
+        #title = slide.shapes.title.text
+        sdict = { 'title':'Slide Title' }
+        slides_out.append(sdict)
+    return slides_out
+
+
 # In[94]:
 
 def analyse_presentation(pres_name:str, verbose=False) -> Dict[str, Any]:
@@ -130,18 +139,24 @@ def analyse_presentation(pres_name:str, verbose=False) -> Dict[str, Any]:
         if words > MAX_WORDS_PER_SLIDE:
             heavy_warnings.append(f"WARNING: slide {slide} has {words} words!")
 
+
+    slides = get_slide_analytics(prs.slides)
+
     result = {
+
         "presentation_rating_stars_interaction": interaction_stars,
         "presentation_rating_stars_section": topic_stars,
         "presentation_rating_stars_accessibility": 3,   # not implemented yet!
         "presentation_rating_stars_text": text_stars,
-        # some other statistics
+        "presentation_count_slide": len(prs.slides),
+        "presentation_count_layout": layouts,  # dictionary that maps layout name to count
+        "presentation_total_words": words_per_slide,  # a float
+        "presentation_warning_text_heavy": heavy_warnings,  # a list of warning strings
+        "presentation_data_slides": slides,  # a list of slides and analytics
         "filename": pres_name,  # TODO: strip any Path and just return file name?
-        "count_slide": len(prs.slides),
-        "count_layout": layouts,  # dictionary that maps layout name to count
-        "slide_words_per": words_per_slide,  # a float
-        "slides_text_heavy": heavy_warnings  # a list of warning strings
+
         }
+
     return result
 
 

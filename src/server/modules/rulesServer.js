@@ -2,12 +2,12 @@
 var RulesServer = function () {
 	var _me = this;
 
-	//////////////////////////////////////////////////////////////commands
+	//////////////////////////////////////////////////////////////process
 	this.init = function () {
 		console.log('rules_server: (init)');
 	};
 
-	this.process_presentation = async function () {
+	this.process_presentation_rules = async function () {
 		return this.process_presentation_py()
 	}
 
@@ -62,6 +62,18 @@ var RulesServer = function () {
 			case "presentation_rating_stars_text":
 				rtype = 'Text score'
 				break;
+			case "presentation_count_slide":
+				rtype = 'Number of Slides'
+				break;
+		//	case "presentation_count_layout":
+		//		rtype = 'Layouts'
+		//		break;
+			case "presentation_total_words":
+				rtype = 'Total word count'
+				break;
+		//	case "presentation_warning_text_heavy":
+		//		rtype = 'Warnings'
+		//		break;
 			default:
 				rtype = -1
 				break;
@@ -71,7 +83,30 @@ var RulesServer = function () {
 
 	}
 
+	//////////////////////////////////////////////////////////////generate
 
+
+	this.process_presentation_slides = async function () {
+		return this.process_presentation_slides_py()
+	}
+
+	this.process_presentation_slides_py = async function (rules) {
+
+		let slides = [];
+
+	/*	switch (rule) {
+
+			case "presentation_data_slides":
+				slides = this.process_presentation_slide_py = async function (rules) {
+				break;
+
+			default:
+				break;
+		}*/
+
+		return slides;
+
+	};
 
 };
 

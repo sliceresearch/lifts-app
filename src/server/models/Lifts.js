@@ -34,7 +34,8 @@ let Lifts = new Schema(
 				slides: [
 					{
 						//	index: Int16Array,
-						name: String,
+						title: String,
+
 						analytics: [
 
 							{

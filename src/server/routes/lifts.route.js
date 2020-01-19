@@ -34,7 +34,9 @@ liftsRoute.route('/process/:user').put(async (req, res) => {
 
 	console.log('find (process):', req.params.user, req.body)
 
-	var rule_result = await global.rulesServer.process_presentation();
+	var rule_result = await global.rulesServer.process_presentation_rules();
+
+	var slides_result = await global.rulesServer.process_presentation_slides(rule_result);
 
 	console.log('rules (process):', req.body.presentation, rule_result)
 
@@ -43,6 +45,7 @@ liftsRoute.route('/process/:user').put(async (req, res) => {
 	}, {
 		$set: {
 			presentations: { name: req.body.presentation, analytics: rule_result },
+			slides: slides_result,
 		},
 	}, {
 		upsert: true
