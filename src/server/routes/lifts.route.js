@@ -38,14 +38,13 @@ liftsRoute.route('/process/:user').put(async (req, res) => {
 
 	var slides_result = await global.rulesServer.process_presentation_slides(rule_result);
 
-	console.log('rules (process):', req.body.presentation, rule_result)
+	console.log('rules (process):', req.body.presentation, rule_result, slides_result)
 
 	Lifts.findOneAndUpdate({
 		user: req.params.user
 	}, {
 		$set: {
-			presentations: { name: req.body.presentation, analytics: rule_result },
-			slides: slides_result,
+			presentations: { name: req.body.presentation, slides: slides_result, analytics: rule_result },
 		},
 	}, {
 		upsert: true

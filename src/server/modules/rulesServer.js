@@ -92,7 +92,7 @@ var RulesServer = function () {
 
 	this.process_presentation_slides_py = async function (rules) {
 
-		let slides = [];
+		let slides = [{title:'Slide One'},{title:'Slide Two'}];
 
 	/*	switch (rule) {
 

@@ -56,19 +56,14 @@ export class AppXService {
 		console.log('appx service: ' + this);
 	}
 
-	service() {
-		this.running = false;
-		this.inited = false;
-		// console.log('appx service: ' + this.host);
-	}
-
 	init() {
 		if (!this.inited) {
 			this.inited = true;
 
 			console.log('appx service init');
-
-			this.service();
+			
+			this.running = false;
+			 
 
 			window.APP.run.parentSet(this);
 			window.APP.run.init();
