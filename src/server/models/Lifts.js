@@ -23,6 +23,10 @@ let Lifts = new Schema(
 					type: String
 				},
 
+				title: {
+					type: String
+				},
+
 				author: {
 					type: String
 				},
@@ -67,6 +71,26 @@ let Lifts = new Schema(
 				],
 
 				analytics: [
+					{
+						code: {
+							type: String
+						},
+
+						type: {
+							type: String
+						},
+
+						description: {
+							type: String
+						},
+
+						value: {
+							type: String
+						}
+					}
+				],
+
+				ratings: [
 					{
 						code: {
 							type: String

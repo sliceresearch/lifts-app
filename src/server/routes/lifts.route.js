@@ -34,17 +34,23 @@ liftsRoute.route('/process/:user').put(async (req, res) => {
 
 	console.log('find (process):', req.params.user, req.body)
 
-	var rule_result = await global.rulesServer.process_presentation_rules();
+	var py_result = await global.pyServer.run();
 
-	var slides_result = await global.rulesServer.process_presentation_slides(rule_result);
+	var ratings_result = await global.rulesServer.process_presentation_rules('presentation_rating',py_result[0]);
+	var data_result = await global.rulesServer.process_presentation_rules('presentation_data',py_result[0]);
 
-	console.log('rules (process):', req.body.presentation, rule_result, slides_result)
+	var slides_result = await global.rulesServer.process_presentation_slides(ratings_result);
+
+	var title = "Introduction to Java" //temp
+	var author = "Dr John Academic" //temp
+
+	console.log('rules (process):', req.body.presentation, ratings_result, slides_result)
 
 	Lifts.findOneAndUpdate({
 		user: req.params.user
 	}, {
 		$set: {
-			presentations: { name: req.body.presentation, slides: slides_result, analytics: rule_result },
+			presentations: { name: req.body.presentation, author: author, title:title, ratings: ratings_result, slides: slides_result, analytics: data_result },
 		},
 	}, {
 		upsert: true
@@ -91,6 +97,12 @@ liftsRoute.route('/delete/:id').delete((req, res, next) => {
 		}
 	});
 });
+
+
+
+
+
+
 
 module.exports = liftsRoute;
 

@@ -7,18 +7,16 @@ var RulesServer = function () {
 		console.log('rules_server: (init)');
 	};
 
-	this.process_presentation_rules = async function () {
-		return this.process_presentation_py()
+	this.process_presentation_rules = async function (type,results) {
+		return this.process_presentation_py(type,results)
 	}
 
-	this.process_presentation_py = async function () {
+	this.process_presentation_py = async function (type,results) {
 
 		let analytics = [];
 
-		var py_result = await global.pyServer.run();
-
-		Object.entries(py_result[0]).forEach(([key, value]) => {
-			let rule = this.process_rule(key, value);
+		Object.entries(results).forEach(([key, value]) => {
+			let rule = this.process_rules(key, value, type);
 			if (rule != -1)
 				analytics.push(rule)
 		})
@@ -26,23 +24,29 @@ var RulesServer = function () {
 		return analytics;
 	};
 
-	this.process_rule = function (rule, value) {
+	this.process_rules = function (rule, value, type) {
 
 		var rtype = this.process_rule_type_py(rule);
 		if (rtype != -1) {
-			var analytic = {
 
-				code: rule,
-				type: rtype,
-				description: this.process_rule_desc(rule),
-				value: value
-
+			if (rtype == type) {
+				var analytic = {
+					code: rule,
+					type: rtype,
+					description: this.process_rule_desc(rule),
+					value: value
+				}
+				return analytic;
 			}
-			return analytic;
 		}
-		console.log('rules_server: (process) - rule not found:' + rule);
+		console.log('rules_server: (process-ratings) - rule not found:' + rule);
 		return -1;
 	}
+
+
+	//if (rtype=='presentation_data') {
+
+
 
 	// media_group_type
 	this.process_rule_type_py = function (rule) {
@@ -65,15 +69,15 @@ var RulesServer = function () {
 			case "presentation_count_slide":
 				rtype = 'presentation_data'
 				break;
-		//	case "presentation_count_layout":
-		//		rtype = 'Layouts'
-		//		break;
+			//	case "presentation_count_layout":
+			//		rtype = 'Layouts'
+			//		break;
 			case "presentation_total_words":
 				rtype = 'presentation_data'
 				break;
-		//	case "presentation_warning_text_heavy":
-		//		rtype = 'Warnings'
-		//		break;
+			//	case "presentation_warning_text_heavy":
+			//		rtype = 'Warnings'
+			//		break;
 			default:
 				rtype = -1
 				break;
@@ -89,22 +93,22 @@ var RulesServer = function () {
 
 		switch (rule) {
 			case "presentation_rating_stars_interaction":
-				desc = 'Interaction score'
+				desc = 'Interaction'
 				break;
 			case "presentation_rating_stars_section":
-				desc = 'Sections score'
+				desc = 'Sections'
 				break;
 			case "presentation_rating_stars_accessibility":
-				desc = 'Accessibility score'
+				desc = 'Accessibility'
 				break;
 			case "presentation_rating_stars_text":
-				desc = 'Text score'
+				desc = 'Text'
 				break;
 			case "presentation_count_slide":
-				desc = 'Number of Slides'
+				desc = 'Slides'
 				break;
 			case "presentation_total_words":
-				desc = 'Total word count'
+				desc = 'Average Word Count'
 				break;
 			default:
 				desc = "";
@@ -126,17 +130,17 @@ var RulesServer = function () {
 
 	this.process_presentation_slides_py = async function (rules) {
 
-		let slides = [{title:'Slide One'},{title:'Slide Two'}];
+		let slides = [{ title: 'Slide One' }, { title: 'Slide Two' }];
 
-	/*	switch (rule) {
-
-			case "presentation_data_slides":
-				slides = this.process_presentation_slide_py = async function (rules) {
-				break;
-
-			default:
-				break;
-		}*/
+		/*	switch (rule) {
+	
+				case "presentation_data_slides":
+					slides = this.process_presentation_slide_py = async function (rules) {
+					break;
+	
+				default:
+					break;
+			}*/
 
 		return slides;
 

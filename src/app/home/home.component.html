@@ -25,80 +25,79 @@
     <div class="row row-center">
       <div class="col col-center">
         <ion-grid>
-          <ion-row class="ion-justify-content-center">
-            <ion-col col-12>
-              <p style="text-align:center"></p>
-            </ion-col>
-          </ion-row>
+         
+			<ion-row class="ion-justify-content-center">
+				<ion-col col-12>
+
+					<ion-card>
+					<ion-card-header>
+						<ion-card-subtitle><h6 ion-text style="text-align: left;">Dr John Academic</h6></ion-card-subtitle>
+						<ion-card-title><h1 ion-text style="text-align: left;">ICT221</h1></ion-card-title>
+						<ion-card-title><h5 ion-text color="dark" style="text-align: left;">Introduction to Java</h5></ion-card-title>
+				
+						 <div  style="text-align: right;">
+							<button ion-item  (click)="analysePresentation()">Analyse</button>
+						</div>
+
+					</ion-card-header>
+
+					<ion-card-content>
+						
+						<h4 ion-text color="dark" style="text-align: left;">20/01/2019</h4>
+
+					</ion-card-content>
+					</ion-card>
+
+					
+
+
+
+				</ion-col>
+			</ion-row>
+		
 
           <ion-row class="ion-justify-content-center">
             <ion-col col-12>
-              <p style="text-align:center">
-                <img class="logo" src="assets/img/logo.jpg" style="text-align: center;" alt="logo" />
-              </p>
-            </ion-col>
-          </ion-row>
-
-          <ion-row class="ion-justify-content-center">
-            <ion-col col-2></ion-col>
-            <ion-col col-8>
-              <h1 ion-text color="dark" style="text-align: center;">LIFTS</h1>
-            </ion-col>
-            <ion-col col-2></ion-col>
-          </ion-row>
-
-          <ion-row class="ion-justify-content-center">
-            <ion-col col-2></ion-col>
-            <ion-col col-8>
-              <h6 ion-text color="dark" style="text-align: center;">ICT221</h6>
-            </ion-col>
-            <ion-col col-2></ion-col>
-          </ion-row>
-
-          <ion-row class="ion-justify-content-center">
-            <ion-col col-2></ion-col>
-            <ion-col col-8>
-             
+			<h4 ion-text color="dark" style="text-align: left;">Analytics</h4>
  			<ion-list>
 				<ion-item
 					ion-item
 					*ngFor="let obj of analytics; index as i"
-					(click)="appXService.dataPresentationIndexSet(i)"
 				>
-					<ion-grid>
-					<ion-row>
-						<ion-col col-2>
-						<ion-label>{{ i + 1 }}</ion-label>
-						<h6 ion-text color="black">{{ obj.name }}</h6>
-						</ion-col>
-						<ion-col col-10>
-						<h6 ion-text color="black">{{ obj.name }}</h6>
-						</ion-col>
-					</ion-row>
-					</ion-grid>
+						<ion-label>
+							<p ion-text color="primary">{{ obj.description }}</p>
+						</ion-label>
+						<ion-badge color="white" slot="end">
+							<p ion-text color="primary">{{ obj.value }}</p>
+						</ion-badge>
+
 				</ion-item>
 			</ion-list>
-
-
             </ion-col>
-            <ion-col col-2></ion-col>
           </ion-row>
-
-       
-
 
 
           <ion-row class="ion-justify-content-center">
-            <ion-col col-2></ion-col>
-            <ion-col col-8>
-              <div style="text-align: center; ">
-                <button ion-item (click)="analysePresentation()">
-                  Analyse
-                </button>
-              </div>
+            <ion-col col-12>
+			<h4 ion-text color="dark" style="text-align: left;">Ratings</h4>
+ 			<ion-list>
+				<ion-item
+					ion-item
+					*ngFor="let obj of ratings; index as i"
+				>
+						<ion-label>
+							<p ion-text color="primary">{{ obj.description }}</p>
+						</ion-label>
+						<ion-badge color="white" slot="end">
+							<p ion-text color="primary">{{ obj.value }}</p>
+						</ion-badge>
+
+				</ion-item>
+			</ion-list>
             </ion-col>
-            <ion-col col-2></ion-col>
           </ion-row>
+
+       
         </ion-grid>
       </div>
     </div>

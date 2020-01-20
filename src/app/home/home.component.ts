@@ -13,7 +13,9 @@ export class HomeComponent implements OnInit {
   isLoading = false;
 
   presentation: any;
+  presentation_data = {};
   presentations: any;
+  ratings: any = [];
   analytics: any = [];
 
   constructor(private appXService: AppXService) ///	private appXDataService: AppXDataService,
@@ -50,7 +52,11 @@ export class HomeComponent implements OnInit {
 	if (this.presentation && this.presentations) {
 		let pindex = this.appXService.dataPresentationIndexGet(this.presentation)
 		let presentation = this.presentations[pindex];
+		
+		this.ratings = presentation.ratings;
 		this.analytics = presentation.analytics;
+		this.presentation_data = {name:presentation.name, author:presentation.name,description:presentation.description}
+	
 	}
   }
 
@@ -60,3 +66,12 @@ export class HomeComponent implements OnInit {
   }
 
 }
+
+
+/*	for (var i = 0; i < analytics.length; i++) {
+			var analytic = analytics[i];
+			if (analytic.type=='presentation_data') {
+				this.analytics.push(analytic);
+			} else if (analytic.type=='presentation_rating') 
+				this.ratings.push(analytic);
+		}*/
