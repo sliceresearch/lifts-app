@@ -51,7 +51,6 @@ export class HomeComponent implements OnInit {
 		let pindex = this.appXService.dataPresentationIndexGet(this.presentation)
 		let presentation = this.presentations[pindex];
 		this.analytics = presentation.analytics;
-		console.log(this.analytics)
 	}
   }
 

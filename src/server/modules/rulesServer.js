@@ -34,7 +34,7 @@ var RulesServer = function () {
 
 				code: rule,
 				type: rtype,
-				description: 'test description of rule', //this.process_rule_desc_py(rcode),
+				description: this.process_rule_desc(rule),
 				value: value
 
 			}
@@ -51,25 +51,25 @@ var RulesServer = function () {
 
 		switch (rule) {
 			case "presentation_rating_stars_interaction":
-				rtype = 'Interaction score'
+				rtype = 'presentation_rating'
 				break;
 			case "presentation_rating_stars_section":
-				rtype = 'Sections score'
+				rtype = 'presentation_rating'
 				break;
 			case "presentation_rating_stars_accessibility":
-				rtype = 'Accessibility score'
+				rtype = 'presentation_rating'
 				break;
 			case "presentation_rating_stars_text":
-				rtype = 'Text score'
+				rtype = 'presentation_rating'
 				break;
 			case "presentation_count_slide":
-				rtype = 'Number of Slides'
+				rtype = 'presentation_data'
 				break;
 		//	case "presentation_count_layout":
 		//		rtype = 'Layouts'
 		//		break;
 			case "presentation_total_words":
-				rtype = 'Total word count'
+				rtype = 'presentation_data'
 				break;
 		//	case "presentation_warning_text_heavy":
 		//		rtype = 'Warnings'
@@ -82,6 +82,40 @@ var RulesServer = function () {
 		return rtype;
 
 	}
+
+	this.process_rule_desc = function (rule) {
+
+		let desc;
+
+		switch (rule) {
+			case "presentation_rating_stars_interaction":
+				desc = 'Interaction score'
+				break;
+			case "presentation_rating_stars_section":
+				desc = 'Sections score'
+				break;
+			case "presentation_rating_stars_accessibility":
+				desc = 'Accessibility score'
+				break;
+			case "presentation_rating_stars_text":
+				desc = 'Text score'
+				break;
+			case "presentation_count_slide":
+				desc = 'Number of Slides'
+				break;
+			case "presentation_total_words":
+				desc = 'Total word count'
+				break;
+			default:
+				desc = "";
+				break;
+		}
+
+		return desc;
+
+	}
+
+
 
 	//////////////////////////////////////////////////////////////generate
 
