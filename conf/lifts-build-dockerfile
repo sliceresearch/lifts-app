@@ -35,7 +35,7 @@ RUN apt-get install -y python-pip
 
 RUN pip install python-pptx
 
-
+RUN apt-get install -y mongodb
 
 COPY ./conf/nginx.conf /etc/nginx/sites-available/lifts
 RUN rm /etc/nginx/sites-enabled/default
