@@ -17,7 +17,6 @@ export class SplashComponent implements OnInit {
 
   ngOnInit() {
 	this.isLoading = true;
-//	this.appXService.userDataNavigationRegister('userpresentation','home','import') 
   }
 
   navigateTo(link) {

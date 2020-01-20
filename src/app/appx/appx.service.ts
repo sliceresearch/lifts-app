@@ -80,6 +80,7 @@ export class AppXService {
 	}
 
 	initUserData() {
+		this.userDataInit('presentation', "")
 		this.userDataInit('presentations', [])
 		this.userDataInit('slides', [])
 	}
@@ -187,6 +188,8 @@ export class AppXService {
 		});
 	}
 
+	////////////presentation
+
 	dataUserPresentationAdd(pres_name: any, pres_file: any) {
 		if (this.data) {
 			const pindex = this.dataPresentationIndexGet(pres_name)
@@ -238,6 +241,12 @@ export class AppXService {
 		return this.data.presentation;
 	}
 
+
+	////////////analytics
+
+
+
+
 	////////////////////////////////////////////////////user subscriptions
 
 	userDataInit(property: any, data: any) {
@@ -256,6 +265,7 @@ export class AppXService {
 		return this.user[msg].asObservable();
 	}
 	
+
 	userDataNavigationRegister(orig, resolver, nav, link2) {
 		var route = { resolve: resolver, go: nav, catch: link2 };
 		this.userRoute[orig] = route
