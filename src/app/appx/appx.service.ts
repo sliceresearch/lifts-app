@@ -22,7 +22,7 @@ window.APPX = {};
 	providedIn: 'root'
 })
 export class AppXService {
-	public data: any = {user:""};
+	public data: any = { user: "" };
 	public user: BehaviorSubject<{}> = new BehaviorSubject<Object>({});
 	private userProperties = [];
 
@@ -33,6 +33,8 @@ export class AppXService {
 
 	baseUri: string = 'http://localhost:8080/api';
 	headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+	userRoute: any = {};
 
 	private routeLocation: string;
 	private routeStart: string;
@@ -46,14 +48,12 @@ export class AppXService {
 		this.host = window.APP.host;
 		this.objdir = window.APP.objDir;
 
+		this.routeStart = '/splash';
+		this.routeLocation = '/splash';
+
 		this.init();
+	//	console.log('appx service: ' + this);
 
-		this.routeStart = '/home';
-		this.routeLocation = '/home';
-
-		this.route();
-
-		console.log('appx service: ' + this);
 	}
 
 	init() {
@@ -61,16 +61,16 @@ export class AppXService {
 			this.inited = true;
 
 			console.log('appx service init');
-			
+
 			this.running = false;
-			 
 
 			window.APP.run.parentSet(this);
 			window.APP.run.init();
 
+			this.initUserRoute();
 			this.initData();
 			this.initUserData();
-
+		
 		}
 	}
 
@@ -81,7 +81,13 @@ export class AppXService {
 
 	initUserData() {
 		this.userDataInit('presentations', [])
-		//this.userDataInit('test',{})
+		this.userDataInit('slides', [])
+	}
+
+	initUserRoute() {
+		console.log('appx route start:' + this.routeStart);
+		this.userDataNavigationRegister('/splash','userpresentation','/home','/import') 
+		this.navigate(this.routeStart);
 	}
 
 	start() {
@@ -94,13 +100,6 @@ export class AppXService {
 
 	load(id: any) {
 		window.APP.run.load(id);
-	}
-
-	route() {
-		console.log('appx route:' + this.routeStart);
-		//window.APPX.devices.setStartRoute('/home');
-		//window.APPX.devices.initInfoDevices();
-		this.navigate(this.routeStart);
 	}
 
 	navigate(link: any) {
@@ -134,15 +133,19 @@ export class AppXService {
 		this.getDataName(name).subscribe(data => {
 			this.data = data;
 			this.userDataUpdate(data)
-			console.log('appx data (get)', this.data);
 
 			if (!this.data.user) {    ///////check on init user record
 				this.getDataName(name).subscribe(data => {
 					this.data = data;
-					this.userDataUpdate(data)
 					console.log('appx data (get-init)', this.data.user);
+					this.userDataUpdate(data)
+					this.userDataNavigation();
 				});
+			} else {
+				console.log('appx data (get)', this.data);
+				this.userDataNavigation();
 			}
+
 		});
 	}
 
@@ -252,6 +255,51 @@ export class AppXService {
 	userDataGet(msg: any): Observable<Object> {
 		return this.user[msg].asObservable();
 	}
+	
+	userDataNavigationRegister(orig, resolver, nav, link2) {
+		var route = { resolve: resolver, go: nav, catch: link2 };
+		this.userRoute[orig] = route
+		console.log('appx data nav register:', orig, resolver, nav, link2);
+	}
+
+	userDataNavigation() {
+		let routeNav = this.userRoute[this.router.url]
+
+		if (routeNav) {
+			let navTo = this.userDataNavigationResolve(this.router.url,routeNav)
+			routeNav = false;
+			if (navTo) {
+				this.navigate(navTo);
+			}
+		}
+	}
+
+	userDataNavigationResolve(navLoc, navOpt: any) {
+
+		let navTo;
+
+		if (this.data) {
+			switch (navOpt.resolve) {
+				case "userpresentation":
+					if (this.data.presentation)
+						navTo = navOpt.go;
+					else
+						navTo = navOpt.catch;
+					break;
+
+				default:
+					break;
+			}
+		}
+
+		if (navTo)
+			console.log('appx data nav resolve:', navLoc, navOpt.resolve, navTo);
+
+
+		return navTo;
+
+	}
+
 
 	/////////////////////////////////////////////////////////data ops
 	createData(data): Observable<any> {

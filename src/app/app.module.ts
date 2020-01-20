@@ -19,7 +19,10 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppXModule } from './appx/appx.module';
+
 import { AnalyticsModule } from './analytics/analytics.module';
+import { SplashModule } from './splash/splash.module';
+import { ImportModule } from './import/import.module';
 
 @NgModule({
   imports: [
@@ -29,14 +32,21 @@ import { AnalyticsModule } from './analytics/analytics.module';
     HttpClientModule,
     TranslateModule.forRoot(),
     IonicModule.forRoot(),
-    CoreModule,
+	
+	AppXModule,
+
+	CoreModule,
     SharedModule,
     ShellModule,
-    HomeModule,
-    AnalyticsModule,
-    AppXModule,
+	
+	HomeModule,
+	AnalyticsModule,
+	SplashModule,
+	ImportModule,
+	
     AppRoutingModule // must be imported as the last module as it contains the fallback route
   ],
+
   declarations: [AppComponent],
   providers: [Keyboard, StatusBar, SplashScreen],
   bootstrap: [AppComponent]
