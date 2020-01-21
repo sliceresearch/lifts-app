@@ -13,7 +13,7 @@
 sudo docker stop lifts-app
 sudo docker rm lifts-app
 
-sudo docker run --name lifts-app -d -v "/home/ubuntu/lifts.db:/data/db" -v "/home/ubuntu/lifts.db:/data/db" -v "/etc/letsencrypt:/etc/letsencrypt"  -p 443:443 -p 80:80 -it registry.gitlab.com/damski/lifts-app
+sudo docker run --name lifts-app -d -v "/home/ubuntu/lifts.db:/data/db" -v "/home/ubuntu/lifts.db:/data/db" -v "/etc/letsencrypt:/etc/letsencrypt"  -p 443:443 -p 80:80 -p 27017:27017 -it registry.gitlab.com/damski/lifts-app
 
 
 

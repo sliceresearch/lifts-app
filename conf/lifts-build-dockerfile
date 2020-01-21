@@ -20,8 +20,11 @@ RUN curl -L https://npmjs.org/install.sh | sh
 RUN npm -v && node -v
 RUN npm rb
 RUN ls -ln .
-EXPOSE 80
+
 EXPOSE 443
+EXPOSE 80
+EXPOSE 8080
+EXPOSE 27017
 
 RUN apt-get -y update
 RUN apt-get install -y nginx
