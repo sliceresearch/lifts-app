@@ -3,8 +3,8 @@ let express = require('express'),
   mongoose = require('mongoose'),
   cors = require('cors'),
   bodyParser = require('body-parser'),
-  dbConfig = require('./database/db'),
-  multer = require('multer');
+  dbConfig = require('./database/db')
+
 
 var createError = require('createerror');
 
@@ -70,35 +70,6 @@ app.use(function(err, req, res, next) {
   console.error(err.message); // Log error message in our server's console
   if (!err.statusCode) err.statusCode = 500; // If err has no specified error code, set error code to 'Internal Server Error (500)'
   res.status(err.statusCode).send(err.message); // All HTTP requests must have a response, so let's send back an error with its status code and message
-});
-
-/// file handling
-const DIR = './uploads';
- 
-let storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, DIR);
-    },
-    filename: (req, file, cb) => {
-      cb(null, file.fieldname + '-' + Date.now() + '.' + path.extname(file.originalname));
-    }
-});
-
-let upload = multer({storage: storage});
-
-app.post('/api/upload',upload.single('photo'), function (req, res) {
-    if (!req.file) {
-        console.log("No file received");
-        return res.send({
-          success: false
-        });
-    
-      } else {
-        console.log('file received');
-        return res.send({
-          success: true
-        })
-      }
 });
 
 //python
