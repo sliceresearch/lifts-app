@@ -35,9 +35,9 @@ liftsRoute.route('/read/:user').get((req, res) => {
 /// lifts - process current presentation
 liftsRoute.route('/process/:user').put(async (req, res) => {
 
-	console.log('find (process):', req.params.user, req.body)
+	console.log('find (process):', req.params.user, req.params.filename)
 
-	var py_result = await global.pyServer.run();
+	var py_result = await global.pyServer.run(req.params.filename);
 
 	var ratings_result = await global.rulesServer.process_presentation_rules('presentation_rating',py_result[0]);
 	var data_result = await global.rulesServer.process_presentation_rules('presentation_data',py_result[0]);

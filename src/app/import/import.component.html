@@ -66,11 +66,12 @@
 					</ion-fab-button>
 				</ion-fab>
 
-				<file-root></file-root>
+				<file-root (uploaderComplete)='importPresentation($event)'></file-root>
 
                 <button ion-item (click)="importPresentation()">
                   Import
               </button>
+
               </div>
             </ion-col>
             <ion-col col-2></ion-col>

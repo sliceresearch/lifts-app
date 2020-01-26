@@ -31,7 +31,7 @@ let Lifts = new Schema(
 					type: String
 				},
 
-				file_url_source: {
+				filename: {
 					type: String
 				},
 

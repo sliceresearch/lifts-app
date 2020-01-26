@@ -1,40 +1,45 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 
 import { AppXService } from '@app/core';
+//import { FileComponent } from '../core/file/file.component'
 
 @Component({
-  selector: 'app-import',
-  templateUrl: './import.component.html',
-  styleUrls: ['./import.component.scss']
+	selector: 'app-import',
+	templateUrl: './import.component.html',
+	styleUrls: ['./import.component.scss']
 })
+
+
 export class ImportComponent implements OnInit {
-  quote: string | undefined;
-  isLoading = false;
+	//@ViewChild(FileComponent, {static: false}) file: FileComponent;
 
-  constructor(private appXService: AppXService) 
-  {}
+	quote: string | undefined;
+	isLoading = false;
 
-  ngOnInit() {
-	this.isLoading = true;
-  }
+	constructor(private appXService: AppXService) { }
 
-  navigateTo(link) {
-    this.appXService.navigate(link);
-  }
+	ngOnInit() {
+		this.isLoading = true;
+	}
 
-  isSelectedTab(type) {
-    return this.appXService.islocation(type);
-  }
-  
-  ///////
+	navigateTo(link) {
+		this.appXService.navigate(link);
+	}
 
-  importPresentation() {
-    let name = 'ICT221';
-	let file = 'filedir';
-	
-	this.appXService.dataUserPresentationCurrentSet(name);
-    this.appXService.dataUserPresentationAdd(name, file);
-  }
+	isSelectedTab(type) {
+		return this.appXService.islocation(type);
+	}
+
+	///////
+
+	importPresentation(fileName) {
+	//	let name = 'ICT221';
+		let file = 'uploads';
+		//console.log(fileName)
+		this.appXService.dataUserPresentationCurrentSet(fileName);
+		this.appXService.dataUserPresentationAdd(fileName, file);
+
+	}
 
 }
