@@ -19,6 +19,10 @@ let Lifts = new Schema(
 		//// user presentations
 		presentations: [
 			{
+				filename: {
+					type: String
+				},
+
 				name: {
 					type: String
 				},
@@ -28,10 +32,6 @@ let Lifts = new Schema(
 				},
 
 				author: {
-					type: String
-				},
-
-				filename: {
 					type: String
 				},
 

@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit {
 		
 		this.ratings = presentation.ratings;
 		this.analytics = presentation.analytics;
-		this.presentation_data = {name:presentation.name, author:presentation.name,description:presentation.description}
+		this.presentation_data = {name:presentation.name, author:presentation.author,description:presentation.description}
 	
 	}
   }

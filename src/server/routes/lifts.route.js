@@ -46,14 +46,15 @@ liftsRoute.route('/process/:user').put(async (req, res) => {
 
 	var title = "Introduction to Java" //temp
 	var author = "Dr John Academic" //temp
-
+	var pname = "ICT999"
+	
 	console.log('rules (process):', req.body.presentation, ratings_result, slides_result)
 
 	Lifts.findOneAndUpdate({
 		user: req.params.user
 	}, {
 		$set: {
-			presentations: { name: req.body.presentation, author: author, title:title, ratings: ratings_result, slides: slides_result, analytics: data_result },
+			presentations: { filename: req.body.presentation, name: pname, author: author, title:title, ratings: ratings_result, slides: slides_result, analytics: data_result },
 		},
 	}, {
 		upsert: true
