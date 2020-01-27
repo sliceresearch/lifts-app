@@ -8,9 +8,10 @@ import { SharedModule } from '@app/shared';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 
+import { RatingModule } from 'ng-starrating';
 
 @NgModule({
-  imports: [CommonModule, TranslateModule, CoreModule, SharedModule, IonicModule, HomeRoutingModule],
+  imports: [CommonModule, TranslateModule, CoreModule, SharedModule, IonicModule, HomeRoutingModule, RatingModule],
   entryComponents: [HomeComponent],
   declarations: [HomeComponent]
 })

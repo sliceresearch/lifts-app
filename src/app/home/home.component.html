@@ -53,7 +53,6 @@
 			</ion-row>
 		
 	
-
           <ion-row class="ion-justify-content-center">
             <ion-col col-12>
 			<h4 ion-text color="dark" style="text-align: left;">Analytics</h4>
@@ -66,6 +65,7 @@
 							<p ion-text color="primary">{{ obj.description }}</p>
 						</ion-label>
 						<ion-badge color="white" slot="end">
+						
 							<p ion-text color="primary">{{ obj.value }}</p>
 						</ion-badge>
 
@@ -87,7 +87,8 @@
 							<p ion-text color="primary">{{ obj.description }}</p>
 						</ion-label>
 						<ion-badge color="white" slot="end">
-							<p ion-text color="primary">{{ obj.value }}</p>
+						 <star-rating value="{{ obj.value }}" totalstars="5" checkedcolor="#3880ff" uncheckedcolor="grey" size="24px" readonly="true" (rate)="onRate($event)"></star-rating>
+						 
 						</ion-badge>
 
 				</ion-item>

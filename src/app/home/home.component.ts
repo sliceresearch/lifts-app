@@ -3,6 +3,8 @@ import { finalize } from 'rxjs/operators';
 
 import { AppXService } from '@app/core';
 
+import { StarRatingComponent } from 'ng-starrating';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -21,6 +23,13 @@ export class HomeComponent implements OnInit {
   constructor(private appXService: AppXService) ///	private appXDataService: AppXDataService,
   //	private ngZone: NgZone
   {}
+
+  onRate($event:{oldValue:number, newValue:number, starRating:StarRatingComponent}) {
+    alert(`Old Value:${$event.oldValue}, 
+      New Value: ${$event.newValue}, 
+      Checked Color: ${$event.starRating.checkedcolor}, 
+      Unchecked Color: ${$event.starRating.uncheckedcolor}`);
+  }
 
   ngOnInit() {
 	this.isLoading = true;
