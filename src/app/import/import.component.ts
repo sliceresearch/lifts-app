@@ -39,7 +39,7 @@ export class ImportComponent implements OnInit {
 		//console.log(fileName)
 		this.appXService.dataUserPresentationCurrentSet(fileName);
 		this.appXService.dataUserPresentationAdd(fileName, file);
-
+		this.appXService.navigate('/home');
 	}
 
 }

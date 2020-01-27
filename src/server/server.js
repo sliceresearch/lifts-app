@@ -5,6 +5,12 @@ let express = require('express'),
   bodyParser = require('body-parser'),
   dbConfig = require('./database/db')
 
+/*
+        ##TODO
+        "filename": pres_name,  # TODO: strip any Path and just return file name?
+        "name": "ICT999",
+        "description": "Introduction to ICT"
+*/
 
 var createError = require('createerror');
 
