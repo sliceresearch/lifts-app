@@ -75,7 +75,7 @@ export class AppXService {
 	}
 
 	initData() {
-		var name = 'lifts9';
+		var name = 'lifts11';
 		this.dataUserInit(name);
 	}
 
@@ -167,9 +167,12 @@ export class AppXService {
 
 	dataUserProcess(getok: boolean) {
 		let user = this.data.user;
+	
+	//	console.log('appx data (process-do)', JSON.stringify(this.data));
+
 		return this.processData(user, this.data).subscribe(
 			res => {
-				console.log('appx data (process)', user);
+				console.log('appx data (process-done)', user);
 				if (getok)
 					this.dataUserGet()
 			},
@@ -200,17 +203,19 @@ export class AppXService {
 
 			this.dataUserUpdate(true);
 
+		//	console.log(pindex, pres_name, pres_file,JSON.stringify(this.data));
+
 		}
 	}
 
 	dataPresentationCreate(pres_name, pres_file) {
-		let p = { name: pres_name, file_url_source: pres_file };
+		let p = { filename: pres_name, file_url_source: pres_file };
 		this.data.presentations.push(p);
 	}
 
 	dataPresentationUpdate(i, pres_name, pres_file) {
 		let pres = this.data.presentations[i]
-		pres.name = pres_name;
+		pres.filename = pres_name;
 		pres.file_url_source = pres_file;
 	}
 
@@ -223,18 +228,18 @@ export class AppXService {
 		return [];
 	}
 
-	dataPresentationIndexGet(name: String) {
+	dataPresentationIndexGet(filename: String) {
 		if (this.data.presentations) {
 			for (var i = 0; i < this.data.presentations.length; i++) {
 				var pres = this.data.presentations[i];
-				if (pres.name === name) return i;
+				if (pres.filename === filename) return i;
 			}
 		}
 		return -1;
 	}
 
-	dataUserPresentationCurrentSet(name) {
-		this.data.presentation = name;
+	dataUserPresentationCurrentSet(filename) {
+		this.data.presentation = filename;
 	}
 
 	dataUserPresentationCurrentGet() {

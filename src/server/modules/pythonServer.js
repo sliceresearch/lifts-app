@@ -7,7 +7,7 @@ const { promisify } = require('util');
 var pyPath = path.join(__dirname, '../analytics/py/process_ppt.py');
 var presPath = path.join(__dirname, '../../assets/test/py-pres-test.pptx');
 
-console.log(pyPath, presPath);
+//console.log(pyPath, presPath);
 
 var py_options = { pythonPath: 'python3', args: [presPath], mode: 'json' };   //
 
@@ -19,8 +19,10 @@ var PythonServer = function () {
 		console.log('pyserver: (init)');
 	};
 
-	this.run = async function (filename) {
-		py_options.args[0] = path.join(__dirname, '../../../upload/' + filename);
+	this.run = async function (filename) { ////TODO filedirectory
+		console.log('pyserver: (run0) ' +  JSON.stringify(py_options));
+		py_options.args[0] = path.join(__dirname, '../../../uploads/' + filename);
+		console.log('pyserver: (run) ' + filename + " " + JSON.stringify(py_options));
 		const pythonPromise = promisify(PythonShell.run);
 		const result = await pythonPromise(pyPath, py_options);
 		return result;

@@ -35,20 +35,20 @@ liftsRoute.route('/read/:user').get((req, res) => {
 /// lifts - process current presentation
 liftsRoute.route('/process/:user').put(async (req, res) => {
 
-	console.log('find (process):', req.params.user, req.params.filename)
+//	console.log('find (process):', req.params.user, req.body.presentation)
 
-	var py_result = await global.pyServer.run(req.params.filename);
+	var py_result = await global.pyServer.run(req.body.presentation);
 
 	var ratings_result = await global.rulesServer.process_presentation_rules('presentation_rating',py_result[0]);
 	var data_result = await global.rulesServer.process_presentation_rules('presentation_data',py_result[0]);
 
 	var slides_result = await global.rulesServer.process_presentation_slides(ratings_result);
 
-	var title = "Introduction to Java" //temp
-	var author = "Dr John Academic" //temp
+	var title = "Introduction to ICT" //temp
+	var author = "Prof John Academic" //temp
 	var pname = "ICT999"
 	
-	console.log('rules (process):', req.body.presentation, ratings_result, slides_result)
+//	console.log('rules (process):', req.body.presentation, ratings_result, slides_result)
 
 	Lifts.findOneAndUpdate({
 		user: req.params.user

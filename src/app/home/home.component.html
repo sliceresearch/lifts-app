@@ -31,9 +31,9 @@
 
 					<ion-card>
 					<ion-card-header>
-						<ion-card-subtitle><h6 ion-text style="text-align: left;">Dr John Academic</h6></ion-card-subtitle>
-						<ion-card-title><h1 ion-text style="text-align: left;">ICT221</h1></ion-card-title>
-						<ion-card-title><h5 ion-text color="dark" style="text-align: left;">Introduction to Java</h5></ion-card-title>
+						<ion-card-subtitle><h6 ion-text style="text-align: left;">{{presentation_data.author}}</h6></ion-card-subtitle>
+						<ion-card-title><h1 ion-text style="text-align: left;">{{presentation_data.name}}</h1></ion-card-title>
+						<ion-card-title><h5 ion-text color="dark" style="text-align: left;">{{presentation_data.title}}</h5></ion-card-title>
 				
 						 <div  style="text-align: right;">
 							<button ion-item  (click)="analysePresentation()">Analyse</button>
