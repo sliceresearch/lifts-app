@@ -80,6 +80,63 @@ export class HomeComponent implements OnInit {
 
 }
 
+
+/*
+
+
+			 
+				<ion-list *ngFor="let obj of ratings; index as i" >
+				
+							<ion-item>
+								<ion-label color="grey">Slide 1</ion-label> 
+								<ion-label color="primary">Too Much Text</ion-label> 
+								 
+								<ion-label color="grey">Too much text on this slide. Try and reduce the amount of bullet points.</ion-label>
+						   </ion-item>
+				</ion-list>
+		 
+ 	 	
+			
+			
+			<ion-col *ngFor="let obj of ratings; index as i" size="12">
+			
+							<ion-card >
+								<ion-card-header>
+									<ion-card-subtitle><ion-label color="grey">Slide 1</ion-label></ion-card-subtitle>
+									<ion-card-title><ion-label color="primary">Too Much Text</ion-label></ion-card-title>
+								</ion-card-header>
+
+								<ion-card-content>
+									<ion-label color="grey">Too much text on this slide. Try and reduce the amount of bullet points.</ion-label>
+								</ion-card-content>
+							</ion-card>
+					
+				
+			</ion-col>
+
+
+
+
+  <ion-row *ngFor="let obj of ratings; index as i">
+			 
+			 <ion-col  size="12">
+						<ion-card >
+							<ion-card-header>
+								<ion-card-title><p ion-text color="primary">{{ obj.description }}</p></ion-card-title>
+								<ion-card-subtitle><p ion-text color="primary">{{ obj.description }}</p></ion-card-subtitle>
+							</ion-card-header>
+
+							<ion-card-content>
+								<star-rating value="{{ obj.value }}" totalstars="5" checkedcolor="#3880ff" uncheckedcolor="grey" size="24px" readonly="true" (rate)="onRate($event)"></star-rating>	
+					
+							</ion-card-content>
+						</ion-card>
+			</ion-col>
+				 
+          </ion-row>
+
+
+		  */
 /*
 
 

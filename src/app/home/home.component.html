@@ -39,18 +39,15 @@
 				</ion-fab-button>
 			</ion-fab>
 
-      
-      
-
         <ion-grid  no-border>
 
 		<ion-row >
 			<ion-col style="border-style: none;background-color: #3880ff" size="2">
-					<h1 ion-text style="color: white; text-align: center;">{{presentation_data.name}}</h1>
-				</ion-col>
+					<h6 ion-text style="color: white; text-align: center;">{{presentation_data.name}}</h6>	
+			</ion-col>
 			<ion-col style="border-style: none;background-color: #3880ff" size="8">
-				<h1 ion-text style="color: white; text-align: center;">{{presentation_data.title}}</h1>
-					<h6 ion-text style="color: white; text-align: center;">{{presentation_data.author}}</h6>
+				<h3 ion-text style="color: white; text-align: center;">{{presentation_data.title}}</h3>
+					<p ion-text style="color: white; text-align: center;">{{presentation_data.author}}</p>
 			</ion-col>
 			<ion-col style="border-style: none;background-color: #3880ff" size="2">
 			
@@ -58,36 +55,69 @@
 			</ion-col>
 		</ion-row>
 
- 		 <ion-row >
-				<div *ngFor="let obj of analytics; index as i">
+		<ion-row class="ion-justify-content-center" >
+			<ion-label color="primary"><br><h2 ion-text style="color: #3880ff; text-align: center;">Analytics</h2><br></ion-label>
+ 		</ion-row>
+
+
+ 		 <ion-row class="ion-justify-content-center" >
+
+					<div *ngFor="let obj of analytics; index as i">
+					 
+	 					<ion-chip disabled outline="true" color="primary">
+							<p ion-text style="color: #3880ff; text-align: center;"> {{ obj.description }}&emsp;</p>
+					 		<ion-badge color="outline">{{ obj.value }}</ion-badge>
+						</ion-chip>
+				
+					</div>
+				 
+		  </ion-row>
+		 
+		<ion-row class="ion-justify-content-center" >
+			<ion-item-divider>				
+			</ion-item-divider>
+			<ion-label color="primary"><br><h2 ion-text style="color: #3880ff; text-align: center;">Ratings</h2></ion-label>
+ 		</ion-row>
+		 <br>
+	
+ 		<ion-row class="ion-justify-content-center" >
+		 	<br >
+				<div *ngFor="let obj of ratings; index as i">
 					<ion-chip disabled outline="true" color="primary">
-						{{ obj.description }}
-						<ion-badge >{{ obj.value }}</ion-badge>
+						 <p ion-text color="primary">{{ obj.description }}&emsp;</p>
+						<star-rating value="{{ obj.value }}" totalstars="5" checkedcolor="#3880ff" uncheckedcolor="grey" size="24px" readonly="true" (rate)="onRate($event)"></star-rating>	
+					
 					</ion-chip>
 				</div>
 		  </ion-row>
 
-          <ion-row >
-			 
-					<ion-list lines="none">
-						<ion-item lines="none" ion-item *ngFor="let obj of ratings; index as i">
+		 <ion-row class="ion-justify-content-center" >
+			<ion-item-divider>				
+			</ion-item-divider>
+			<ion-label color="primary"><br><h2 ion-text style="color: #3880ff; text-align: center;">Issues</h2></ion-label>
+ 		 </ion-row>
+		 
+	 	<ion-row class="ion-justify-content-center" >
+ 			 
+					<ion-list lines="none" *ngFor="let obj of ratings; index as i" >
+							<ion-item detail>
+							
+									<ion-card button="true">
+										<ion-card-header>
+											<ion-card-subtitle><ion-label color="grey">Slide 1</ion-label></ion-card-subtitle>
+											<ion-card-title><ion-label color="primary"><h2 ion-text style="color: #3880ff; text-align: center;">Issues</h2></ion-label></ion-card-title>
+										</ion-card-header>
 
-							<ion-card>
-							<ion-card-header>
-								<ion-card-subtitle><p ion-text color="primary">{{ obj.description }}</p></ion-card-subtitle>
-								<ion-card-title><p ion-text color="primary">{{ obj.description }}</p></ion-card-title>
-							</ion-card-header>
-
-							<ion-card-content>
-								<star-rating value="{{ obj.value }}" totalstars="5" checkedcolor="#3880ff" uncheckedcolor="grey" size="24px" readonly="true" (rate)="onRate($event)"></star-rating>	
-					
-							</ion-card-content>
-							</ion-card>
-
-						</ion-item>
+										<ion-card-content>
+											<ion-label color="grey">Too much text on this slide. Try and reduce the amount of bullet points.</ion-label>
+										</ion-card-content>
+									</ion-card>
+							
+							</ion-item>
 					</ion-list>
-				 
-          </ion-row>
+ 			  
+ 		</ion-row>
+
 
        
         </ion-grid>
