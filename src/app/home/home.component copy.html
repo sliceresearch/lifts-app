@@ -20,78 +20,92 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content >
+<ion-content>
 
-
-	
-
-	<!-- fab placed to the (vertical) center and end -->
-			<ion-fab vertical="bottom" horizontal="end" slot="fixed">
-				<ion-fab-button>
-				<ion-icon name="add"></ion-icon>
-				</ion-fab-button>
-			</ion-fab>
-
-	<!-- fab placed to the (vertical) center and end -->
-			<ion-fab vertical="top" horizontal="end" slot="fixed">
-				<ion-fab-button>
-				<ion-icon name="refresh"></ion-icon>
-				</ion-fab-button>
-			</ion-fab>
-
-      
-      
-
-        <ion-grid  no-border>
-
-		<ion-row >
-			<ion-col style="border-style: none;background-color: #3880ff" size="2">
-					<h1 ion-text style="color: white; text-align: center;">{{presentation_data.name}}</h1>
-				</ion-col>
-			<ion-col style="border-style: none;background-color: #3880ff" size="8">
-				<h1 ion-text style="color: white; text-align: center;">{{presentation_data.title}}</h1>
-					<h6 ion-text style="color: white; text-align: center;">{{presentation_data.author}}</h6>
-			</ion-col>
-			<ion-col style="border-style: none;background-color: #3880ff" size="2">
+        <ion-grid>
+         
+		
 			
-					<p ion-text style="color: white; text-align: center;">Edited: 20/01/2019</p>	
-			</ion-col>
+			
+		<ion-row >
+					<h6 ion-text color="white" style="text-align: left;">{{presentation_data.author}}</h6>
+					<h1 ion-text color="white" style="text-align: left;">{{presentation_data.name}}</h1>
+					<h5 ion-text color="white" style="text-align: left;">{{presentation_data.title}}</h5>
+				
+						 <div  style="text-align: right;">
+							<button ion-item  (click)="analysePresentation()">Analyse</button>
+						</div>
+			
+					
+						<h4 ion-text col or="dark" style="text-align: left;">20/01/2019</h4>
+
 		</ion-row>
 
- 		 <ion-row >
-				<div *ngFor="let obj of analytics; index as i">
-					<ion-chip disabled outline="true" color="primary">
-						{{ obj.description }}
-						<ion-badge >{{ obj.value }}</ion-badge>
-					</ion-chip>
-				</div>
-		  </ion-row>
+		<ion-row >
+						<ion-list>
+							<ion-item
+								ion-item
+								*ngFor="let obj of analytics; index as i"
+							>
+									<ion-label>
+										<p ion-text color="primary">{{ obj.description }}</p>
+									</ion-label>
+									<ion-badge color="white" slot="end">
+									
+										<p ion-text color="primary">{{ obj.value }}</p>
+									</ion-badge>
+
+							</ion-item>
+						</ion-list>
+		</ion-row>
+
+		
 
           <ion-row >
-			 
-					<ion-list lines="none">
-						<ion-item lines="none" ion-item *ngFor="let obj of ratings; index as i">
+            <ion-col col-12>
+			<h4 ion-text color="dark" style="text-align: left;">Analytics</h4>
+ 			<ion-list>
+				<ion-item
+					ion-item
+					*ngFor="let obj of analytics; index as i"
+				>
+						<ion-label>
+							<p ion-text color="primary">{{ obj.description }}</p>
+						</ion-label>
+						<ion-badge color="white" slot="end">
+						
+							<p ion-text color="primary">{{ obj.value }}</p>
+						</ion-badge>
 
-							<ion-card>
-							<ion-card-header>
-								<ion-card-subtitle><p ion-text color="primary">{{ obj.description }}</p></ion-card-subtitle>
-								<ion-card-title><p ion-text color="primary">{{ obj.description }}</p></ion-card-title>
-							</ion-card-header>
+				</ion-item>
+			</ion-list>
+            </ion-col>
+          </ion-row>
 
-							<ion-card-content>
-								<star-rating value="{{ obj.value }}" totalstars="5" checkedcolor="#3880ff" uncheckedcolor="grey" size="24px" readonly="true" (rate)="onRate($event)"></star-rating>	
-					
-							</ion-card-content>
-							</ion-card>
+          <ion-row >
+           
+			<h4 ion-text color="dark" style="text-align: left;">Ratings</h4>
+ 			<ion-list>
+				<ion-item
+					ion-item
+					*ngFor="let obj of ratings; index as i"
+				>
+						<ion-label>
+							<p ion-text color="primary">{{ obj.description }}</p>
+						</ion-label>
+						<ion-badge color="white" slot="end">
+						 <star-rating value="{{ obj.value }}" totalstars="5" checkedcolor="#3880ff" uncheckedcolor="grey" size="24px" readonly="true" (rate)="onRate($event)"></star-rating>
+						 
+						</ion-badge>
 
-						</ion-item>
-					</ion-list>
-				 
+				</ion-item>
+			</ion-list>
+          
           </ion-row>
 
        
         </ion-grid>
- 
+
 </ion-content>
 
 <ion-footer no-border>
