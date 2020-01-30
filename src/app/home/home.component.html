@@ -55,11 +55,7 @@
 			</ion-col>
 		</ion-row>
 
-		<ion-row class="ion-justify-content-center" >
-			<ion-label color="primary"><br><h2 ion-text style="color: #3880ff; text-align: center;">Analytics</h2><br></ion-label>
- 		</ion-row>
-
-
+		 <br><br>  
  		 <ion-row class="ion-justify-content-center" >
 
 					<div *ngFor="let obj of analytics; index as i">
@@ -72,13 +68,13 @@
 					</div>
 				 
 		  </ion-row>
-		 
+		
 		<ion-row class="ion-justify-content-center" >
+		 
 			<ion-item-divider>				
 			</ion-item-divider>
-			<ion-label color="primary"><br><h2 ion-text style="color: #3880ff; text-align: center;">Ratings</h2></ion-label>
  		</ion-row>
-		 <br>
+		 <br><br> 
 	
  		<ion-row class="ion-justify-content-center" >
 		 	<br >
@@ -94,28 +90,28 @@
 		 <ion-row class="ion-justify-content-center" >
 			<ion-item-divider>				
 			</ion-item-divider>
-			<ion-label color="primary"><br><h2 ion-text style="color: #3880ff; text-align: center;">Issues</h2></ion-label>
+		
  		 </ion-row>
 		 
 	 	<ion-row class="ion-justify-content-center" >
- 			 
-					<ion-list lines="none" *ngFor="let obj of ratings; index as i" >
-							<ion-item detail>
-							
-									<ion-card button="true">
-										<ion-card-header>
-											<ion-card-subtitle><ion-label color="grey">Slide 1</ion-label></ion-card-subtitle>
-											<ion-card-title><ion-label color="primary"><h2 ion-text style="color: #3880ff; text-align: center;">Issues</h2></ion-label></ion-card-title>
-										</ion-card-header>
-
-										<ion-card-content>
-											<ion-label color="grey">Too much text on this slide. Try and reduce the amount of bullet points.</ion-label>
-										</ion-card-content>
-									</ion-card>
-							
+ 				<ion-col size="12" sizeLg="6" *ngFor="let obj of ratings; index as i">
+				 			<ion-item detail>
+								<ion-card  button="true">
+									<ion-card-header>
+										<ion-card-subtitle>
+											 <ion-icon  size="large" name="information-circle-outline"></ion-icon>
+										</ion-card-subtitle>
+										<ion-card-title>
+											<ion-label color="primary"><h2 ion-text style="color: #3880ff; text-align: left;">Slide 1 - Issue Here</h2></ion-label>
+										</ion-card-title>
+									</ion-card-header>
+									<ion-card-content>
+										<ion-label color="black">Too much text on this slide. Try and reduce the amount of bullet points.</ion-label>
+									</ion-card-content>
+								</ion-card>
 							</ion-item>
-					</ion-list>
- 			  
+				 
+ 			  	</ion-col>
  		</ion-row>
 
 

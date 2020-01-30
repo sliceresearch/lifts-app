@@ -82,6 +82,31 @@ export class HomeComponent implements OnInit {
 
 
 /*
+<ion-row class="ion-justify-content-center" >
+			<ion-item-divider>				
+			</ion-item-divider>
+			<ion-label color="primary"><br><h2 ion-text style="color: #3880ff; text-align: center;">Ratings</h2></ion-label>
+ 		</ion-row>
+		 <br>
+
+
+		<ion-row class="ion-justify-content-center" >
+			<ion-label color="primary"><br><h2 ion-text style="color: #3880ff; text-align: center;">Analytics</h2><br></ion-label>
+ 		</ion-row>
+
+		 <ion-row class="ion-justify-content-center" >
+			<ion-item-divider>				
+			</ion-item-divider>
+			<ion-label color="primary"><br><h2 ion-text style="color: #3880ff; text-align: center;">Issues</h2></ion-label>
+ 		 </ion-row>
+
+
+
+
+
+		 */
+
+/*
 
 
 			 
