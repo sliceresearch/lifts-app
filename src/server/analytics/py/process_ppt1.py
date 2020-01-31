@@ -104,51 +104,14 @@ def count_layouts(prs:Presentation) -> Tuple[int, Dict[str, int]]:
             layouts_interactive += 1
     return (layouts_interactive, layouts)
 
-##################################################################################presentation properties
-def get_presentation_properties(prs:Presentation) -> Dict[str, Any]:
-    pres_properties = prs.core_properties
-    result = {
-        "author":pres_properties.author,
-        "title":pres_properties.title,
-        "category":pres_properties.category,
-        "subject":"00/00/00", #pres_properties.subject,
-        "created":"00/00/00", #pres_properties.created,
-        "modified":"00/00/00", #pres_properties.modified,
-        "last_modified_by":pres_properties.last_modified_by
-        }
 
-    return result
-
-##################################################################################slide analytics
 def get_slide_analytics(slides) -> List[int]:
     slides_out = []
     for slide in slides:
-        words = 0
-        print("slide:",slide)
-        for shape in slide.shapes:
-            print("shape:",shape.name,shape.shape_type, shape.text,shape.text_frame)
-            shape_analyse = analyse_shapes(shape)
-        result = {
-            "id":slide.slide_id,
-            "name":slide.name,
-            "shapes":shape_analyse,
-            "words":words,
-            }
-        slides_out.append(result)
+        #title = slide.shapes.title.text
+        sdict = { 'title':'Slide Title' }
+        slides_out.append(sdict)
     return slides_out
-
-def analyse_shapes(shape) -> Dict[str, Any]:
-    shapes_out = []
-    shape_text=""
-    if shape.has_text_frame:
-        shape_paragraphs=[]
-        for paragraph in shape.text_frame.paragraphs:  ## extract text 
-           shape_paragraphs.append(paragraph.text)
-        shape_text=shape.text  ## all text == all paragraph text?
-
-    shape_properties = {'name':shape.name,'type':shape.shape_type,'text':shape_text,'paragraphs':shape_paragraphs}
-    shapes_out.append(shape_properties)
-    return shapes_out
 
 
 # In[94]:
@@ -176,7 +139,7 @@ def analyse_presentation(pres_name:str, verbose=False) -> Dict[str, Any]:
         if words > MAX_WORDS_PER_SLIDE:
             heavy_warnings.append(f"WARNING: slide {slide} has {words} words!")
 
-    pres_properties = get_presentation_properties(prs)
+
     slides = get_slide_analytics(prs.slides)
 
     result = {
@@ -192,9 +155,7 @@ def analyse_presentation(pres_name:str, verbose=False) -> Dict[str, Any]:
         "presentation_data_slides": slides,  # a list of slides and analytics
         "filename": pres_name,  # TODO: strip any Path and just return file name?
         "name": "ICT999",
-        "description": "Introduction to ICT",
-        "properties": pres_properties,
-        "slides": slides,
+        "description": "Introduction to ICT"
         }
 
     return result

@@ -24,13 +24,6 @@ export class HomeComponent implements OnInit {
 	//	private ngZone: NgZone
 	{ }
 
-	onRate($event: { oldValue: number, newValue: number, starRating: StarRatingComponent }) {
-		alert(`Old Value:${$event.oldValue}, 
-      New Value: ${$event.newValue}, 
-      Checked Color: ${$event.starRating.checkedcolor}, 
-      Unchecked Color: ${$event.starRating.uncheckedcolor}`);
-	}
-
 	ngOnInit() {
 		this.isLoading = true;
 		this.subscribePresentationAnalytics();
@@ -77,6 +70,14 @@ export class HomeComponent implements OnInit {
 		this.appXService.navigate('/splash');
 		this.appXService.dataUserProcess(true);
 	}
+
+	onRate($event: { oldValue: number, newValue: number, starRating: StarRatingComponent }) {
+		alert(`Old Value:${$event.oldValue}, 
+      New Value: ${$event.newValue}, 
+      Checked Color: ${$event.starRating.checkedcolor}, 
+      Unchecked Color: ${$event.starRating.uncheckedcolor}`);
+	}
+
 
 }
 

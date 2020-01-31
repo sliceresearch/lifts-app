@@ -104,22 +104,23 @@ def count_layouts(prs:Presentation) -> Tuple[int, Dict[str, int]]:
             layouts_interactive += 1
     return (layouts_interactive, layouts)
 
-##################################################################################presentation properties
+##################################################################################33
 def get_presentation_properties(prs:Presentation) -> Dict[str, Any]:
     pres_properties = prs.core_properties
+    print(pres_properties.author)
     result = {
         "author":pres_properties.author,
         "title":pres_properties.title,
         "category":pres_properties.category,
         "subject":"00/00/00", #pres_properties.subject,
         "created":"00/00/00", #pres_properties.created,
-        "modified":"00/00/00", #pres_properties.modified,
+        "modified":pres_properties.modified,
         "last_modified_by":pres_properties.last_modified_by
         }
 
     return result
 
-##################################################################################slide analytics
+
 def get_slide_analytics(slides) -> List[int]:
     slides_out = []
     for slide in slides:
@@ -137,6 +138,7 @@ def get_slide_analytics(slides) -> List[int]:
         slides_out.append(result)
     return slides_out
 
+
 def analyse_shapes(shape) -> Dict[str, Any]:
     shapes_out = []
     shape_text=""
@@ -150,6 +152,24 @@ def analyse_shapes(shape) -> Dict[str, Any]:
     shapes_out.append(shape_properties)
     return shapes_out
 
+#####################################################################################################3
+
+def get_slide_analytics_new(slides) -> List[int]:
+    """Count the amount of text in each slide."""
+    word_count = []
+    for slide in slides:
+        print(slide)
+        words = 0
+        for shape in slide.shapes:
+            if not shape.has_text_frame:
+                continue
+            print(shape.name)
+            for paragraph in shape.text_frame.paragraphs:
+                for run in paragraph.runs:
+                    print("    " + run.text)
+                    words += len(run.text.split())
+        word_count.append(words)
+    return word_count
 
 # In[94]:
 
@@ -164,6 +184,8 @@ def analyse_presentation(pres_name:str, verbose=False) -> Dict[str, Any]:
     interaction_stars = min(layouts_interactive, 5)
     topic_stars = ([1,1,3,5,5,4,3,2,1]+[1]*100)[layouts["Section Header"]]
 
+    pres_properties = get_presentation_properties(prs)
+
     word_count = get_word_counts(prs.slides)
     words_per_slide = sum(word_count) / len(word_count)
     # ideal words/slide is 30-40 (5 stars)
@@ -176,9 +198,9 @@ def analyse_presentation(pres_name:str, verbose=False) -> Dict[str, Any]:
         if words > MAX_WORDS_PER_SLIDE:
             heavy_warnings.append(f"WARNING: slide {slide} has {words} words!")
 
-    pres_properties = get_presentation_properties(prs)
-    slides = get_slide_analytics(prs.slides)
 
+    slides = get_slide_analytics(prs.slides)
+    print(slides)
     result = {
 
         "presentation_rating_stars_interaction": interaction_stars,
@@ -192,9 +214,7 @@ def analyse_presentation(pres_name:str, verbose=False) -> Dict[str, Any]:
         "presentation_data_slides": slides,  # a list of slides and analytics
         "filename": pres_name,  # TODO: strip any Path and just return file name?
         "name": "ICT999",
-        "description": "Introduction to ICT",
-        "properties": pres_properties,
-        "slides": slides,
+        "description": "Introduction to ICT"
         }
 
     return result
@@ -204,7 +224,7 @@ def analyse_presentation(pres_name:str, verbose=False) -> Dict[str, Any]:
 #print(sys.argv[1])
 analytics = analyse_presentation(sys.argv[1])  # the default example
 jout = json.dumps(analytics)
-print(jout)
+#print(jout)
 #if __name__ == "__main__":
 #    verbose = False
 #    if len(sys.argv) > 1:
