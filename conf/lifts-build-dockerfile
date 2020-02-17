@@ -48,14 +48,11 @@ RUN ln -s /etc/nginx/sites-available/lifts /etc/nginx/sites-enabled/lifts
 #################################################################################################
 
 RUN mkdir /lifts
-COPY     package.json /lifts/package.json
-WORKDIR  /lifts
-RUN      npm install
-COPY     . /lifts
-RUN cd /lifts && ls -l
+COPY . /lifts
 
 WORKDIR /lifts
 RUN ls -l
+RUN npm install
 RUN npm run build
 
 
