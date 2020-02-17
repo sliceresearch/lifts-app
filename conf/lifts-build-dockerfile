@@ -49,7 +49,7 @@ RUN ln -s /etc/nginx/sites-available/lifts /etc/nginx/sites-enabled/lifts
 #################################################################################################
 
 RUN mkdir /lifts
-COPY . /lifts
+COPY ../ /lifts
 RUN cd /lifts && pwd && ls -l
 
 WORKDIR /lifts
