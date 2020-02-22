@@ -105,6 +105,7 @@ def count_layouts(prs:Presentation) -> Tuple[int, Dict[str, int]]:
     return (layouts_interactive, layouts)
 
 ##################################################################################presentation properties
+
 def get_presentation_properties(prs:Presentation) -> Dict[str, Any]:
     pres_properties = prs.core_properties
     result = {
@@ -148,7 +149,10 @@ def analyse_shapes(shape) -> Dict[str, Any]:
 
     shape_properties = {'name':shape.name,'type':shape.shape_type,'text':shape_text,'paragraphs':shape_paragraphs}
     shapes_out.append(shape_properties)
+
     return shapes_out
+
+
 
 
 # In[94]:
