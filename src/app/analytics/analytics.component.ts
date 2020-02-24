@@ -20,8 +20,17 @@ export class AnalyticsComponent implements OnInit {
 	presentation: any;
 	presentation_data = {};
 	presentations: any;
-	ratings: any = [];
-	analytics: any = [];
+	presentation_slides: any = [];
+	presentation_analytics: any = [];	
+
+	slideOpts = {
+		// direction: 'vertical'
+		// longSwipesMs:50,
+		// resistance:false,
+		//  height:500,
+		speed: 500,
+		resistanceRatio: 0.2
+	  };
 
 	constructor(private appXService: AppXService) { }
 
@@ -56,10 +65,13 @@ export class AnalyticsComponent implements OnInit {
 			let presentation = this.presentations[pindex];
 
 			if (presentation) {
-				this.ratings = presentation.ratings;
-				this.analytics = presentation.analytics;
-
+				this.presentation_slides = presentation.slides;
+			//	this.presentation_analytics = presentation.slides;
 				this.presentation_data = { name: presentation.name, author: presentation.author, title: presentation.title }
+				
+				
+				console.log(presentation,this.presentation_data,this.presentation_slides);
+
 			}
 
 		}

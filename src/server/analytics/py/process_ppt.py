@@ -121,25 +121,27 @@ def get_presentation_properties(prs:Presentation) -> Dict[str, Any]:
     return result
 
 ##################################################################################slide analytics
-def get_slide_analytics(slides) -> List[int]:
+def get_slide_analytics(slides):
     slides_out = []
     for slide in slides:
         words = 0
-        print("slide:",slide)
+        shapes_out = []
         for shape in slide.shapes:
-            print("shape:",shape.name,shape.shape_type, shape.text,shape.text_frame)
-            shape_analyse = analyse_shapes(shape)
+            shape_analyse = analyse_shape(shape)
+            shapes_out.append(shape_analyse);
+
         result = {
-            "id":slide.slide_id,
-            "name":slide.name,
-            "shapes":shape_analyse,
-            "words":words,
-            }
+             "id":slide.slide_id,
+             "name":slide.name,
+             "shapes":shapes_out,
+             "words":words,
+        }
         slides_out.append(result)
+     
     return slides_out
 
-def analyse_shapes(shape) -> Dict[str, Any]:
-    shapes_out = []
+def analyse_shape(shape):
+#text
     shape_text=""
     if shape.has_text_frame:
         shape_paragraphs=[]
@@ -147,11 +149,19 @@ def analyse_shapes(shape) -> Dict[str, Any]:
            shape_paragraphs.append(paragraph.text)
         shape_text=shape.text  ## all text == all paragraph text?
 
-    shape_properties = {'name':shape.name,'type':shape.shape_type,'text':shape_text,'paragraphs':shape_paragraphs}
-    shapes_out.append(shape_properties)
+    shape_type = analyse_shape_type(shape.shape_type);
+    shapes_out = {'name':shape.name,'type':shape_type,'paragraphs':shape_paragraphs}
 
     return shapes_out
 
+def analyse_shape_type(shape_type):
+
+    if (shape_type==14):
+         return 'title'
+    elif (shape_type==17):
+         return 'content'
+
+    return 'none'
 
 
 
@@ -197,8 +207,8 @@ def analyse_presentation(pres_name:str, verbose=False) -> Dict[str, Any]:
         "filename": pres_name,  # TODO: strip any Path and just return file name?
         "name": "ICT999",
         "description": "Introduction to ICT",
-        "properties": pres_properties,
-        "slides": slides,
+        "properties": pres_properties
+       # "slides": slides,
         }
 
     return result

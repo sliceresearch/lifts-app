@@ -124,27 +124,53 @@ var RulesServer = function () {
 	//////////////////////////////////////////////////////////////generate
 
 
-	this.process_presentation_slides = async function () {
-		return this.process_presentation_slides_py()
+	this.process_presentation_slides = async function (slides_data) {
+		return this.process_presentation_slides_py(slides_data)
 	}
 
-	this.process_presentation_slides_py = async function (rules) {
+	this.process_presentation_slides_py = async function (slides_data) {
 
-		let slides = [{ title: 'Slide One' }, { title: 'Slide Two' }];
+		let slides = [];
+		let slide_data = slides_data.presentation_data_slides;
 
-		/*	switch (rule) {
-	
-				case "presentation_data_slides":
-					slides = this.process_presentation_slide_py = async function (rules) {
-					break;
-	
-				default:
-					break;
-			}*/
+		for (var i = 0; i < slide_data.length; i++) {
+			var slide = slide_data[i];
+			let slide_out = this.process_presentation_slide(i,slide);
+			if (slide_out != -1)
+				slides.push(slide_out)
+		}
 
+		console.log('slides processed:',slides)
 		return slides;
+	};
+
+	this.process_presentation_slide =  function (i,slide) {
+
+		console.log('slides (process):', i,slide)
+
+		let shape_data = this.process_presentation_slide_shapes(slide.shapes);
+		let slide_out = { index:i,title: slide.name, id:slide.id, shapes:shape_data };
+
+		return slide_out;
 
 	};
+
+
+	this.process_presentation_slide_shapes =  function (shapes) {
+
+		console.log('>>>>>>>shapes (process):', shapes)
+		let shapes_out=[]
+		for (var i = 0; i < shapes.length; i++) {
+			var shape = shapes[i];
+			let shape_out = {name: shape.name, type:shape.type, text:shape.paragraphs };
+			shapes_out.push(shape_out)
+		}
+
+		return shapes_out;
+
+	};
+
+
 
 };
 

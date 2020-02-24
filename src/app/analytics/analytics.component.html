@@ -57,15 +57,12 @@
 					(ionSlideNextStart)="slideNextStart()"
 					(ionSlideNextEnd)="slideNextEnd()"
 			>
-				<ion-slide color="white" *ngFor="let obj of objectsData">
-					<ion-grid color="white">
-						<ion-row>
-						<h3 ion-text color="white">{{ obj.title }}</h3>
-						</ion-row>
-						<ion-row>
-						<p ion-text>{{ obj.description }}</p>
-						</ion-row>
-					</ion-grid>
+				<ion-slide color="white" *ngFor="let slide of presentation_slides">
+					 
+						<h3 ion-text color="white">{{ slide.title }}</h3>
+					 
+						<p ion-text>{{ slide.description }}</p>
+					 
 				</ion-slide>
 			</ion-slides>
 
@@ -77,7 +74,28 @@
 			</ion-item-divider>
 		
  		 </ion-row>
+		
+		 <br><br>  
+ 		 <ion-row class="ion-justify-content-center" >
+
+					<div *ngFor="let obj of analytics; index as i">
+					 
+	 					<ion-chip disabled outline="true" color="primary">
+							<p ion-text style="color: #3880ff; text-align: center;"> {{ obj.description }}&emsp;</p>
+					 		<ion-badge color="outline">{{ obj.value }}</ion-badge>
+						</ion-chip>
+				
+					</div>
+				 
+		  </ion-row>
+		
+		<ion-row class="ion-justify-content-center" >
 		 
+			<ion-item-divider>				
+			</ion-item-divider>
+ 		</ion-row>
+		 <br><br> 
+	
 	 	<ion-row class="ion-justify-content-center" >
  				<ion-col size="12" sizeLg="6" *ngFor="let obj of ratings; index as i">
 				 			<ion-item detail>
