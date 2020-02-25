@@ -20,7 +20,6 @@ var PythonServer = function () {
 	};
 
 	this.run = async function (filename) { ////TODO filedirectory
-		console.log('pyserver: (run0) ' +  JSON.stringify(py_options));
 		py_options.args[0] = path.join(__dirname, '../../../uploads/' + filename);
 		console.log('pyserver: (run) ' + filename + " " + JSON.stringify(py_options));
 		const pythonPromise = promisify(PythonShell.run);

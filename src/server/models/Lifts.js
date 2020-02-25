@@ -37,14 +37,17 @@ let Lifts = new Schema(
 
 				slides: [
 					{
-						//	index: Int16Array,
+						index: String,
+
 						title: String,
 
-						analytics: [
+						id: String,
+
+						shapes: [
 
 							{
 
-								code: {
+								name: {
 									type: String
 								},
 
@@ -52,20 +55,11 @@ let Lifts = new Schema(
 									type: String
 								},
 
-								rule: {
-									type: String
-								},
-
-								description: {
-									type: String
-								},
-
-								value: {}
+								text: []
 
 							}
 
 						]
-
 
 					}
 				],

@@ -51,6 +51,7 @@ liftsRoute.route('/process/:user').put(async (req, res) => {
 	//console.log('rules (process):', req.body.presentation, ratings_result, slides_result)
 	//console.log('slides (process):', slides_result,py_result[0])
 
+
 	Lifts.findOneAndUpdate({
 		user: req.params.user
 	}, {

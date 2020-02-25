@@ -7,11 +7,11 @@ var RulesServer = function () {
 		console.log('rules_server: (init)');
 	};
 
-	this.process_presentation_rules = async function (type,results) {
-		return this.process_presentation_py(type,results)
+	this.process_presentation_rules = async function (type, results) {
+		return this.process_presentation_py(type, results)
 	}
 
-	this.process_presentation_py = async function (type,results) {
+	this.process_presentation_py = async function (type, results) {
 
 		let analytics = [];
 
@@ -42,11 +42,6 @@ var RulesServer = function () {
 		console.log('rules_server: (process-ratings) - rule not found:' + rule);
 		return -1;
 	}
-
-
-	//if (rtype=='presentation_data') {
-
-
 
 	// media_group_type
 	this.process_rule_type_py = function (rule) {
@@ -135,34 +130,36 @@ var RulesServer = function () {
 
 		for (var i = 0; i < slide_data.length; i++) {
 			var slide = slide_data[i];
-			let slide_out = this.process_presentation_slide(i,slide);
+			let slide_out = this.process_presentation_slide(i, slide);
 			if (slide_out != -1)
 				slides.push(slide_out)
 		}
 
-		console.log('slides processed:',slides)
 		return slides;
 	};
 
-	this.process_presentation_slide =  function (i,slide) {
+	this.process_presentation_slide = function (i, slide) {
 
-		console.log('slides (process):', i,slide)
+		console.log('slides (process):', i, slide)
 
-		let shape_data = this.process_presentation_slide_shapes(slide.shapes);
-		let slide_out = { index:i,title: slide.name, id:slide.id, shapes:shape_data };
+		let shape_data = this.process_presentation_slide_shapes(i, slide.shapes);
+		let slide_out = { index: i, title: slide.name, id: slide.id, shapes: shape_data };
+
+		console.log('slides (process-out):', i, slide_out)
 
 		return slide_out;
 
 	};
 
 
-	this.process_presentation_slide_shapes =  function (shapes) {
+	this.process_presentation_slide_shapes = function (index, shapes) {
 
-		console.log('>>>>>>>shapes (process):', shapes)
-		let shapes_out=[]
+
+		let shapes_out = []
 		for (var i = 0; i < shapes.length; i++) {
 			var shape = shapes[i];
-			let shape_out = {name: shape.name, type:shape.type, text:shape.paragraphs };
+			let shape_out = { name: shape.name, type: shape.type, text: shape.paragraphs };
+			console.log('slides (process-shape):', index, i, shape_out)
 			shapes_out.push(shape_out)
 		}
 
