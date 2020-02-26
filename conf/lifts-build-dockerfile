@@ -84,7 +84,7 @@ RUN ls -l
 ##################################################################################
 WORKDIR /lifts
 RUN mongod &
-CMD ["npm","run","serve:prod"]
+#CMD ["npm","run","serve:prod"]
 
 
 
