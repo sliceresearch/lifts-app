@@ -6,7 +6,7 @@
   "scripts": {
     "ng": "ng",
     "serve:prod1": "pm2 start ./src/server/server.js",
-    "serve:prod": "npx supervisor  ./src/server/server.js > ./log/lifts.log",
+    "serve:prod": "npx supervisor  ./src/server/server.js",
     "monitor": "pm2 monitor",
     "serve": "npx supervisor  ./src/server/server.js",
     "build": "npm run env -s && ng build --prod",
