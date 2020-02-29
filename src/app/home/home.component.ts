@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
 	isLoading = false;
 
 	presentation: any;
-	presentation_data = {};
+	presentation_data = {name:"",title:"",author:""};
 	presentations: any;
 	ratings: any = [];
 	analytics: any = [];

@@ -10,12 +10,13 @@ import { ImportComponent } from './import.component';
 
 
 import { FileComponent } from '../core/file/file.component';
-import { FileSelectDirective } from 'ng2-file-upload';
+import { FileUploadModule } from 'ng2-file-upload';
+ 
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [CommonModule, TranslateModule, CoreModule, SharedModule, IonicModule, ImportRoutingModule, FormsModule],
+  imports: [CommonModule, TranslateModule, CoreModule, SharedModule, IonicModule, ImportRoutingModule, FormsModule, FileUploadModule],
   entryComponents: [ImportComponent, FileComponent],
-  declarations: [ImportComponent, FileSelectDirective, FileComponent]
+  declarations: [ ImportComponent, FileComponent]
 })
 export class ImportModule {}

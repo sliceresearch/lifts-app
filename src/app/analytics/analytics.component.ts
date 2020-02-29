@@ -18,11 +18,14 @@ export class AnalyticsComponent implements OnInit {
 	isLoading = false;
 
 	presentation: any;
-	presentation_data = {};
+	presentation_data = {name:"",title:"",author:""};
 	presentations: any;
 	presentation_slides: any = [];
 	presentation_analytics: any = [];	
 
+	ratings: any = [];
+	analytics: any = [];
+	
 	slideOpts = {
 		// direction: 'vertical'
 		// longSwipesMs:50,

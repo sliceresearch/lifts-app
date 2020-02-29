@@ -1,7 +1,8 @@
 
 
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { FileUploader, FileSelectDirective } from 'ng2-file-upload';
+import { FileUploader } from 'ng2-file-upload';
+//import { FileSelectDirective } from 'ng2-file-upload';
 
 const URL = 'http://localhost:8080/api/upload'; //4000
 
