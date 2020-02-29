@@ -73,7 +73,7 @@ export class AnalyticsComponent implements OnInit {
 				this.presentation_data = { name: presentation.name, author: presentation.author, title: presentation.title }
 				
 				
-				console.log(presentation,this.presentation_data,this.presentation_slides);
+			//	console.log(presentation,this.presentation_data,this.presentation_slides);
 
 			}
 

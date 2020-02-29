@@ -5,6 +5,8 @@ var RulesServer = function () {
 	//////////////////////////////////////////////////////////////process
 	this.init = function () {
 		console.log('rules_server: (init)');
+
+		this.load_rules();
 	};
 
 	this.process_presentation_rules = async function (type, results) {
@@ -114,7 +116,43 @@ var RulesServer = function () {
 
 	}
 
+	//////////////////////////////////////////////////////////////rule
 
+	this.load_rules = async function () {
+		
+	//	this.rules = 
+
+	}
+
+	this.check_rule = async function (rule_name,rule_arg,rule_test,rule_condition) {
+		//check rule exists 
+		let rule_data = this.rules[rule_name]
+
+		if (!rule_data) {
+			console.log('rules_server: (check-rule) - rule not found:' + rule_name);
+			return -1;
+		} 
+		//check rule argument exists 
+		let rule_arg_data = this.rules[rule_arg]
+
+		if (!rule_arg_data) {
+			console.log('rules_server: (check-rule) - rule argument not found:' +  rule_name + " " + rule_arg );
+			return -1;
+		} 
+
+
+		this.check_rule_condition(rule_arg,rule_test,rule_condition) 
+
+
+		console.log('rules_server: (check-rule)' + rule_name + " " + rule_arg_data );
+
+	}
+
+	this.check_rule_condition = async function (rule_arg,rule_test,rule_condition) {
+
+		
+
+	}
 
 	//////////////////////////////////////////////////////////////generate
 
