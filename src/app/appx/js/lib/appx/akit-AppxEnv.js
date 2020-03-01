@@ -1,6 +1,6 @@
 export default class AKIT_AppxEnv {
   constructor() {
-	this.browser = 'generic';
+    this.browser = 'generic';
 
     this.init();
   }

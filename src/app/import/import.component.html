@@ -59,12 +59,7 @@
             <ion-col col-2></ion-col>
             <ion-col col-8>
               <div style="text-align: center; ">
-			  
-
-				<file-root (uploaderComplete)='importPresentation($event)'></file-root>
-
-            
-
+                <file-root (uploaderComplete)="importPresentation($event)"></file-root>
               </div>
             </ion-col>
             <ion-col col-2></ion-col>
@@ -91,7 +86,7 @@
             <ion-label>Home</ion-label>
           </ion-tab-button>
 
-		<ion-tab-button
+          <ion-tab-button
             tab="import"
             size="small"
             menuClose

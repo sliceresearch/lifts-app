@@ -21,91 +21,70 @@
 </ion-header>
 
 <ion-content>
+  <ion-grid>
+    <ion-row>
+      <h6 ion-text color="white" style="text-align: left;">{{presentation_data.author}}</h6>
+      <h1 ion-text color="white" style="text-align: left;">{{presentation_data.name}}</h1>
+      <h5 ion-text color="white" style="text-align: left;">{{presentation_data.title}}</h5>
 
-        <ion-grid>
-         
-		
-			
-			
-		<ion-row >
-					<h6 ion-text color="white" style="text-align: left;">{{presentation_data.author}}</h6>
-					<h1 ion-text color="white" style="text-align: left;">{{presentation_data.name}}</h1>
-					<h5 ion-text color="white" style="text-align: left;">{{presentation_data.title}}</h5>
-				
-						 <div  style="text-align: right;">
-							<button ion-item  (click)="analysePresentation()">Analyse</button>
-						</div>
-			
-					
-						<h4 ion-text col or="dark" style="text-align: left;">20/01/2019</h4>
+      <div style="text-align: right;">
+        <button ion-item (click)="analysePresentation()">Analyse</button>
+      </div>
 
-		</ion-row>
+      <h4 ion-text col or="dark" style="text-align: left;">20/01/2019</h4>
+    </ion-row>
 
-		<ion-row >
-						<ion-list>
-							<ion-item
-								ion-item
-								*ngFor="let obj of analytics; index as i"
-							>
-									<ion-label>
-										<p ion-text color="primary">{{ obj.description }}</p>
-									</ion-label>
-									<ion-badge color="white" slot="end">
-									
-										<p ion-text color="primary">{{ obj.value }}</p>
-									</ion-badge>
+    <ion-row>
+      <ion-list>
+        <ion-item ion-item *ngFor="let obj of analytics; index as i">
+          <ion-label>
+            <p ion-text color="primary">{{ obj.description }}</p>
+          </ion-label>
+          <ion-badge color="white" slot="end">
+            <p ion-text color="primary">{{ obj.value }}</p>
+          </ion-badge>
+        </ion-item>
+      </ion-list>
+    </ion-row>
 
-							</ion-item>
-						</ion-list>
-		</ion-row>
+    <ion-row>
+      <ion-col col-12>
+        <h4 ion-text color="dark" style="text-align: left;">Analytics</h4>
+        <ion-list>
+          <ion-item ion-item *ngFor="let obj of analytics; index as i">
+            <ion-label>
+              <p ion-text color="primary">{{ obj.description }}</p>
+            </ion-label>
+            <ion-badge color="white" slot="end">
+              <p ion-text color="primary">{{ obj.value }}</p>
+            </ion-badge>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
 
-		
-
-          <ion-row >
-            <ion-col col-12>
-			<h4 ion-text color="dark" style="text-align: left;">Analytics</h4>
- 			<ion-list>
-				<ion-item
-					ion-item
-					*ngFor="let obj of analytics; index as i"
-				>
-						<ion-label>
-							<p ion-text color="primary">{{ obj.description }}</p>
-						</ion-label>
-						<ion-badge color="white" slot="end">
-						
-							<p ion-text color="primary">{{ obj.value }}</p>
-						</ion-badge>
-
-				</ion-item>
-			</ion-list>
-            </ion-col>
-          </ion-row>
-
-          <ion-row >
-           
-			<h4 ion-text color="dark" style="text-align: left;">Ratings</h4>
- 			<ion-list>
-				<ion-item
-					ion-item
-					*ngFor="let obj of ratings; index as i"
-				>
-						<ion-label>
-							<p ion-text color="primary">{{ obj.description }}</p>
-						</ion-label>
-						<ion-badge color="white" slot="end">
-						 <star-rating value="{{ obj.value }}" totalstars="5" checkedcolor="#3880ff" uncheckedcolor="grey" size="24px" readonly="true" (rate)="onRate($event)"></star-rating>
-						 
-						</ion-badge>
-
-				</ion-item>
-			</ion-list>
-          
-          </ion-row>
-
-       
-        </ion-grid>
-
+    <ion-row>
+      <h4 ion-text color="dark" style="text-align: left;">Ratings</h4>
+      <ion-list>
+        <ion-item ion-item *ngFor="let obj of ratings; index as i">
+          <ion-label>
+            <p ion-text color="primary">{{ obj.description }}</p>
+          </ion-label>
+          <ion-badge color="white" slot="end">
+            <star-rating
+              value="{{ obj.value }}"
+              totalstars="5"
+              checkedcolor="#3880ff"
+              uncheckedcolor="grey"
+              size="24px"
+              readonly="true"
+              (rate)="onRate($event)"
+            ></star-rating>
+          </ion-badge>
+        </ion-item>
+      </ion-list>
+    </ion-row>
+  </ion-grid>
 </ion-content>
 
 <ion-footer no-border>
@@ -124,7 +103,7 @@
             <ion-label>Home</ion-label>
           </ion-tab-button>
 
-		<ion-tab-button
+          <ion-tab-button
             tab="import"
             size="small"
             menuClose

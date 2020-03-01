@@ -20,104 +20,96 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content >
+<ion-content>
+  <!-- fab placed to the (vertical) center and end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
+  <!-- fab placed to the (vertical) center and end -->
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="refresh"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
-	
+  <ion-grid no-border>
+    <ion-row>
+      <ion-col style="border-style: none;background-color: #3880ff" size="2">
+        <h6 ion-text style="color: white; text-align: center;">{{ presentation_data.name }}</h6>
+      </ion-col>
+      <ion-col style="border-style: none;background-color: #3880ff" size="8">
+        <h3 ion-text style="color: white; text-align: center;">{{ presentation_data.title }}</h3>
+        <p ion-text style="color: white; text-align: center;">{{ presentation_data.author }}</p>
+      </ion-col>
+      <ion-col style="border-style: none;background-color: #3880ff" size="2">
+        <p ion-text style="color: white; text-align: center;">Edited: 20/01/2019</p>
+      </ion-col>
+    </ion-row>
 
-	<!-- fab placed to the (vertical) center and end -->
-			<ion-fab vertical="bottom" horizontal="end" slot="fixed">
-				<ion-fab-button>
-				<ion-icon name="add"></ion-icon>
-				</ion-fab-button>
-			</ion-fab>
+    <br /><br />
+    <ion-row class="ion-justify-content-center">
+      <div *ngFor="let obj of analytics; index as i">
+        <ion-chip disabled outline="true" color="primary">
+          <p ion-text style="color: #3880ff; text-align: center;">{{ obj.description }}&emsp;</p>
+          <ion-badge color="outline">{{ obj.value }}</ion-badge>
+        </ion-chip>
+      </div>
+    </ion-row>
 
-	<!-- fab placed to the (vertical) center and end -->
-			<ion-fab vertical="top" horizontal="end" slot="fixed">
-				<ion-fab-button>
-				<ion-icon name="refresh"></ion-icon>
-				</ion-fab-button>
-			</ion-fab>
+    <ion-row class="ion-justify-content-center">
+      <ion-item-divider> </ion-item-divider>
+    </ion-row>
+    <br /><br />
 
-        <ion-grid  no-border>
+    <ion-row class="ion-justify-content-center">
+      <br />
+      <div *ngFor="let obj of ratings; index as i">
+        <ion-chip disabled outline="true" color="primary">
+          <p ion-text color="primary">{{ obj.description }}&emsp;</p>
+          <star-rating
+            value="{{ obj.value }}"
+            totalstars="5"
+            checkedcolor="#3880ff"
+            uncheckedcolor="grey"
+            size="24px"
+            readonly="true"
+            (rate)="onRate($event)"
+          ></star-rating>
+        </ion-chip>
+      </div>
+    </ion-row>
 
-		<ion-row >
-			<ion-col style="border-style: none;background-color: #3880ff" size="2">
-					<h6 ion-text style="color: white; text-align: center;">{{presentation_data.name}}</h6>	
-			</ion-col>
-			<ion-col style="border-style: none;background-color: #3880ff" size="8">
-				<h3 ion-text style="color: white; text-align: center;">{{presentation_data.title}}</h3>
-					<p ion-text style="color: white; text-align: center;">{{presentation_data.author}}</p>
-			</ion-col>
-			<ion-col style="border-style: none;background-color: #3880ff" size="2">
-			
-					<p ion-text style="color: white; text-align: center;">Edited: 20/01/2019</p>	
-			</ion-col>
-		</ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-item-divider> </ion-item-divider>
+    </ion-row>
 
-		 <br><br>  
- 		 <ion-row class="ion-justify-content-center" >
-
-					<div *ngFor="let obj of analytics; index as i">
-					 
-	 					<ion-chip disabled outline="true" color="primary">
-							<p ion-text style="color: #3880ff; text-align: center;"> {{ obj.description }}&emsp;</p>
-					 		<ion-badge color="outline">{{ obj.value }}</ion-badge>
-						</ion-chip>
-				
-					</div>
-				 
-		  </ion-row>
-		
-		<ion-row class="ion-justify-content-center" >
-		 
-			<ion-item-divider>				
-			</ion-item-divider>
- 		</ion-row>
-		 <br><br> 
-	
- 		<ion-row class="ion-justify-content-center" >
-		 	<br >
-				<div *ngFor="let obj of ratings; index as i">
-					<ion-chip disabled outline="true" color="primary">
-						 <p ion-text color="primary">{{ obj.description }}&emsp;</p>
-						<star-rating value="{{ obj.value }}" totalstars="5" checkedcolor="#3880ff" uncheckedcolor="grey" size="24px" readonly="true" (rate)="onRate($event)"></star-rating>	
-					
-					</ion-chip>
-				</div>
-		  </ion-row>
-
-		 <ion-row class="ion-justify-content-center" >
-			<ion-item-divider>				
-			</ion-item-divider>
-		
- 		 </ion-row>
-		 
-	 	<ion-row class="ion-justify-content-center" >
- 				<ion-col size="12" sizeLg="6" *ngFor="let obj of ratings; index as i">
-				 			<ion-item detail>
-								<ion-card  button="true">
-									<ion-card-header>
-										<ion-card-subtitle>
-											 <ion-icon  size="large" name="information-circle-outline"></ion-icon>
-										</ion-card-subtitle>
-										<ion-card-title>
-											<ion-label color="primary"><h2 ion-text style="color: #3880ff; text-align: left;">Slide 1 - Issue Here</h2></ion-label>
-										</ion-card-title>
-									</ion-card-header>
-									<ion-card-content>
-										<ion-label color="black">Too much text on this slide. Try and reduce the amount of bullet points.</ion-label>
-									</ion-card-content>
-								</ion-card>
-							</ion-item>
-				 
- 			  	</ion-col>
- 		</ion-row>
-
-
-       
-        </ion-grid>
- 
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" sizeLg="6" *ngFor="let obj of ratings; index as i">
+        <ion-item detail>
+          <ion-card button="true">
+            <ion-card-header>
+              <ion-card-subtitle>
+                <ion-icon size="large" name="information-circle-outline"></ion-icon>
+              </ion-card-subtitle>
+              <ion-card-title>
+                <ion-label color="primary"
+                  ><h2 ion-text style="color: #3880ff; text-align: left;">Slide 1 - Issue Here</h2></ion-label
+                >
+              </ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-label color="black"
+                >Too much text on this slide. Try and reduce the amount of bullet points.</ion-label
+              >
+            </ion-card-content>
+          </ion-card>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
 
 <ion-footer no-border>
@@ -136,7 +128,7 @@
             <ion-label>Home</ion-label>
           </ion-tab-button>
 
-		<ion-tab-button
+          <ion-tab-button
             tab="import"
             size="small"
             menuClose

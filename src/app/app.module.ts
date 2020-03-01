@@ -24,7 +24,6 @@ import { AnalyticsModule } from './analytics/analytics.module';
 import { SplashModule } from './splash/splash.module';
 import { ImportModule } from './import/import.module';
 
-
 @NgModule({
   imports: [
     BrowserModule,
@@ -33,18 +32,18 @@ import { ImportModule } from './import/import.module';
     HttpClientModule,
     TranslateModule.forRoot(),
     IonicModule.forRoot(),
-	
-	AppXModule,
 
-	CoreModule,
+    AppXModule,
+
+    CoreModule,
     SharedModule,
     ShellModule,
-	
-	HomeModule,
-	AnalyticsModule,
-	SplashModule,
-	ImportModule,
-	
+
+    HomeModule,
+    AnalyticsModule,
+    SplashModule,
+    ImportModule,
+
     AppRoutingModule // must be imported as the last module as it contains the fallback route
   ],
 

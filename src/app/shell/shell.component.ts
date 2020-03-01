@@ -30,9 +30,9 @@ export class ShellComponent {
   }
 
   getPresentations() {
-	this.appXService.userDataGet('presentations').subscribe(data => {
-		this.presentations=data;
-	 });
+    this.appXService.userDataGet('presentations').subscribe(data => {
+      this.presentations = data;
+    });
   }
 
   get isWeb(): boolean {

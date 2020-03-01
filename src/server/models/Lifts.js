@@ -2,113 +2,108 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let Lifts = new Schema(
-	{
-		user: {
-			type: String
-		},
+  {
+    user: {
+      type: String
+    },
 
-		email: {
-			type: String
-		},
+    email: {
+      type: String
+    },
 
-		// current working presentation
-		presentation: {
-			type: String
-		},
+    // current working presentation
+    presentation: {
+      type: String
+    },
 
-		//// user presentations
-		presentations: [
-			{
-				filename: {
-					type: String
-				},
+    //// user presentations
+    presentations: [
+      {
+        filename: {
+          type: String
+        },
 
-				name: {
-					type: String
-				},
+        name: {
+          type: String
+        },
 
-				title: {
-					type: String
-				},
+        title: {
+          type: String
+        },
 
-				author: {
-					type: String
-				},
+        author: {
+          type: String
+        },
 
-				slides: [
-					{
-						index: String,
+        slides: [
+          {
+            index: String,
 
-						title: String,
+            title: String,
 
-						id: String,
+            id: String,
 
-						shapes: [
+            shapes: [
+              {
+                name: {
+                  type: String
+                },
 
-							{
+                type: {
+                  type: String
+                },
 
-								name: {
-									type: String
-								},
+                text: []
+              }
+            ]
+          }
+        ],
 
-								type: {
-									type: String
-								},
+        analytics: [
+          {
+            code: {
+              type: String
+            },
 
-								text: []
+            type: {
+              type: String
+            },
 
-							}
+            description: {
+              type: String
+            },
 
-						]
+            value: {
+              type: String
+            }
+          }
+        ],
 
-					}
-				],
+        ratings: [
+          {
+            code: {
+              type: String
+            },
 
-				analytics: [
-					{
-						code: {
-							type: String
-						},
+            type: {
+              type: String
+            },
 
-						type: {
-							type: String
-						},
+            description: {
+              type: String
+            },
 
-						description: {
-							type: String
-						},
-
-						value: {
-							type: String
-						}
-					}
-				],
-
-				ratings: [
-					{
-						code: {
-							type: String
-						},
-
-						type: {
-							type: String
-						},
-
-						description: {
-							type: String
-						},
-
-						value: {
-							type: String
-						}
-					}
-				]
-			}
-		]
-	},
-	{
-		collection: 'lifts'
-	}
+            value: {
+              type: String
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    collection: 'lifts'
+  }
 );
 
 module.exports = mongoose.model('Lifts', Lifts);

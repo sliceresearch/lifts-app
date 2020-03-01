@@ -3,7 +3,7 @@ let express = require('express'),
   mongoose = require('mongoose'),
   cors = require('cors'),
   bodyParser = require('body-parser'),
-  dbConfig = require('./database/db')
+  dbConfig = require('./database/db');
 
 /*
         ##TODO
@@ -32,8 +32,8 @@ var createError = require('createerror');
 mongoose.Promise = global.Promise;
 mongoose
   .connect(dbConfig.db, {
-    useNewUrlParser: true,
-  //  useUnifiedTopology: true
+    useNewUrlParser: true
+    //  useUnifiedTopology: true
   })
   .then(
     () => {
@@ -85,7 +85,6 @@ console.log('pyserver:' + pythonServerPath);
 var PythonServer = require(pythonServerPath);
 global.pyServer = new PythonServer();
 global.pyServer.init();
-
 
 //rules
 

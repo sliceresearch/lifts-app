@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild  } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 
 import { IonSlides } from '@ionic/angular';
@@ -6,115 +6,110 @@ import { IonSlides } from '@ionic/angular';
 import { AppXService } from '@app/core';
 
 @Component({
-	selector: 'app-analytics',
-	templateUrl: './analytics.component.html',
-	styleUrls: ['./analytics.component.scss']
+  selector: 'app-analytics',
+  templateUrl: './analytics.component.html',
+  styleUrls: ['./analytics.component.scss']
 })
 export class AnalyticsComponent implements OnInit {
-	@ViewChild(IonSlides, {static:false})
-	slides: IonSlides;
+  @ViewChild(IonSlides, { static: false })
+  slides: IonSlides;
 
-	quote: string | undefined;
-	isLoading = false;
+  quote: string | undefined;
+  isLoading = false;
 
-	presentation: any;
-	presentation_data = {name:"",title:"",author:""};
-	presentations: any;
-	presentation_slides: any = [];
-	presentation_analytics: any = [];	
+  presentation: any;
+  presentation_data = { name: '', title: '', author: '' };
+  presentations: any;
+  presentation_slides: any = [];
+  presentation_analytics: any = [];
 
-	ratings: any = [];
-	analytics: any = [];
-	
-	slideOpts = {
-		// direction: 'vertical'
-		// longSwipesMs:50,
-		// resistance:false,
-		//  height:500,
-		speed: 500,
-		resistanceRatio: 0.2
-	  };
+  ratings: any = [];
+  analytics: any = [];
 
-	constructor(private appXService: AppXService) { }
+  slideOpts = {
+    // direction: 'vertical'
+    // longSwipesMs:50,
+    // resistance:false,
+    //  height:500,
+    speed: 500,
+    resistanceRatio: 0.2
+  };
 
-	ngOnInit() {
-		this.isLoading = true;
-		this.subscribePresentationAnalytics();
-	}
+  constructor(private appXService: AppXService) {}
 
-	navigateTo(link) {
-		this.appXService.navigate(link);
-	}
+  ngOnInit() {
+    this.isLoading = true;
+    this.subscribePresentationAnalytics();
+  }
 
-	isSelectedTab(type) {
-		return this.appXService.islocation(type);
-	}
+  navigateTo(link) {
+    this.appXService.navigate(link);
+  }
 
-	subscribePresentationAnalytics() {
-		this.appXService.userDataGet('presentation').subscribe(data => {
-			this.presentation = data;
-			this.updateAnalytics();
-		});
+  isSelectedTab(type) {
+    return this.appXService.islocation(type);
+  }
 
-		this.appXService.userDataGet('presentations').subscribe(data => {
-			this.presentations = data;
-			this.updateAnalytics();
-		});
-	}
+  subscribePresentationAnalytics() {
+    this.appXService.userDataGet('presentation').subscribe(data => {
+      this.presentation = data;
+      this.updateAnalytics();
+    });
 
-	updateAnalytics() {
-		if (this.presentation && this.presentations) {
-			let pindex = this.appXService.dataPresentationIndexGet(this.presentation)
-			let presentation = this.presentations[pindex];
+    this.appXService.userDataGet('presentations').subscribe(data => {
+      this.presentations = data;
+      this.updateAnalytics();
+    });
+  }
 
-			if (presentation) {
-				this.presentation_slides = presentation.slides;
-			//	this.presentation_analytics = presentation.slides;
-				this.presentation_data = { name: presentation.name, author: presentation.author, title: presentation.title }
-				
-				
-			//	console.log(presentation,this.presentation_data,this.presentation_slides);
+  updateAnalytics() {
+    if (this.presentation && this.presentations) {
+      let pindex = this.appXService.dataPresentationIndexGet(this.presentation);
+      let presentation = this.presentations[pindex];
 
-			}
+      if (presentation) {
+        this.presentation_slides = presentation.slides;
+        //	this.presentation_analytics = presentation.slides;
+        this.presentation_data = { name: presentation.name, author: presentation.author, title: presentation.title };
 
-		}
-	}
+        //	console.log(presentation,this.presentation_data,this.presentation_slides);
+      }
+    }
+  }
 
+  analysePresentation() {
+    this.appXService.navigate('/splash');
+    this.appXService.dataUserProcess(true);
+  }
 
-	analysePresentation() {
-		this.appXService.navigate('/splash');
-		this.appXService.dataUserProcess(true);
-	}
+  ////////////////////////////////////////////
 
-	////////////////////////////////////////////
+  ////////////////////////////////////// slides
 
-	////////////////////////////////////// slides
+  slideToThis(i: any) {
+    this.slides.slideTo(i);
+  }
 
-	slideToThis(i: any) {
-		this.slides.slideTo(i);
-	}
+  slideChanged() {
+    this.slides.getActiveIndex().then(i => {
+      //	this.app3Service.objectIndexSet(i);
+    });
+  }
 
-	slideChanged() {
-		this.slides.getActiveIndex().then(i => {
-		//	this.app3Service.objectIndexSet(i);
-		});
-	}
+  slideNextStart() {
+    //  console.log("start")
+    //this.app3Service.objectIndexFade();
+  }
 
-	slideNextStart() {
-		//  console.log("start")
-		//this.app3Service.objectIndexFade();
-	}
+  slideNextEnd() {
+    //  console.log("end")
+  }
 
-	slideNextEnd() {
-		//  console.log("end")
-	}
+  slidePrevStart() {
+    // console.log("start")
+  }
 
-	slidePrevStart() {
-		// console.log("start")
-	}
-
-	slidePrevEnd() {
-		//  console.log("end")
-	}
-
+  slidePrevEnd() {
+    //  console.log("end")
+  }
 }
