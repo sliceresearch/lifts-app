@@ -1,6 +1,3 @@
-
-
 {
-
-	"bullet_points_per_slide":{ "group":"Cognitive Load","args":{"max_points_per_slide":3} }
+  "bullet_points_per_slide": { "group": "Cognitive Load", "value": 3, "condition": ">" }
 }

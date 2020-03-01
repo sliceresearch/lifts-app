@@ -113,7 +113,7 @@ var RulesServer = function() {
     //	this.rules =
   };
 
-  this.check_rule = async function(rule_name, rule_arg, rule_test, rule_condition) {
+  this.check_rule = async function(rule_name, rule_test) {
     //check rule exists
     let rule_data = this.rules[rule_name];
 
@@ -121,20 +121,37 @@ var RulesServer = function() {
       console.log('rules_server: (check-rule) - rule not found:' + rule_name);
       return -1;
     }
-    //check rule argument exists
-    let rule_arg_data = this.rules[rule_arg];
+    //check rule value exists
+    let rule_value = rule_data['value'];
 
-    if (!rule_arg_data) {
-      console.log('rules_server: (check-rule) - rule argument not found:' + rule_name + ' ' + rule_arg);
+    if (!rule_value) {
+      console.log('rules_server: (check-rule) - rule value not found:' + rule_name);
+      return -1;
+    }
+    //check rule condition exists
+    let rule_condition = rule_data['condition'];
+
+    if (!rule_condition) {
+      console.log('rules_server: (check-rule) - rule condition not found:' + rule_name);
       return -1;
     }
 
-    this.check_rule_condition(rule_arg, rule_test, rule_condition);
+    console.log('rules_server: (check-rule)' + rule_name + ' ' + rule_value + ' ' + rule_condition + ' ' + rule_test);
 
-    console.log('rules_server: (check-rule)' + rule_name + ' ' + rule_arg_data);
+    return this.check_rule_condition(rule_condition, rule_value, rule_test);
   };
 
-  this.check_rule_condition = async function(rule_arg, rule_test, rule_condition) {};
+  this.check_rule_condition = async function(rule_condition, rule_value, rule_test) {
+    switch (rule_condition) {
+      case '>':
+        if (rule_value > rule_test) return 1;
+        break;
+      default:
+        break;
+    }
+
+    return 0;
+  };
 
   //////////////////////////////////////////////////////////////generate
 

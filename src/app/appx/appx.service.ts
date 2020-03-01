@@ -31,7 +31,7 @@ export class AppXService {
   private running: any;
   private inited: any;
 
-  baseUri: string = 'http://localhost:8080/api';
+  baseUri: string = 'http://lifts.apps.dj/api'; //'http://localhost:8080/api';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   userRoute: any = {};
