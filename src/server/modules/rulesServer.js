@@ -110,7 +110,8 @@ var RulesServer = function() {
   //////////////////////////////////////////////////////////////rule
 
   this.load_rules = async function() {
-    //	this.rules =
+    let data = '../definitions/lift_rules.json'; //path.join(__dirname, '../../../uploads/' + filename);
+    this.rules = data ? JSON.parse(data) : {};
   };
 
   this.check_rule = async function(rule_name, rule_test) {

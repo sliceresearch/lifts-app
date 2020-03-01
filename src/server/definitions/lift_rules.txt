@@ -26,4 +26,3 @@ o	Might be the first rule to be turned off given slide decks use point form whic
 Readability
 •	Slide exceeds the readability level desired for a Level 1 course
 o	This could be determined via sending text ( slides/notes ) from bullet points to a Cognitive AI based service that provides textual interpretation information that could be used in rules.
-*/
