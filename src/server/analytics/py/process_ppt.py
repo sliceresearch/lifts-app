@@ -149,16 +149,21 @@ def analyse_shape(shape):
            shape_paragraphs.append(paragraph.text)
         shape_text=shape.text  ## all text == all paragraph text?
 
-    shape_type = analyse_shape_type(shape.shape_type);
+    shape_type = analyse_shape_type(shape.name);
     shapes_out = {'name':shape.name,'type':shape_type,'paragraphs':shape_paragraphs}
 
     return shapes_out
 
-def analyse_shape_type(shape_type):
+def analyse_shape_type(shape_name):
 
-    if (shape_type==14):
+   # if (shape_type==14):
+   #      return 'title'
+  #  elif (shape_type==17):
+  #       return 'content'
+    
+    if (shape_name.find('Title') != -1): 
          return 'title'
-    elif (shape_type==17):
+    elif (shape_name.find('Content') != -1):
          return 'content'
 
     return 'none'

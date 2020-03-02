@@ -142,7 +142,12 @@ var RulesServer = function() {
 
     console.log('rules_server: (check-rule)' + rule_name + ' ' + rule_value + ' ' + rule_condition + ' ' + rule_test);
 
-    return this.check_rule_condition(rule_condition, rule_value, rule_test);
+    if (this.check_rule_condition(rule_condition, rule_value, rule_test)) {
+      let rule_out = { description: rule_data.description, group: rule_data.group };
+      return rule_out;
+    }
+
+    return 0;
   };
 
   this.check_rule_condition = async function(rule_condition, rule_value, rule_test) {
@@ -208,7 +213,19 @@ var RulesServer = function() {
   this.process_slide_analytics = function(slide) {
     let analytics = [];
 
-    console.log('rules_server: (slide-rule):' + slide);
+    let shapes = slide.shapes;
+    let rule_check;
+
+    for (var i = 0; i < shapes.length; i++) {
+      var shape = shapes[i];
+      let text = shape.text;
+
+      // bullet_points_per_slide
+      rule_check = this.check_rule('bullet_points_per_slide', text.length);
+      if (rule_check) analytics.push(rule_check);
+    }
+
+    console.log('rules_server: (slide-analytics):', analytics.length);
 
     return analytics;
   };
