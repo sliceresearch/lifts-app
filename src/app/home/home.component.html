@@ -87,7 +87,7 @@
     </ion-row>
 
     <ion-row class="ion-justify-content-center">
-      <ion-col size="12" sizeLg="6" *ngFor="let obj of ratings; index as i">
+      <ion-col size="12" sizeLg="6" *ngFor="let obj of analytics_slides; index as i">
         <ion-item detail>
           <ion-card button="true">
             <ion-card-header>
@@ -96,14 +96,14 @@
               </ion-card-subtitle>
               <ion-card-title>
                 <ion-label color="primary"
-                  ><h2 ion-text style="color: #3880ff; text-align: left;">Slide 1 - Issue Here</h2></ion-label
+                  ><h2 ion-text style="color: #3880ff; text-align: left;">
+                    Slide {{ obj.slide }} - {{ obj.description }}
+                  </h2></ion-label
                 >
               </ion-card-title>
             </ion-card-header>
             <ion-card-content>
-              <ion-label color="black"
-                >Too much text on this slide. Try and reduce the amount of bullet points.</ion-label
-              >
+              <ion-label color="black">{{ obj.description }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-item>

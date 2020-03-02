@@ -184,10 +184,17 @@ var RulesServer = function() {
   this.process_presentation_slide = function(i, slide) {
     console.log('slides (process):', i, slide);
 
-    let shape_data = this.process_presentation_slide_shapes(i, slide.shapes);
-    let slide_out = { index: i, title: slide.name, id: slide.id, shapes: shape_data };
+    let shape_data_title = this.process_presentation_slide_shapes(i, 'title', slide.shapes);
+    let shape_data_text_content = this.process_presentation_slide_shapes(i, 'content', slide.shapes);
+    let slide_out = {
+      index: i,
+      title: slide.name,
+      id: slide.id,
+      title: shape_data_title,
+      content: shape_data_text_content
+    };
 
-    let slide_analytics = this.process_slide_analytics(slide_out);
+    let slide_analytics = this.process_slide_analytics_content(shape_data_text_content);
 
     slide_out.analytics = slide_analytics;
 
@@ -196,13 +203,15 @@ var RulesServer = function() {
     return slide_out;
   };
 
-  this.process_presentation_slide_shapes = function(index, shapes) {
+  this.process_presentation_slide_shapes = function(index, type, shapes) {
     let shapes_out = [];
     for (var i = 0; i < shapes.length; i++) {
       var shape = shapes[i];
-      let shape_out = { name: shape.name, type: shape.type, text: shape.paragraphs };
-      console.log('slides (process-shape):', index, i, shape_out);
-      shapes_out.push(shape_out);
+      if (shape.type == type) {
+        let shape_out = { name: shape.name, text: shape.paragraphs };
+        console.log('slides (process-shape):', type, index, i, shape_out);
+        shapes_out.push(shape_out);
+      }
     }
 
     return shapes_out;
@@ -210,23 +219,19 @@ var RulesServer = function() {
 
   //////////////////////////////////////////////////////////////analyse slides
 
-  this.process_slide_analytics = function(slide) {
+  this.process_slide_analytics_content = function(shapes) {
     let analytics = [];
 
-    let shapes = slide.shapes;
     let rule_check;
 
     for (var i = 0; i < shapes.length; i++) {
       var shape = shapes[i];
       let text = shape.text;
-      let type = shape.type;
 
-      if (type == 'content') {
-        // bullet_points_per_slide
-        rule_check = this.check_rule('bullet_points_per_slide', text.length);
-        console.log('rules_server: (slide-analytics):', rule_check, text.length);
-        if (rule_check) analytics.push(rule_check);
-      }
+      // bullet_points_per_slide
+      rule_check = this.check_rule('bullet_points_per_slide', text.length);
+      console.log('rules_server: (slide-analytics):', rule_check, text.length);
+      if (rule_check) analytics.push(rule_check);
     }
 
     console.log('rules_server: (slide-analytics):', analytics.length);

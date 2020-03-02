@@ -35,6 +35,16 @@
       </ion-col>
     </ion-row>
 
+    <br /><br />
+
+    <ion-row class="ion-justify-content-center">
+      <div *ngFor="let obj of presentation_slides; index as i">
+        <ion-chip disabled outline="true" color="primary">
+          <p ion-text (click)="slideToThis(i)" style="color: #3880ff; text-align: center;">{{ i + 1 }}</p>
+        </ion-chip>
+      </div>
+    </ion-row>
+
     <ion-row class="ion-justify-content-center">
       <ion-item-divider> </ion-item-divider>
     </ion-row>
@@ -48,10 +58,19 @@
         (ionSlideNextStart)="slideNextStart()"
         (ionSlideNextEnd)="slideNextEnd()"
       >
-        <ion-slide color="white" *ngFor="let slide of presentation_slides">
-          <h3 ion-text color="white">{{ slide.title }}</h3>
-
-          <p ion-text>{{ slide.description }}</p>
+        <ion-slide *ngFor="let obj of presentation_slides">
+          <ion-grid color="white">
+            <ion-row class="ion-justify-content-center">
+              <div *ngFor="let slide of slide_title">
+                <h4 ion-text color="primary">{{ slide.text }}</h4>
+              </div>
+            </ion-row>
+            <ion-row class="ion-justify-content-center">
+              <div *ngFor="let slide of slide_content">
+                <p ion-text>{{ slide.text }}</p>
+              </div>
+            </ion-row>
+          </ion-grid>
         </ion-slide>
       </ion-slides>
     </ion-row>
@@ -60,23 +79,8 @@
       <ion-item-divider> </ion-item-divider>
     </ion-row>
 
-    <br /><br />
     <ion-row class="ion-justify-content-center">
-      <div *ngFor="let obj of analytics; index as i">
-        <ion-chip disabled outline="true" color="primary">
-          <p ion-text style="color: #3880ff; text-align: center;">{{ obj.description }}&emsp;</p>
-          <ion-badge color="outline">{{ obj.value }}</ion-badge>
-        </ion-chip>
-      </div>
-    </ion-row>
-
-    <ion-row class="ion-justify-content-center">
-      <ion-item-divider> </ion-item-divider>
-    </ion-row>
-    <br /><br />
-
-    <ion-row class="ion-justify-content-center">
-      <ion-col size="12" sizeLg="6" *ngFor="let obj of ratings; index as i">
+      <ion-col size="12" sizeLg="6" *ngFor="let obj of slide_analytics; index as i">
         <ion-item detail>
           <ion-card button="true">
             <ion-card-header>
@@ -85,14 +89,14 @@
               </ion-card-subtitle>
               <ion-card-title>
                 <ion-label color="primary"
-                  ><h2 ion-text style="color: #3880ff; text-align: left;">Slide 1 - Issue Here</h2></ion-label
+                  ><h2 ion-text style="color: #3880ff; text-align: left;">
+                    Slide {{ obj.slide }} - {{ obj.description }}
+                  </h2></ion-label
                 >
               </ion-card-title>
             </ion-card-header>
             <ion-card-content>
-              <ion-label color="black"
-                >Too much text on this slide. Try and reduce the amount of bullet points.</ion-label
-              >
+              <ion-label color="black">{{ obj.description }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-item>

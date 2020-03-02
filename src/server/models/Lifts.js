@@ -43,13 +43,19 @@ let Lifts = new Schema(
 
             id: String,
 
-            shapes: [
+            title: [
               {
                 name: {
                   type: String
                 },
 
-                type: {
+                text: []
+              }
+            ],
+
+            content: [
+              {
+                name: {
                   type: String
                 },
 

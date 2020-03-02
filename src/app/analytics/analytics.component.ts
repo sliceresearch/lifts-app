@@ -21,10 +21,11 @@ export class AnalyticsComponent implements OnInit {
   presentation_data = { name: '', title: '', author: '' };
   presentations: any;
   presentation_slides: any = [];
-  presentation_analytics: any = [];
 
-  ratings: any = [];
-  analytics: any = [];
+  slide_analytics: any = [];
+  slide_title: any = [];
+  slide_content: any = [];
+  slide_index: any = 0;
 
   slideOpts = {
     // direction: 'vertical'
@@ -72,9 +73,19 @@ export class AnalyticsComponent implements OnInit {
         //	this.presentation_analytics = presentation.slides;
         this.presentation_data = { name: presentation.name, author: presentation.author, title: presentation.title };
 
-        //	console.log(presentation,this.presentation_data,this.presentation_slides);
+        this.updateSlide();
+
+        console.log(presentation, this.presentation_data, this.presentation_slides);
       }
     }
+  }
+
+  updateSlide() {
+    var slide = this.presentation_slides[this.slide_index];
+
+    this.slide_title = slide.title;
+    this.slide_content = slide.content;
+    this.slide_analytics = slide.analytics;
   }
 
   analysePresentation() {
@@ -86,23 +97,36 @@ export class AnalyticsComponent implements OnInit {
 
   ////////////////////////////////////// slides
 
+  getSelectedIdx(i: any) {
+    //	if (i === this.app3Service.objectIndexGet()) {
+    //	  return true;
+    //	}
+    //	return false;
+  }
+
+  getSelectedIdxNameIcon(fn: any) {
+    //return this.iconNames[fn];
+  }
+
   slideToThis(i: any) {
     this.slides.slideTo(i);
   }
 
   slideChanged() {
     this.slides.getActiveIndex().then(i => {
-      //	this.app3Service.objectIndexSet(i);
+      console.log('slide index' + i);
+      this.slide_index = i;
+      this.updateSlide();
     });
   }
 
   slideNextStart() {
-    //  console.log("start")
+    console.log('start');
     //this.app3Service.objectIndexFade();
   }
 
   slideNextEnd() {
-    //  console.log("end")
+    console.log('end');
   }
 
   slidePrevStart() {

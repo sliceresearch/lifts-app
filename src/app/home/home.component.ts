@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   presentations: any;
   ratings: any = [];
   analytics: any = [];
+  analytics_slides: any = [];
 
   constructor(
     private appXService: AppXService ///	private appXDataService: AppXDataService, //	private ngZone: NgZone
@@ -59,15 +60,32 @@ export class HomeComponent implements OnInit {
         this.ratings = presentation.ratings;
         this.analytics = presentation.analytics;
 
-        //	this.analytics_slides = updateAnalyticsSlides(presentation.analytics_slides)
+        this.analytics_slides = this.updateAnalyticsSlides(presentation.slides);
 
         this.presentation_data = { name: presentation.name, author: presentation.author, title: presentation.title };
       }
     }
   }
 
-  updateAnalyticsSlide(slides) {
-    //iterate slides
+  updateAnalyticsSlides(slides) {
+    let analytics = [];
+
+    if (slides) {
+      for (var i = 0; i < slides.length; i++) {
+        var slide = slides[i];
+        var slide_analytics = slide.analytics;
+        for (var h = 0; h < slide_analytics.length; h++) {
+          var analytics_slide = slide_analytics[h];
+          analytics.push({
+            slide: slide.index,
+            description: analytics_slide.description,
+            group: analytics_slide.group
+          });
+        }
+      }
+    }
+
+    return analytics;
   }
 
   analysePresentation() {
