@@ -115,9 +115,9 @@ var RulesServer = function() {
 
   //////////////////////////////////////////////////////////////rule
 
-  this.load_rules = async function() {};
+  this.load_rules = function() {};
 
-  this.check_rule = async function(rule_name, rule_test) {
+  this.check_rule = function(rule_name, rule_test) {
     //check rule exists
     let rule_data = lifts_rules[rule_name];
 
@@ -150,10 +150,10 @@ var RulesServer = function() {
     return 0;
   };
 
-  this.check_rule_condition = async function(rule_condition, rule_value, rule_test) {
+  this.check_rule_condition = function(rule_condition, rule_value, rule_test) {
     switch (rule_condition) {
       case '>':
-        if (rule_value > rule_test) return 1;
+        if (rule_test > rule_value) return 1;
         break;
       default:
         break;
@@ -174,7 +174,7 @@ var RulesServer = function() {
 
     for (var i = 0; i < slide_data.length; i++) {
       var slide = slide_data[i];
-      let slide_out = this.process_presentation_slide(i, slide);
+      let slide_out = this.process_presentation_slide(i + 1, slide);
       if (slide_out != -1) slides.push(slide_out);
     }
 
@@ -219,10 +219,14 @@ var RulesServer = function() {
     for (var i = 0; i < shapes.length; i++) {
       var shape = shapes[i];
       let text = shape.text;
+      let type = shape.type;
 
-      // bullet_points_per_slide
-      rule_check = this.check_rule('bullet_points_per_slide', text.length);
-      if (rule_check) analytics.push(rule_check);
+      if (type == 'content') {
+        // bullet_points_per_slide
+        rule_check = this.check_rule('bullet_points_per_slide', text.length);
+        console.log('rules_server: (slide-analytics):', rule_check, text.length);
+        if (rule_check) analytics.push(rule_check);
+      }
     }
 
     console.log('rules_server: (slide-analytics):', analytics.length);

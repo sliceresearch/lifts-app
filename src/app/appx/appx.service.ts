@@ -87,7 +87,7 @@ export class AppXService {
   }
 
   initData() {
-    var name = 'lifts17';
+    var name = 'lifts18';
     this.dataUserInit(name);
   }
 
