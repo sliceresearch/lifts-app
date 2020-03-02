@@ -59,9 +59,15 @@ export class HomeComponent implements OnInit {
         this.ratings = presentation.ratings;
         this.analytics = presentation.analytics;
 
+        //	this.analytics_slides = updateAnalyticsSlides(presentation.analytics_slides)
+
         this.presentation_data = { name: presentation.name, author: presentation.author, title: presentation.title };
       }
     }
+  }
+
+  updateAnalyticsSlide(slides) {
+    //iterate slides
   }
 
   analysePresentation() {
@@ -79,7 +85,7 @@ export class HomeComponent implements OnInit {
 
 /*
 <ion-row class="ion-justify-content-center" >
-			<ion-item-divider>				
+			<ion-item-divider>
 			</ion-item-divider>
 			<ion-label color="primary"><br><h2 ion-text style="color: #3880ff; text-align: center;">Ratings</h2></ion-label>
  		</ion-row>
@@ -91,7 +97,7 @@ export class HomeComponent implements OnInit {
  		</ion-row>
 
 		 <ion-row class="ion-justify-content-center" >
-			<ion-item-divider>				
+			<ion-item-divider>
 			</ion-item-divider>
 			<ion-label color="primary"><br><h2 ion-text style="color: #3880ff; text-align: center;">Issues</h2></ion-label>
  		 </ion-row>
@@ -105,22 +111,22 @@ export class HomeComponent implements OnInit {
 /*
 
 
-			 
+
 				<ion-list *ngFor="let obj of ratings; index as i" >
-				
+
 							<ion-item>
-								<ion-label color="grey">Slide 1</ion-label> 
-								<ion-label color="primary">Too Much Text</ion-label> 
-								 
+								<ion-label color="grey">Slide 1</ion-label>
+								<ion-label color="primary">Too Much Text</ion-label>
+
 								<ion-label color="grey">Too much text on this slide. Try and reduce the amount of bullet points.</ion-label>
 						   </ion-item>
 				</ion-list>
-		 
- 	 	
-			
-			
+
+
+
+
 			<ion-col *ngFor="let obj of ratings; index as i" size="12">
-			
+
 							<ion-card >
 								<ion-card-header>
 									<ion-card-subtitle><ion-label color="grey">Slide 1</ion-label></ion-card-subtitle>
@@ -131,15 +137,15 @@ export class HomeComponent implements OnInit {
 									<ion-label color="grey">Too much text on this slide. Try and reduce the amount of bullet points.</ion-label>
 								</ion-card-content>
 							</ion-card>
-					
-				
+
+
 			</ion-col>
 
 
 
 
   <ion-row *ngFor="let obj of ratings; index as i">
-			 
+
 			 <ion-col  size="12">
 						<ion-card >
 							<ion-card-header>
@@ -148,12 +154,12 @@ export class HomeComponent implements OnInit {
 							</ion-card-header>
 
 							<ion-card-content>
-								<star-rating value="{{ obj.value }}" totalstars="5" checkedcolor="#3880ff" uncheckedcolor="grey" size="24px" readonly="true" (rate)="onRate($event)"></star-rating>	
-					
+								<star-rating value="{{ obj.value }}" totalstars="5" checkedcolor="#3880ff" uncheckedcolor="grey" size="24px" readonly="true" (rate)="onRate($event)"></star-rating>
+
 							</ion-card-content>
 						</ion-card>
 			</ion-col>
-				 
+
           </ion-row>
 
 

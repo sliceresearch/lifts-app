@@ -6,6 +6,8 @@ import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
+import { environment } from '@env/environment';
+
 import APP_run from './js/appx-Run';
 
 declare global {
@@ -31,7 +33,7 @@ export class AppXService {
   private running: any;
   private inited: any;
 
-  baseUri: string = 'http://lifts.apps.dj/api'; //'http://localhost:8080/api';
+  baseUri: string = 'http://localhost:8080/api'; //'http://lifts.apps.dj/api'; //'http://localhost:8080/api';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   userRoute: any = {};
@@ -50,11 +52,21 @@ export class AppXService {
     this.host = window.APP.host;
     this.objdir = window.APP.objDir;
 
+    this.env();
+
     this.routeStart = '/splash';
     this.routeLocation = '/splash';
 
     this.init();
     //	console.log('appx service: ' + this);
+  }
+
+  env() {
+    if (environment.production) {
+      this.baseUri = 'http://lifts.apps.dj/api';
+    }
+
+    console.log('appx host:', this.baseUri);
   }
 
   init() {

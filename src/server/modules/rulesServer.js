@@ -1,3 +1,9 @@
+var path = require('path');
+
+//var lifts_rules = path.join(__dirname, '../definitions/lift_rules.json');
+
+var lifts_rules = require('../definitions/lift_rules.json');
+
 var RulesServer = function() {
   var _me = this;
 
@@ -109,14 +115,11 @@ var RulesServer = function() {
 
   //////////////////////////////////////////////////////////////rule
 
-  this.load_rules = async function() {
-    let data = '../definitions/lift_rules.json'; //path.join(__dirname, '../../../uploads/' + filename);
-    this.rules = data ? JSON.parse(data) : {};
-  };
+  this.load_rules = async function() {};
 
   this.check_rule = async function(rule_name, rule_test) {
     //check rule exists
-    let rule_data = this.rules[rule_name];
+    let rule_data = lifts_rules[rule_name];
 
     if (!rule_data) {
       console.log('rules_server: (check-rule) - rule not found:' + rule_name);
@@ -154,7 +157,7 @@ var RulesServer = function() {
     return 0;
   };
 
-  //////////////////////////////////////////////////////////////generate
+  //////////////////////////////////////////////////////////////slides
 
   this.process_presentation_slides = async function(slides_data) {
     return this.process_presentation_slides_py(slides_data);
@@ -179,6 +182,10 @@ var RulesServer = function() {
     let shape_data = this.process_presentation_slide_shapes(i, slide.shapes);
     let slide_out = { index: i, title: slide.name, id: slide.id, shapes: shape_data };
 
+    let slide_analytics = this.process_slide_analytics(slide_out);
+
+    slide_out.analytics = slide_analytics;
+
     console.log('slides (process-out):', i, slide_out);
 
     return slide_out;
@@ -194,6 +201,16 @@ var RulesServer = function() {
     }
 
     return shapes_out;
+  };
+
+  //////////////////////////////////////////////////////////////analyse slides
+
+  this.process_slide_analytics = function(slide) {
+    let analytics = [];
+
+    console.log('rules_server: (slide-rule):' + slide);
+
+    return analytics;
   };
 };
 

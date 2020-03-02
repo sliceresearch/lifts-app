@@ -81,10 +81,14 @@ RUN  rm -fr /lifts/src/app
 RUN  rm -fr /lifts/dev
 RUN ls -l
 
+
+#################### run
+
+
 ##################################################################################
 WORKDIR /lifts
-RUN mongod &
-#CMD ["npm","run","serve:prod"]
+
+CMD ["npm","run","serve:pm"]
 
 
 
