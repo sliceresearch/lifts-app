@@ -1,8 +1,9 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 //import { FileSelectDirective } from 'ng2-file-upload';
+import { AppXService } from '@app/core';
 
-const URL = 'http://localhost:8080/api/upload'; //4000
+const apiUpload = '/upload'; //4000
 
 @Component({
   selector: 'file-root',
@@ -12,7 +13,13 @@ const URL = 'http://localhost:8080/api/upload'; //4000
 export class FileComponent implements OnInit {
   @Output() uploaderComplete: EventEmitter<number> = new EventEmitter();
 
-  public uploader: FileUploader = new FileUploader({ url: URL, itemAlias: 'pptx' }); //pptx   , itemAlias: 'ppt'
+  public uploader: FileUploader;
+  public URL;
+
+  constructor(private appXService: AppXService) {
+    this.URL = this.appXService.baseUri + apiUpload;
+    this.uploader = new FileUploader({ url: this.URL, itemAlias: 'pptx' }); //pptx   , itemAlias: 'ppt'
+  }
 
   ngOnInit() {
     this.uploader.onAfterAddingFile = file => {

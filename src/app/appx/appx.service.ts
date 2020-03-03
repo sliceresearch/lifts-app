@@ -65,7 +65,6 @@ export class AppXService {
     if (environment.production) {
       this.baseUri = 'http://lifts.apps.dj/api';
     }
-
     console.log('appx host:', this.baseUri);
   }
 
