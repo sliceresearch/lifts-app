@@ -81,7 +81,17 @@ RUN chmod +x /lifts/conf/*
 
 RUN  rm -fr /lifts/src/app
 RUN  rm -fr /lifts/dev
+
+
+RUN mkdir /lifts/uploads
+RUN mkdir /lifts/log
+
+RUN chmod 777 /lifts/uploads
+RUN chmod 777 /lifts/log
+
+
 RUN ls -l
+
 
 
 #################### run

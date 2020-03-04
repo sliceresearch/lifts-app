@@ -35,7 +35,7 @@ liftsRoute.route('/read/:user').get((req, res) => {
 
 /// lifts - process current presentation
 liftsRoute.route('/process/:user').put(async (req, res) => {
-  //	console.log('find (process):', req.params.user, req.body.presentation)
+  console.log('find (process):', req.params.user, req.body.presentation);
 
   var py_result = await global.pyServer.run(req.body.presentation);
 
