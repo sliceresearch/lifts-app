@@ -5,8 +5,8 @@
   "main": "electron.main.js",
   "scripts": {
     "ng": "ng",
-    "serve:pm": " mongod& && service nginx restart && pm2 start ./src/server/server.js ",
-    "serve:prod": "mongod& && service nginx restart &&  npx supervisor  ./src/server/server.js ",
+    "serve:pm": " mongod& && service nginx restart && pm2 start ./src/server/server.js",
+    "serve:prod": "mongod& && service nginx restart &&  npx supervisor  ./src/server/server.js",
     "monitor": "pm2 monitor",
     "serve": "npx supervisor  ./src/server/server.js",
     "build": "npm run env -s && ng build --prod",
