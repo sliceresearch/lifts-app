@@ -144,15 +144,31 @@ def analyse_shape(shape):
 #text
     shape_text=""
     shape_paragraphs=[]
+    shape_paragraphs_properties=[]
     if shape.has_text_frame:
         for paragraph in shape.text_frame.paragraphs:  ## extract text 
+           shape_font_properties = analyse_shape_paragraph_properties(paragraph)
            shape_paragraphs.append(paragraph.text)
+           shape_paragraphs_properties.append(shape_font_properties)
         shape_text=shape.text  ## all text == all paragraph text?
 
     shape_type = analyse_shape_type(shape.name);
-    shapes_out = {'name':shape.name,'type':shape_type,'paragraphs':shape_paragraphs}
+    shapes_out = {'name':shape.name,'type':shape_type,'paragraphs':shape_paragraphs,'paragraphs_properties':shape_paragraphs_properties}
 
     return shapes_out
+
+def analyse_shape_paragraph_properties(paragraph):
+    shape_level=paragraph.level
+    shape_font=paragraph.font
+    font_result = {
+             "name":shape_font.name,
+             "size":shape_font.size
+        }
+    result = {
+             "font":font_result,
+             "level":shape_level
+        }
+    return result
 
 def analyse_shape_type(shape_name):
 
