@@ -24,7 +24,7 @@ var PythonServer = function() {
     py_options.args[0] = path.join(__dirname, '../../../uploads/' + filename);
     console.log('pyserver: (run) ' + filename + ' ' + JSON.stringify(py_options) + ' ' + pyPath);
     const pythonPromise = promisify(PythonShell.run);
-    console.log('pyserver: (promise) ' + pythonPromise);
+    //   console.log('pyserver: (promise) ' + pythonPromise);
     const result = await pythonPromise(pyPath, py_options);
     console.log('pyserver: (result) ' + result);
     return result;

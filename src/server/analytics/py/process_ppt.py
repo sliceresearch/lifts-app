@@ -143,8 +143,8 @@ def get_slide_analytics(slides):
 def analyse_shape(shape):
 #text
     shape_text=""
+    shape_paragraphs=[]
     if shape.has_text_frame:
-        shape_paragraphs=[]
         for paragraph in shape.text_frame.paragraphs:  ## extract text 
            shape_paragraphs.append(paragraph.text)
         shape_text=shape.text  ## all text == all paragraph text?
