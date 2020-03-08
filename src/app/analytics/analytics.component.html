@@ -45,9 +45,6 @@
       </div>
     </ion-row>
 
-    <ion-row class="ion-justify-content-center">
-      <ion-item-divider> </ion-item-divider>
-    </ion-row>
     <br /><br />
 
     <ion-row class="ion-justify-content-center">
@@ -76,29 +73,17 @@
     </ion-row>
 
     <ion-row class="ion-justify-content-center">
-      <ion-item-divider> </ion-item-divider>
-    </ion-row>
+      <ion-col size="12" sizeLg="6">
+        <ion-item detail *ngFor="let obj of slide_analytics; index as i">
+          <ion-chip disabled outline="true" color="primary">
+            <ion-label color="primary"
+              ><h2 ion-text style="color: #3880ff; text-align: left;">
+                Slide {{ obj.slide }} - {{ obj.description }}
+              </h2></ion-label
+            >
+          </ion-chip>
 
-    <ion-row class="ion-justify-content-center">
-      <ion-col size="12" sizeLg="6" *ngFor="let obj of slide_analytics; index as i">
-        <ion-item detail>
-          <ion-card button="true">
-            <ion-card-header>
-              <ion-card-subtitle>
-                <ion-icon size="large" name="information-circle-outline"></ion-icon>
-              </ion-card-subtitle>
-              <ion-card-title>
-                <ion-label color="primary"
-                  ><h2 ion-text style="color: #3880ff; text-align: left;">
-                    Slide {{ obj.slide }} - {{ obj.description }}
-                  </h2></ion-label
-                >
-              </ion-card-title>
-            </ion-card-header>
-            <ion-card-content>
-              <ion-label color="black">{{ obj.description }}</ion-label>
-            </ion-card-content>
-          </ion-card>
+          <ion-label color="black">{{ obj.description }}</ion-label>
         </ion-item>
       </ion-col>
     </ion-row>
