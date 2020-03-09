@@ -86,6 +86,8 @@ export class AnalyticsComponent implements OnInit {
     this.slide_title = slide.title;
     this.slide_content = slide.content;
     this.slide_analytics = slide.analytics;
+
+    console.log('update:', this.slide_title, this.slide_content);
   }
 
   analysePresentation() {

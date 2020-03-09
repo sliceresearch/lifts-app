@@ -56,17 +56,21 @@
         (ionSlideNextEnd)="slideNextEnd()"
       >
         <ion-slide *ngFor="let obj of presentation_slides">
-          <ion-grid color="white">
-            <ion-row class="ion-justify-content-center">
-              <div *ngFor="let slide of slide_title">
-                <h4 ion-text color="primary">{{ slide.text }}</h4>
-              </div>
-            </ion-row>
-            <ion-row class="ion-justify-content-center">
-              <div *ngFor="let slide of slide_content">
-                <p ion-text>{{ slide.text }}</p>
-              </div>
-            </ion-row>
+          <ion-grid>
+            <ion-col size="12">
+              <ion-row class="ion-justify-content-center" *ngFor="let slide of slide_title">
+                <ion-label color="primary">
+                  <ion-icon size="small" name="home"></ion-icon>
+                  <h1 ion-text>{{ slide.text }}</h1>
+                </ion-label>
+              </ion-row>
+              <ion-row *ngFor="let slide of slide_content">
+                <ion-label>
+                  <ion-icon size="small" name="add-circle-outline"></ion-icon>
+                  <p ion-text>{{ slide.text }}</p>
+                </ion-label>
+              </ion-row>
+            </ion-col>
           </ion-grid>
         </ion-slide>
       </ion-slides>
@@ -74,17 +78,12 @@
 
     <ion-row class="ion-justify-content-center">
       <ion-col size="12" sizeLg="6">
-        <ion-item detail *ngFor="let obj of slide_analytics; index as i">
-          <ion-chip disabled outline="true" color="primary">
-            <ion-label color="primary"
-              ><h2 ion-text style="color: #3880ff; text-align: left;">
-                Slide {{ obj.slide }} - {{ obj.description }}
-              </h2></ion-label
-            >
-          </ion-chip>
-
-          <ion-label color="black">{{ obj.description }}</ion-label>
-        </ion-item>
+        <ion-chip outline="true" color="primary" *ngFor="let obj of slide_analytics; index as i">
+          <ion-icon size="large" name="information-circle-outline"></ion-icon>
+          <ion-label color="primary"
+            ><h2 ion-text style="color: #3880ff;">Slide {{ obj.slide }} - {{ obj.description }}</h2></ion-label
+          >
+        </ion-chip>
       </ion-col>
     </ion-row>
   </ion-grid>
