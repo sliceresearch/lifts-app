@@ -208,7 +208,8 @@ var RulesServer = function() {
     for (var i = 0; i < shapes.length; i++) {
       var shape = shapes[i];
       if (shape.type == type) {
-        let shape_out = { name: shape.name, text: shape.paragraphs };
+        let shape_text = this.process_presentation_slide_text(shape.paragraphs);
+        let shape_out = { name: shape.name, text: shape_text };
         console.log('slides (process-shape):', type, index, i, shape_out);
         shapes_out.push(shape_out);
       }
@@ -218,6 +219,12 @@ var RulesServer = function() {
   };
 
   //////////////////////////////////////////////////////////////analyse slides
+
+  this.process_presentation_slide_text = function(paragraphs) {
+    console.log('rules_server: (slide-paragraphs):');
+
+    return paragraphs;
+  };
 
   this.process_slide_analytics_content = function(shapes) {
     let analytics = [];

@@ -100,7 +100,10 @@ RUN ls -l
 ##################################################################################
 WORKDIR /lifts
 
-CMD ["npm","run","serve:pm"]
+#CMD ["npm","run","serve:pm"]
+
+
+CMD bash -C './conf/lifts-run-serve.sh';'bash'
 
 
 
