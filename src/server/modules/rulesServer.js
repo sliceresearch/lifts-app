@@ -9,7 +9,7 @@ var RulesServer = function() {
 
   //////////////////////////////////////////////////////////////process
   this.init = function() {
-    console.log('rules_server: (init)');
+    // console.log('rules_server: (init)');
 
     this.load_rules();
   };
@@ -42,7 +42,7 @@ var RulesServer = function() {
         return analytic;
       }
     }
-    console.log('rules_server: (process-ratings) - rule not found:' + rule);
+    //  console.log('rules_server: (process-ratings) - rule not found:' + rule);
     return -1;
   };
 
@@ -182,7 +182,7 @@ var RulesServer = function() {
   };
 
   this.process_presentation_slide = function(i, slide) {
-    console.log('slides (process):', i, slide);
+    // console.log('slides (process):', i, slide);
 
     let shape_data_title = this.process_presentation_slide_shapes(i, 'title', slide.shapes);
     let shape_data_text_content = this.process_presentation_slide_shapes(i, 'content', slide.shapes);
@@ -198,7 +198,7 @@ var RulesServer = function() {
 
     slide_out.analytics = slide_analytics;
 
-    console.log('slides (process-out):', i, slide_out);
+    //  console.log('slides (process-out):', i, slide_out);
 
     return slide_out;
   };
@@ -210,7 +210,7 @@ var RulesServer = function() {
       if (shape.type == type) {
         let shape_text = this.process_presentation_slide_text(shape.paragraphs);
         let shape_out = { name: shape.name, text: shape_text };
-        console.log('slides (process-shape):', type, index, i, shape_out);
+        //   console.log('slides (process-shape):', type, index, i, shape_out);
         shapes_out.push(shape_out);
       }
     }
@@ -221,7 +221,7 @@ var RulesServer = function() {
   //////////////////////////////////////////////////////////////analyse slides
 
   this.process_presentation_slide_text = function(paragraphs) {
-    console.log('rules_server: (slide-paragraphs):');
+    //   console.log('rules_server: (slide-paragraphs):');
 
     return paragraphs;
   };
@@ -237,11 +237,11 @@ var RulesServer = function() {
 
       // bullet_points_per_slide
       rule_check = this.check_rule('bullet_points_per_slide', text.length);
-      console.log('rules_server: (slide-analytics):', rule_check, text.length);
+      //    console.log('rules_server: (slide-analytics):', rule_check, text.length);
       if (rule_check) analytics.push(rule_check);
     }
 
-    console.log('rules_server: (slide-analytics):', analytics.length);
+    //  console.log('rules_server: (slide-analytics):', analytics.length);
 
     return analytics;
   };

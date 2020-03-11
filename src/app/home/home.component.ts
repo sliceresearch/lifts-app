@@ -102,6 +102,27 @@ export class HomeComponent implements OnInit {
 }
 
 /*
+
+  <!-- fab placed to the (vertical) center and end -->
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="refresh"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+
+  <!-- fab placed to the (vertical) center and end -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+  */
+
+/*
 <ion-row class="ion-justify-content-center" >
 			<ion-item-divider>
 			</ion-item-divider>

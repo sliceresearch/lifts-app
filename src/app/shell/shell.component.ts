@@ -14,6 +14,7 @@ import { AppXService } from '@app/core';
 })
 export class ShellComponent {
   presentations: any = [];
+  presentation: any;
 
   constructor(
     private router: Router,
@@ -26,13 +27,33 @@ export class ShellComponent {
   ) {}
 
   ngOnInit() {
-    this.getPresentations();
+    this.subscribePresentationAnalytics();
   }
 
-  getPresentations() {
+  subscribePresentationAnalytics() {
+    this.appXService.userDataGet('presentation').subscribe(data => {
+      this.presentation = data;
+      this.updateAnalytics();
+    });
+
     this.appXService.userDataGet('presentations').subscribe(data => {
       this.presentations = data;
+      this.updateAnalytics();
     });
+  }
+
+  updateAnalytics() {
+    if (this.presentation && this.presentations) {
+      let pindex = this.appXService.dataPresentationIndexGet(this.presentation);
+      let presentation = this.presentations[pindex];
+
+      if (presentation) {
+        //   this.ratings = presentation.ratings;
+        //   this.analytics = presentation.analytics;
+        //   this.analytics_slides = this.updateAnalyticsSlides(presentation.slides);
+        //  this.presentation_data = { name: presentation.name, author: presentation.author, title: presentation.title };
+      }
+    }
   }
 
   get isWeb(): boolean {

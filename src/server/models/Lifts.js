@@ -35,6 +35,26 @@ let Lifts = new Schema(
           type: String
         },
 
+        subject: {
+          type: String
+        },
+
+        created: {
+          type: String
+        },
+
+        modified: {
+          type: String
+        },
+
+        category: {
+          type: String
+        },
+
+        last_modified_by: {
+          type: String
+        },
+
         slides: [
           {
             index: String,

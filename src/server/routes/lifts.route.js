@@ -44,12 +44,22 @@ liftsRoute.route('/process/:user').put(async (req, res) => {
 
   var slides_result = await global.rulesServer.process_presentation_slides(py_result[0]);
 
-  var title = 'Introduction to ICT'; //temp
-  var author = 'Prof John Academic'; //temp
+  // presentation - properties
+  var pres_properties = py_result[0].properties;
+  var title = pres_properties.title;
+  var author = pres_properties.author;
+  var subject = pres_properties.subject;
+  var created = pres_properties.created;
+  var modified = pres_properties.modified;
+
+  var category = pres_properties.category;
+
+  var last_modified = pres_properties.last_modified_by;
+
   var pname = 'ICT999';
 
   //console.log('rules (process):', req.body.presentation, ratings_result, slides_result)
-  //console.log('slides (process):', slides_result,py_result[0])
+  console.log('slides (process):', slides_result, py_result[0].properties);
 
   Lifts.findOneAndUpdate(
     {
@@ -62,6 +72,11 @@ liftsRoute.route('/process/:user').put(async (req, res) => {
           name: pname,
           author: author,
           title: title,
+          subject: subject,
+          created: created,
+          modified: modified,
+          last_modified_by: last_modified,
+          category: category,
           ratings: ratings_result,
           slides: slides_result,
           analytics: data_result
