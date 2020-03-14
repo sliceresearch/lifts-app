@@ -59,33 +59,51 @@ liftsRoute.route('/process/:user').put(async (req, res) => {
   var pname = 'ICT999';
 
   //console.log('rules (process):', req.body.presentation, ratings_result, slides_result)
-  console.log('slides (process):', slides_result, py_result[0].properties);
+  //console.log('slides (process):', slides_result, py_result[0].properties);
+
+  console.log('rules (process):', req.body.presentation, slides_result.length);
 
   Lifts.findOneAndUpdate(
     {
-      user: req.params.user
+      user: req.params.user,
+      'presentations.filename': req.body.presentation
     },
+
     {
       $set: {
-        presentations: {
-          filename: req.body.presentation,
-          name: pname,
-          author: author,
-          title: title,
-          subject: subject,
-          created: created,
-          modified: modified,
-          last_modified_by: last_modified,
-          category: category,
-          ratings: ratings_result,
-          slides: slides_result,
-          analytics: data_result
-        }
+        /*presentations: {
+					filename: req.body.presentation,
+					name: pname,
+					author: author,
+					title: title,
+					subject: subject,
+					created: created,
+					modified: modified,
+					last_modified_by: last_modified,
+					category: category,
+					ratings: ratings_result,
+					slides: slides_result,
+					analytics: data_result
+				}*/
+
+        'presentations.$.filename': req.body.presentation,
+        'presentations.$.name': pname,
+        'presentations.$.author': author,
+        'presentations.$.title': title,
+        'presentations.$.subject': subject,
+        'presentations.$.created': created,
+        'presentations.$.modified': modified,
+        'presentations.$.last_modified_by': last_modified,
+        'presentations.$.category': category,
+        'presentations.$.ratings': ratings_result,
+        'presentations.$.slides': slides_result,
+        'presentations.$.analytics': data_result
       }
     },
     {
       upsert: true
     },
+
     function(err, data) {
       if (err) {
         res.send('error updating lifts:', data);
