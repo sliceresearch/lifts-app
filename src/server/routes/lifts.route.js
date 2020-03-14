@@ -44,6 +44,8 @@ liftsRoute.route('/process/:user').put(async (req, res) => {
 
   var slides_result = await global.rulesServer.process_presentation_slides(py_result[0]);
 
+  var pres_total_analytics = await global.rulesServer.process_presentation_total_analytics(slides_result);
+
   // presentation - properties
   var pres_properties = py_result[0].properties;
   var title = pres_properties.title;
@@ -56,7 +58,7 @@ liftsRoute.route('/process/:user').put(async (req, res) => {
 
   var last_modified = pres_properties.last_modified_by;
 
-  var pname = 'ICT999';
+  var pname = py_result[0].name; //'ICT999';
 
   //console.log('rules (process):', req.body.presentation, ratings_result, slides_result)
   //console.log('slides (process):', slides_result, py_result[0].properties);
@@ -71,21 +73,6 @@ liftsRoute.route('/process/:user').put(async (req, res) => {
 
     {
       $set: {
-        /*presentations: {
-					filename: req.body.presentation,
-					name: pname,
-					author: author,
-					title: title,
-					subject: subject,
-					created: created,
-					modified: modified,
-					last_modified_by: last_modified,
-					category: category,
-					ratings: ratings_result,
-					slides: slides_result,
-					analytics: data_result
-				}*/
-
         'presentations.$.filename': req.body.presentation,
         'presentations.$.name': pname,
         'presentations.$.author': author,
@@ -97,7 +84,8 @@ liftsRoute.route('/process/:user').put(async (req, res) => {
         'presentations.$.category': category,
         'presentations.$.ratings': ratings_result,
         'presentations.$.slides': slides_result,
-        'presentations.$.analytics': data_result
+        'presentations.$.analytics': data_result,
+        'presentations.$.analytics_total': pres_total_analytics
       }
     },
     {
@@ -244,3 +232,18 @@ liftsRoute.route('/create').post((req, res, next) => {
     }
   })
 });*/
+
+/*presentations: {
+					filename: req.body.presentation,
+					name: pname,
+					author: author,
+					title: title,
+					subject: subject,
+					created: created,
+					modified: modified,
+					last_modified_by: last_modified,
+					category: category,
+					ratings: ratings_result,
+					slides: slides_result,
+					analytics: data_result
+				}*/

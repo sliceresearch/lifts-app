@@ -113,6 +113,17 @@ var RulesServer = function() {
     return desc;
   };
 
+  this.process_presentation_total_analytics = async function(slides) {
+    var analytics_total = 0;
+
+    for (var i = 0; i < slides.length; i++) {
+      var slide = slides[i];
+      analytics_total = analytics_total + slide.analytics.length;
+    }
+
+    return analytics_total;
+  };
+
   //////////////////////////////////////////////////////////////rule
 
   this.load_rules = function() {};
@@ -186,6 +197,7 @@ var RulesServer = function() {
 
     let shape_data_title = this.process_presentation_slide_shapes(i, 'title', slide.shapes);
     let shape_data_text_content = this.process_presentation_slide_shapes(i, 'content', slide.shapes);
+
     let slide_out = {
       index: i,
       title: slide.name,

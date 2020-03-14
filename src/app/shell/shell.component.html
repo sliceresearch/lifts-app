@@ -31,20 +31,15 @@
           (click)="appXService.dataPresentationIndexSet(i)"
         >
           <ion-item-divider>
-            <ion-col size="3">
+            <ion-col size="11" class="ion-justify-content-center">
               <ion-label>
-                <p ion-text style="color: #3880ff; text-align: center;">{{ obj.name }}&emsp;</p>
-              </ion-label>
-            </ion-col>
-            <ion-col size="6">
-              <ion-label>
-                <p ion-text style="color: #3880ff; text-align: left;">{{ obj.title }}&emsp;</p>
+                <h6 ion-text style="color: #3880ff; text-align: left;">{{ obj.name }}&emsp; ({{ obj.title }})</h6>
               </ion-label>
             </ion-col>
 
-            <ion-col size="3">
+            <ion-col size="1" class="ion-justify-content-right">
               <ion-label>
-                <ion-badge color="danger">4</ion-badge>
+                <ion-badge color="danger">{{ obj.analytics_total }}</ion-badge>
               </ion-label>
             </ion-col>
           </ion-item-divider>

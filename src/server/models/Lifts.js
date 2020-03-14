@@ -55,6 +55,10 @@ let Lifts = new Schema(
           type: String
         },
 
+        analytics_total: {
+          type: String
+        },
+
         slides: [
           {
             index: String,

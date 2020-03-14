@@ -226,8 +226,8 @@ def analyse_presentation(pres_name:str, verbose=False) -> Dict[str, Any]:
         "presentation_warning_text_heavy": heavy_warnings,  # a list of warning strings
         "presentation_data_slides": slides,  # a list of slides and analytics
         "filename": pres_name,  # TODO: strip any Path and just return file name?
-        "name": "ICT999",
-        "description": "Introduction to ICT",
+        "name": "USC999",
+   #     "description": "Introduction to ICT",
         "properties": pres_properties
        # "slides": slides,
         }

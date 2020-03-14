@@ -45,14 +45,9 @@ export class ShellComponent {
   updateAnalytics() {
     if (this.presentation && this.presentations) {
       let pindex = this.appXService.dataPresentationIndexGet(this.presentation);
-      let presentation = this.presentations[pindex];
 
-      if (presentation) {
-        //   this.ratings = presentation.ratings;
-        //   this.analytics = presentation.analytics;
-        //   this.analytics_slides = this.updateAnalyticsSlides(presentation.slides);
-        //  this.presentation_data = { name: presentation.name, author: presentation.author, title: presentation.title };
-      }
+      var active_presentation = this.presentations[pindex];
+      //this.presentations.slice();
     }
   }
 

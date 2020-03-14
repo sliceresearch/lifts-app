@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
       let presentation = this.presentations[pindex];
 
       if (presentation) {
-        console.log(presentation);
+        //   console.log(presentation);
         this.ratings = presentation.ratings;
         this.analytics = presentation.analytics;
 
