@@ -21,53 +21,15 @@
 </ion-header>
 
 <ion-content>
-  <div ion-fixed class="fixed-content">
-    <div class="row row-center">
-      <div class="col col-center">
-        <ion-grid>
-          <ion-row class="ion-justify-content-center">
-            <ion-col col-12>
-              <p style="text-align:center"></p>
-            </ion-col>
-          </ion-row>
+  <ion-grid no-border>
+    <ion-row>
+      <ion-col style="border-style: none;background-color: #3880ff" size="12">
+        <h5 ion-text style="color: white; text-align: center;">Import a Presentation</h5>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-          <ion-row class="ion-justify-content-center">
-            <ion-col col-12>
-              <p style="text-align:center">
-                <img class="logo" src="assets/img/logo.jpg" style="text-align: center;" alt="logo" />
-              </p>
-            </ion-col>
-          </ion-row>
-
-          <ion-row class="ion-justify-content-center">
-            <ion-col col-2></ion-col>
-            <ion-col col-8>
-              <h1 ion-text color="dark" style="text-align: center;">LIFTS</h1>
-            </ion-col>
-            <ion-col col-2></ion-col>
-          </ion-row>
-
-          <ion-row class="ion-justify-content-center">
-            <ion-col col-2></ion-col>
-            <ion-col col-8>
-              <h6 ion-text color="dark" style="text-align: center;">ICT221</h6>
-            </ion-col>
-            <ion-col col-2></ion-col>
-          </ion-row>
-
-          <ion-row class="ion-justify-content-center">
-            <ion-col col-2></ion-col>
-            <ion-col col-8>
-              <div style="text-align: center; ">
-                <file-root (uploaderComplete)="importPresentation($event)"></file-root>
-              </div>
-            </ion-col>
-            <ion-col col-2></ion-col>
-          </ion-row>
-        </ion-grid>
-      </div>
-    </div>
-  </div>
+  <file-root (uploaderComplete)="importPresentation($event)"></file-root>
 </ion-content>
 
 <ion-footer no-border>

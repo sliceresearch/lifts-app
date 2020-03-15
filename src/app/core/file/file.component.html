@@ -1,11 +1,34 @@
-<div class="container">
-  <input type="file" name="pptx" ng2FileSelect [uploader]="uploader" />
-  <button
-    type="button"
-    class="btn btn-success btn-s"
-    (click)="uploader.uploadAll()"
-    [disabled]="!uploader.getNotUploadedItems().length"
-  >
-    Upload an Image
-  </button>
+<div class="centered">
+  <ion-grid>
+    <br /><br />
+    <br /><br />
+
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12">
+        <ion-input
+          style="background-color: #3880ff;color: white;"
+          mode="ios"
+          type="file"
+          name="pptx"
+          ng2FileSelect
+          [uploader]="uploader"
+        >
+        </ion-input>
+      </ion-col>
+    </ion-row>
+
+    <br /><br />
+
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="6">
+        <ion-button
+          expand="block"
+          type="submit"
+          (click)="uploader.uploadAll()"
+          [disabled]="!uploader.getNotUploadedItems().length"
+          >Upload</ion-button
+        >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </div>
