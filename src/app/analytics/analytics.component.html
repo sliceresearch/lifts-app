@@ -38,11 +38,15 @@
     <br /><br />
 
     <ion-row class="ion-justify-content-center">
-      <div *ngFor="let obj of presentation_slides; index as i">
-        <ion-chip disabled outline="true" color="primary">
-          <p ion-text (click)="slideToThis(i)" style="color: #3880ff; text-align: center;">{{ i + 1 }}</p>
-        </ion-chip>
-      </div>
+      <ion-chip
+        (click)="slideToThis(i)"
+        disabled
+        [outline]="slideOutline(i)"
+        color="primary"
+        *ngFor="let obj of presentation_slides; index as i"
+      >
+        <p ion-text style="color: #3880ff; text-align: center;">{{ i + 1 }}</p>
+      </ion-chip>
     </ion-row>
 
     <br /><br />

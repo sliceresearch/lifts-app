@@ -110,7 +110,13 @@ export class AnalyticsComponent implements OnInit {
     //return this.iconNames[fn];
   }
 
+  slideOutline(i: any) {
+    if (this.slide_index == i) return 'true';
+    return 'false';
+  }
+
   slideToThis(i: any) {
+    console.log('slideToThis' + i);
     this.slides.slideTo(i);
   }
 
