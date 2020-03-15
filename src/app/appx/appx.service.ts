@@ -86,7 +86,7 @@ export class AppXService {
   }
 
   initData() {
-    var name = 'lifts28';
+    var name = 'lifts29';
     this.dataUserInit(name);
   }
 
@@ -225,7 +225,11 @@ export class AppXService {
   }
 
   dataPresentationIndexSet(i) {
-    console.log('pres idx:', i);
+    //console.log('pres idx:', i);
+    if (this.data.presentations) {
+      var pres = this.data.presentations[i];
+      this.dataUserPresentationCurrentSet(pres.filename);
+    }
   }
 
   dataPresentationsGet() {
@@ -245,6 +249,8 @@ export class AppXService {
 
   dataUserPresentationCurrentSet(filename) {
     this.data.presentation = filename;
+    console.log('pres fn:', this.data.presentation);
+    this.dataUserUpdate(true);
   }
 
   dataUserPresentationCurrentGet() {
