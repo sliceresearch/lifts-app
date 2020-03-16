@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 
 import { IonSlides } from '@ionic/angular';
@@ -10,7 +10,7 @@ import { AppXService } from '@app/core';
   templateUrl: './analytics.component.html',
   styleUrls: ['./analytics.component.scss']
 })
-export class AnalyticsComponent implements OnInit {
+export class AnalyticsComponent implements OnInit, AfterViewInit {
   @ViewChild(IonSlides, { static: false })
   slides: IonSlides;
 
@@ -41,6 +41,10 @@ export class AnalyticsComponent implements OnInit {
   ngOnInit() {
     this.isLoading = true;
     this.subscribePresentationAnalytics();
+  }
+
+  ngAfterViewInit() {
+    this.navigateSlide();
   }
 
   navigateTo(link) {
@@ -91,6 +95,11 @@ export class AnalyticsComponent implements OnInit {
     this.slide_analytics = slide.analytics;
 
     console.log('update:', this.slide_title, this.slide_content, this.slide_analytics);
+  }
+
+  navigateSlide() {
+    let i = this.appXService.data_index;
+    this.slideToThis(i);
   }
 
   analysePresentation() {

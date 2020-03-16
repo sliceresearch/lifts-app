@@ -107,6 +107,11 @@ export class HomeComponent implements OnInit {
       Checked Color: ${$event.starRating.checkedcolor}, 
       Unchecked Color: ${$event.starRating.uncheckedcolor}`);
   }
+
+  slideNavigate(slide: any) {
+    this.appXService.data_index = slide - 1;
+    this.appXService.navigate('/analytics');
+  }
 }
 
 /*

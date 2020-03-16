@@ -43,6 +43,8 @@ export class AppXService {
   private routeLocation: string;
   private routeStart: string;
 
+  data_index: any = 0;
+
   constructor(
     private http: HttpClient,
     private router: Router //private appXDataService: AppXDataService
