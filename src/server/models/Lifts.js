@@ -83,7 +83,11 @@ let Lifts = new Schema(
                   type: String
                 },
 
-                text: []
+                text: [],
+
+                text_level: [],
+
+                level: []
               }
             ],
 

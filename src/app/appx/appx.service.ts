@@ -33,6 +33,8 @@ export class AppXService {
   private running: any;
   private inited: any;
 
+  private uid: any;
+
   baseUri: string = 'http://localhost:8080/api'; //'http://lifts.apps.dj/api'; //'http://localhost:8080/api';
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 
@@ -56,6 +58,8 @@ export class AppXService {
 
     this.routeStart = '/splash';
     this.routeLocation = '/splash';
+
+    this.uid = 'lifts32';
 
     this.init();
     //	console.log('appx service: ' + this);
@@ -86,8 +90,7 @@ export class AppXService {
   }
 
   initData() {
-    var name = 'lifts29';
-    this.dataUserInit(name);
+    this.dataUserInit(this.uid);
   }
 
   initUserData() {

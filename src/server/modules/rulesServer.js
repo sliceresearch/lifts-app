@@ -220,9 +220,14 @@ var RulesServer = function() {
     for (var i = 0; i < shapes.length; i++) {
       var shape = shapes[i];
       if (shape.type == type) {
-        let shape_text = this.process_presentation_slide_text(shape.paragraphs);
-        let shape_out = { name: shape.name, text: shape_text };
-        //   console.log('slides (process-shape):', type, index, i, shape_out);
+        let shape_text = this.process_presentation_slide_text(shape.paragraphs, shape.paragraphs_properties);
+        let shape_out = {
+          name: shape.name,
+          text_level: shape_text.data,
+          text: shape_text.text,
+          level: shape_text.levels
+        };
+        console.log('slides (process-shape):', shape_out);
         shapes_out.push(shape_out);
       }
     }
@@ -232,10 +237,50 @@ var RulesServer = function() {
 
   //////////////////////////////////////////////////////////////analyse slides
 
-  this.process_presentation_slide_text = function(paragraphs) {
-    //   console.log('rules_server: (slide-paragraphs):');
+  this.process_presentation_slide_text = function(paragraphs, properties) {
+    //  console.log('rules_server: (slide-paragraphs):' + paragraphs + "  " + properties);
 
-    return paragraphs;
+    let paragraphs_list = [];
+    let paragraph_data_list = [];
+    let paragraph_levels = [];
+    for (var i = 0; i < paragraphs.length; i++) {
+      var prop = properties[i];
+      var text = paragraphs[i];
+
+      paragraphs_list.push(text);
+      paragraph_levels.push(prop.level);
+
+      if (prop.level == 0) {
+        paragraph_data_list.push(
+          this.process_presentation_slide_text_para(i, prop.level, text, paragraphs, properties)
+        );
+      }
+      //	console.log('rules_server: (slide-paragraphs):' + i + " " + prop.level + "  " + para);
+    }
+
+    return { data: paragraph_data_list, text: paragraphs_list, levels: paragraph_levels };
+  };
+
+  this.process_presentation_slide_text_para = function(index, level, text, paragraphs, properties) {
+    let obj = {};
+    let texts = [];
+    let child_level = level + 1;
+    for (var i = index + 1; i < paragraphs.length; i++) {
+      var prop = properties[i];
+      var para = paragraphs[i];
+
+      if (child_level == prop.level) {
+        let text_list = this.process_presentation_slide_text_para(i, child_level, para, paragraphs, properties);
+        texts.push(text_list);
+        //	} else if (level==prop.level) {  /// handle 0,1,2,2,1
+      } else {
+        break;
+      }
+    }
+
+    console.log('rules_server: (slide-paragraphs):' + text + ' ' + texts + '  ');
+
+    return { text: text, list: texts };
   };
 
   this.process_slide_analytics_content = function(shapes) {

@@ -51,7 +51,7 @@
 
     <br /><br />
 
-    <ion-row class="ion-justify-content-center">
+    <ion-row class="ion-justify-content-left">
       <ion-slides
         [options]="slideOpts"
         #slideWithNav
@@ -60,18 +60,38 @@
         (ionSlideNextEnd)="slideNextEnd()"
       >
         <ion-slide *ngFor="let obj of presentation_slides">
-          <ion-col size="12" class="ion-justify-content-center">
+          <ion-col size="12" class="ion-justify-content-left">
             <ion-item class="ion-text-center" *ngFor="let slide of slide_title">
               <ion-label color="primary" class="ion-text-wrap">
                 <h1>{{ slide.text }}</h1>
               </ion-label>
             </ion-item>
 
-            <ion-item color="light" *ngFor="let slide of slide_content">
-              <ion-label class="ion-text-wrap">
-                <p><ion-icon size="small" name="add-circle-outline"></ion-icon>{{ slide.text }}</p>
-              </ion-label>
-            </ion-item>
+            <div *ngFor="let slide of slide_content">
+              <ul *ngFor="let slide_text of slide.text_level">
+                <li>
+                  <ion-label class="ion-text-wrap"
+                    ><h5 style="text-align: left;">{{ slide_text.text }}</h5></ion-label
+                  >
+                </li>
+
+                <ul *ngFor="let slide_1 of slide_text.list">
+                  <li>
+                    <ion-label class="ion-text-wrap"
+                      ><h6 style="text-align: left;">{{ slide_1.text }}</h6></ion-label
+                    >
+                  </li>
+
+                  <ul *ngFor="let slide_2 of slide_1.list">
+                    <li>
+                      <ion-label class="ion-text-wrap"
+                        ><p style="text-align: left;">{{ slide_2.text }}</p></ion-label
+                      >
+                    </li>
+                  </ul>
+                </ul>
+              </ul>
+            </div>
           </ion-col>
         </ion-slide>
       </ion-slides>
