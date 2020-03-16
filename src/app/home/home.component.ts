@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   isLoading = false;
 
   presentation: any;
-  presentation_data = { name: '', title: '', author: '' };
+  presentation_data = { name: '', title: '', author: '', modified: '' };
   presentations: any;
   ratings: any = [];
   analytics: any = [];
@@ -63,7 +63,14 @@ export class HomeComponent implements OnInit {
 
         this.analytics_slides = this.updateAnalyticsSlides(presentation.slides);
 
-        this.presentation_data = { name: presentation.name, author: presentation.author, title: presentation.title };
+        //	console.log(presentation, this.presentation_data);
+
+        this.presentation_data = {
+          name: presentation.name,
+          author: presentation.author,
+          title: presentation.title,
+          modified: presentation.modified
+        };
       }
     }
   }

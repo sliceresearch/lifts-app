@@ -18,7 +18,7 @@ export class AnalyticsComponent implements OnInit {
   isLoading = false;
 
   presentation: any;
-  presentation_data = { name: '', title: '', author: '' };
+  presentation_data = { name: '', title: '', author: '', modified: '' };
   presentations: any;
   presentation_slides: any = [];
 
@@ -71,11 +71,14 @@ export class AnalyticsComponent implements OnInit {
       if (presentation) {
         this.presentation_slides = presentation.slides;
         //	this.presentation_analytics = presentation.slides;
-        this.presentation_data = { name: presentation.name, author: presentation.author, title: presentation.title };
+        this.presentation_data = {
+          name: presentation.name,
+          author: presentation.author,
+          title: presentation.title,
+          modified: presentation.modified
+        };
 
         this.updateSlide();
-
-        console.log(presentation, this.presentation_data, this.presentation_slides);
       }
     }
   }

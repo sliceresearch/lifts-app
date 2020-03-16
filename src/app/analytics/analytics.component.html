@@ -31,7 +31,7 @@
         <p ion-text style="color: white; text-align: center;">{{ presentation_data.author }}</p>
       </ion-col>
       <ion-col style="border-style: none;background-color: #3880ff" size="2">
-        <p ion-text style="color: white; text-align: center;">Edited: 20/01/2019</p>
+        <h6 ion-text style="color: white; text-align: center;">Edited: {{ presentation_data.modified }}</h6>
       </ion-col>
     </ion-row>
 
@@ -104,7 +104,7 @@
         <ion-chip outline="true" color="danger" *ngFor="let obj of slide_analytics; index as i">
           <ion-icon size="small" name="information-circle-outline"></ion-icon>
           <ion-label
-            ><h2 ion-text>Slide {{ obj.slide }}: {{ obj.description }}</h2></ion-label
+            ><h2 ion-text>Slide - {{ obj.description }}</h2></ion-label
           >
         </ion-chip>
       </ion-col>
