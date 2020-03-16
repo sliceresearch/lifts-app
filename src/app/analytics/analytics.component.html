@@ -104,7 +104,7 @@
         <ion-chip outline="true" color="danger" *ngFor="let obj of slide_analytics; index as i">
           <ion-icon size="small" name="information-circle-outline"></ion-icon>
           <ion-label
-            ><h2 ion-text>{{ obj.description }} ({{ slide_index }})</h2></ion-label
+            ><h2 ion-text>Slide {{ obj.slide }}: {{ obj.description }}</h2></ion-label
           >
         </ion-chip>
       </ion-col>
