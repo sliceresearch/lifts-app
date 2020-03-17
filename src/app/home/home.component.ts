@@ -112,6 +112,10 @@ export class HomeComponent implements OnInit {
     this.appXService.data_index = slide - 1;
     this.appXService.navigate('/analytics');
   }
+
+  fabSelect() {
+    this.appXService.navigate('/import');
+  }
 }
 
 /*
