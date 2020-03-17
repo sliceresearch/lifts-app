@@ -144,7 +144,7 @@ export class AnalyticsComponent implements OnInit, AfterViewInit {
   }
 
   slideColor(i: any) {
-    if (this.presentation_slides_analytics_index.indexOf(i) == -1) return 'primary';
+    if (this.presentation_slides_analytics_index.indexOf(i + 1) == -1) return 'primary';
 
     return 'danger';
   }

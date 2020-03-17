@@ -61,7 +61,7 @@ export class AppXService {
     this.routeStart = '/splash';
     this.routeLocation = '/splash';
 
-    this.uid = 'lifts32';
+    this.uid = 'lifts33';
 
     this.init();
     //	console.log('appx service: ' + this);
