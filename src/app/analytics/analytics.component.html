@@ -69,25 +69,25 @@
 
             <div *ngFor="let slide of slide_content">
               <ul *ngFor="let slide_text of slide.text_level">
-                <li>
-                  <ion-label class="ion-text-wrap"
-                    ><h5 style="text-align: left;">{{ slide_text.text }}</h5></ion-label
-                  >
-                </li>
+                <ion-label class="ion-text-wrap">
+                  <li>
+                    <h5 style="text-align: left;">{{ slide_text.text }}</h5>
+                  </li></ion-label
+                >
 
                 <ul *ngFor="let slide_1 of slide_text.list">
-                  <li>
-                    <ion-label class="ion-text-wrap"
-                      ><h6 style="text-align: left;">{{ slide_1.text }}</h6></ion-label
-                    >
-                  </li>
+                  <ion-label class="ion-text-wrap"
+                    ><li>
+                      <h6 style="text-align: left;">{{ slide_1.text }}</h6>
+                    </li></ion-label
+                  >
 
                   <ul *ngFor="let slide_2 of slide_1.list">
-                    <li>
-                      <ion-label class="ion-text-wrap"
-                        ><p style="text-align: left;">{{ slide_2.text }}</p></ion-label
-                      >
-                    </li>
+                    <ion-label class="ion-text-wrap">
+                      <li>
+                        <p style="text-align: left;">{{ slide_2.text }}</p>
+                      </li></ion-label
+                    >
                   </ul>
                 </ul>
               </ul>
