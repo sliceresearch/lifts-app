@@ -1,8 +1,8 @@
 {
   "bullet_points_per_slide": {
     "group": "Cognitive Load",
-    "description": "more than 3 bullet points",
-    "value": 3,
+    "description": "more than 7 bullet points",
+    "value": 7,
     "condition": ">"
   }
 }

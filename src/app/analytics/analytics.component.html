@@ -42,7 +42,7 @@
         (click)="slideToThis(i)"
         disabled
         [outline]="slideOutline(i)"
-        color="primary"
+        [color]="slideColor(i)"
         *ngFor="let obj of presentation_slides; index as i"
       >
         <p ion-text style="color: #3880ff; text-align: center;">{{ i + 1 }}</p>

@@ -22,6 +22,8 @@ export class AnalyticsComponent implements OnInit, AfterViewInit {
   presentations: any;
   presentation_slides: any = [];
 
+  presentation_slides_analytics_index: any = [];
+
   slide_analytics: any = [];
   slide_title: any = [];
   slide_content: any = [];
@@ -77,10 +79,12 @@ export class AnalyticsComponent implements OnInit, AfterViewInit {
         //	this.presentation_analytics = presentation.slides;
         this.presentation_data = {
           name: presentation.name,
-          author: presentation.author,
+          author: presentation.last_modified_by,
           title: presentation.title,
           modified: presentation.modified
         };
+
+        this.presentation_slides_analytics_index = this.updateAnalyticsSlides(this.presentation_slides);
 
         this.updateSlide();
       }
@@ -95,6 +99,23 @@ export class AnalyticsComponent implements OnInit, AfterViewInit {
     this.slide_analytics = slide.analytics;
 
     console.log('update:', this.slide_title, this.slide_content, this.slide_analytics);
+  }
+
+  updateAnalyticsSlides(slides) {
+    let analytics = [];
+
+    if (slides) {
+      for (var i = 0; i < slides.length; i++) {
+        var slide = slides[i];
+        var slide_analytics = slide.analytics;
+        for (var h = 0; h < slide_analytics.length; h++) {
+          var analytics_slide = slide_analytics[h];
+          analytics.push(parseInt(slide.index));
+        }
+      }
+    }
+
+    return analytics;
   }
 
   navigateSlide() {
@@ -120,6 +141,12 @@ export class AnalyticsComponent implements OnInit, AfterViewInit {
 
   getSelectedIdxNameIcon(fn: any) {
     //return this.iconNames[fn];
+  }
+
+  slideColor(i: any) {
+    if (this.presentation_slides_analytics_index.indexOf(i) == -1) return 'primary';
+
+    return 'danger';
   }
 
   slideOutline(i: any) {

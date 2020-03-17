@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit {
 
         this.presentation_data = {
           name: presentation.name,
-          author: presentation.author,
+          author: presentation.last_modified_by,
           title: presentation.title,
           modified: presentation.modified
         };
