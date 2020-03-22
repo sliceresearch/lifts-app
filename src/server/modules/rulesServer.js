@@ -7,7 +7,7 @@ var lifts_rules = require('../definitions/lift_rules.json');
 var RulesServer = function() {
   var _me = this;
 
-  //////////////////////////////////////////////////////////////process
+  //////////////////////////////////////////////////////////////process presentation
   this.init = function() {
     // console.log('rules_server: (init)');
 
@@ -28,6 +28,37 @@ var RulesServer = function() {
 
     return analytics;
   };
+
+  this.process_presentation_total_analytics = async function(slides) {
+    var analytics_total = 0;
+
+    for (var i = 0; i < slides.length; i++) {
+      var slide = slides[i];
+      analytics_total = analytics_total + slide.analytics.length;
+    }
+
+    return analytics_total;
+  };
+
+  this.process_presentation_properties_title = async function(title, slides) {
+    if (title == '') {
+      //title missing
+
+      var slide = slides[0]; //title strip from slide 1 title
+
+      if (slide.title.length > 0) {
+        title_text = slide.title[0].text;
+        if (title_text.length > 0) {
+          console.log('rules_server: (process-pres-title) - strip from slide:' + title_text[0]);
+          title = title_text[0];
+        }
+      }
+    }
+
+    return title;
+  };
+
+  //////////////////////////////////////////////////////////////process presentation rules
 
   this.process_rules = function(rule, value, type) {
     var rtype = this.process_rule_type_py(rule);
@@ -113,17 +144,6 @@ var RulesServer = function() {
     return desc;
   };
 
-  this.process_presentation_total_analytics = async function(slides) {
-    var analytics_total = 0;
-
-    for (var i = 0; i < slides.length; i++) {
-      var slide = slides[i];
-      analytics_total = analytics_total + slide.analytics.length;
-    }
-
-    return analytics_total;
-  };
-
   //////////////////////////////////////////////////////////////rule
 
   this.load_rules = function() {};
@@ -200,7 +220,7 @@ var RulesServer = function() {
 
     let slide_out = {
       index: i,
-      title: slide.name,
+      //  title: slide.name,
       id: slide.id,
       title: shape_data_title,
       content: shape_data_text_content

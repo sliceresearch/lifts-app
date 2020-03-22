@@ -48,7 +48,7 @@ liftsRoute.route('/process/:user').put(async (req, res) => {
 
   // presentation - properties
   var pres_properties = py_result[0].properties;
-  var title = pres_properties.title;
+  var title = await global.rulesServer.process_presentation_properties_title(pres_properties.title, slides_result); //pres_properties.title;
   var author = pres_properties.author;
   var subject = pres_properties.subject;
   var created = pres_properties.created;
