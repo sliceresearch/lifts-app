@@ -11,6 +11,7 @@
           type="file"
           name="pptx"
           ng2FileSelect
+          (change)="selectedUserFile($event, user)"
           [uploader]="uploader"
         />
       </ion-col>
@@ -23,7 +24,7 @@
         <ion-button
           expand="block"
           type="submit"
-          (click)="uploader.uploadAll()"
+          (click)="uploadFile($event)"
           [disabled]="!uploader.getNotUploadedItems().length"
           >Upload</ion-button
         >

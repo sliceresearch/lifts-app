@@ -32,7 +32,8 @@ export class ImportComponent implements OnInit {
   ///////
 
   importPresentation(fileName) {
-    //	let name = 'ICT221';
+    console.log('import:', fileName);
+
     let file = 'uploads';
     this.appXService.dataUserPresentationCurrentSet(fileName);
     this.appXService.dataUserPresentationAdd(fileName, file);
