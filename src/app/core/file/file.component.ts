@@ -35,7 +35,7 @@ export class FileComponent implements OnInit {
     };
   }
 
-  selectedUserFile(event: any, user: any) {
+  selectedUserFile(event: any) {
     //console.log('selected:', event.target.files[0].name)
   }
 
