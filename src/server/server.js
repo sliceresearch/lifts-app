@@ -47,10 +47,13 @@ mongoose
 // Setting up port with express js
 const liftsRoute = require('./routes/lifts.route');
 const app = express();
-app.use(bodyParser.json());
+
+app.use(bodyParser.json({ limit: '50mb' }));
 app.use(
   bodyParser.urlencoded({
-    extended: false
+    limit: '50mb',
+    extended: true,
+    parameterLimit: 50000
   })
 );
 
